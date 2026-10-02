@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class SupportMessageCategory extends Model
 {
-    //
+    protected $fillable=['label'];
 }

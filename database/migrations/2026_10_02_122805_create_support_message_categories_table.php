@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('support_message_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('label');
             $table->timestamps();
         });
     }

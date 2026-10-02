@@ -29,8 +29,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'user_name',
         'email',
         'password',
+        'news_letter'
     ];
 
     /**
@@ -65,5 +68,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function articlesCreator()
+    {
+        return $this->hasMany(Article::class,'user_id_creator');
+    }
+    public function articlesBuyer()
+    {
+        return $this->hasMany(Article::class,'user_id_buyer');
+    }
+    public function supportMessages()
+    {
+        return $this->hasMany(SupportMessage::class);
     }
 }
