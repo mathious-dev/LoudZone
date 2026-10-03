@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-       // Table articles
+       //Table articles
         Schema::table('articles', function (Blueprint $table) {
             $table->foreignId('user_id_creator')->constrained('users');
             $table->foreignId('user_id_buyer')->nullable()->constrained('users');
@@ -21,17 +21,22 @@ return new class extends Migration
         // Table add_info_by_categories
         Schema::table('add_info_by_categories', function (Blueprint $table) {
             $table->foreignId('add_info_id')->constrained();
-            $table->foreignId('category_message_support_id')->constrained();
+            $table->foreignId('support_message_category_id')->constrained();
         });
 
         // Table support_messages
         Schema::table('support_messages', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('add_info_id')->nullable()->constrained();
-            $table->foreignId('category_message_support_id')->constrained();
+            $table->foreignId('support_message_category_id')->constrained();
         });
         
-    }
+        //Table support_message_add_infos
+        Schema::table('support_message_add_infos', function (Blueprint $table) {
+            $table->foreignId('add_info_id')->constrained();
+            $table->foreignId('support_message_id')->constrained();
+        });
+    }   
 
     /**
      * Reverse the migrations.

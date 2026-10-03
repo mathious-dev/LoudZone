@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class AddInfo extends Model
 {
     protected $fillable=['label'];
-    public function supportMessages()
+    public function SupportMessageCategories()
     {
-        return $this->hasMany(SupportMessage::class);
+        return $this->belongsToMany(SupportMessageCategory::class,'add_info_by_categories','add_info_id','support_message_category_id');
     }
-    public function addInfoByCategories()
+    public function SupportMessages()
     {
-        return $this->hasMany(AddInfoByCategory::class);
+        return $this->belongsToMany(SupportMessage::class,'support_message_add_infos','add_info_id','support_message_id');
     }
 }
