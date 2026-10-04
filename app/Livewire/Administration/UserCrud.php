@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Livewire\Administration;
+namespace App\Livewire\administration;
 
+use App\Livewire\AdminComponent;
 use App\Models\User;
-use Livewire\Component;
-// use WithPagination;
 
-class UserCrud extends Component
+use Livewire\WithPagination;
+
+class UserCrud extends AdminComponent
 {
+    use WithPagination;
     public $userName;
     public $userFirstName;
     public $userEmail;
@@ -16,7 +18,7 @@ class UserCrud extends Component
     
     public function render()
     {
-        return view('livewire.user-crud',['listUsers'=>$this->queryUser()]);
+        return view('livewire.administration.user-crud',['listUsers'=>$this->queryUser()]);
     }
     public function mount()
     {
@@ -25,6 +27,6 @@ class UserCrud extends Component
     public function queryUser()
     {
         $query=User::query();
-        return $query->get();
+        return $query->paginate(10);
     }
 }

@@ -50,7 +50,7 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
                             <x-dropdown-link href="{{ route('admin.userCrud') }}">
-                                {{ __('Utilisateurs') }}
+                                {{ __('Administration') }}
                             </x-dropdown-link>
 
                             <div class="border-t border-gray-200"></div>
