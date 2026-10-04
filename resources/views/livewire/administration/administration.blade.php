@@ -14,10 +14,10 @@
                     <h3 class="font-bold text-gray-700 mb-4 border-b pb-2">Menu Admin</h3>
                     <ul class="space-y-3 text-sm">
                         <li>
-                            <a href="{{ route('admin.userCrud') }}" class="text-indigo-600 font-semibold hover:underline">
+                            <a href="{{ route('admin.userList') }}" class="text-indigo-600 font-semibold hover:underline">
                                 Utilisateurs
                             </a>
-                            <a href="{{ route('admin.roleCrud') }}" class="text-indigo-600 font-semibold hover:underline">
+                            <a href="{{ route('admin.roleList') }}" class="text-indigo-600 font-semibold hover:underline">
                                 Rôles
                             </a>
                         </li>
