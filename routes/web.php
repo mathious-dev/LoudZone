@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Administration\UserCrud;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,4 +15,10 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::middleware(['role:admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function(){
+        Route::get('/users',UserCrud::class)->name('userCrud');
+    });
 });
