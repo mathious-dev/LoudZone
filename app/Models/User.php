@@ -70,16 +70,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function articlesCreator()
+    public function articles()
     {
-        return $this->hasMany(Article::class,'user_id_creator');
+        return $this->hasMany(Article::class);
     }
-    public function articlesBuyer()
-    {
-        return $this->hasMany(Article::class,'user_id_buyer');
-    }
+
     public function supportMessages()
     {
         return $this->hasMany(SupportMessage::class);
+    }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

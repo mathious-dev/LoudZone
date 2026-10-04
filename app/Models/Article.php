@@ -13,19 +13,19 @@ class Article extends Model
     'stock',
     'is_published',
     'tva',
-    'user_id_creator',
-    'user_id_buyer',
+    'user_id',
     'article_category_id'];
-    public function userCreator()
+    public function user()
     {
-        return $this->belongsTo(User::class,'user_id_creator');
+        return $this->belongsTo(User::class);
     }
-    public function userBuyer()
-    {
-        return $this->belongsTo(User::class,'user_id_buyer');
-    }
+
     public function articleCategory()
     {
         return $this->belongsTo(ArticleCategory::class);
+    }
+    public function article_orders()
+    {
+        return $this->hasMany(ArticleOrder::class);
     }
 }

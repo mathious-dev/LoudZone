@@ -17,6 +17,9 @@
                             <a href="{{ route('admin.userCrud') }}" class="text-indigo-600 font-semibold hover:underline">
                                 Utilisateurs
                             </a>
+                            <a href="{{ route('admin.roleCrud') }}" class="text-indigo-600 font-semibold hover:underline">
+                                Rôles
+                            </a>
                         </li>
                     </ul>
                 </div>

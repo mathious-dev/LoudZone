@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();  
-            $table->integer('price_ht');   
+            $table->decimal('price_ht', 5, 2);   
             $table->string('slug')->unique();   
             $table->integer('stock')->default(0);   
             $table->boolean('is_published')->default(false);   
