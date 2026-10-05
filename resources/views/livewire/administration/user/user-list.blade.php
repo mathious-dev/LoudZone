@@ -18,9 +18,12 @@
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         NewsLetter
                     </th>
+                    <th>
+                        Actions
+                    </th>
                 </tr>
             </thead>
-            
+            <a href="{{ route('admin.userForm.create') }}">Ajouter un utilisateur</a>
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach ($listUsers as $user)
                 <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
@@ -47,6 +50,10 @@
                             </span>
                         @endif
                     </td>
+                    @if(auth()->id()!==$user->id)
+                    <td><button wire:click="delete({{ $user->id }})">Supprimer</button></td>
+                    @endif
+                    
                 </tr>
                 @endforeach
             </tbody>

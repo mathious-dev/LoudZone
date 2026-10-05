@@ -1,22 +1,26 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\administration\user;
 
+use App\Livewire\AdminComponent;
 use App\Models\User;
-use Livewire\Component;
 
-class UserForm extends Component
+class UserForm extends AdminComponent
 {
     public $user;
     public function render()
     {
-        return view('livewire.user-form');
+        return view('livewire.administration.user.user-form');
     }
     public function mount(User $user=null)
     {
-        if($user&&$user->exists())
+        if($user&&$user->exists)
             $this->user=$user;
         else
-            $this->user=new user();
+            $this->user=new User();
+    }
+    public function save()
+    {
+        
     }
 }

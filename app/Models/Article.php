@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class Article extends BaseEntity
 {
+    protected $nameColumn='title';
     protected $fillable=['title',
     'description',
     'price_ht',

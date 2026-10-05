@@ -49,7 +49,7 @@
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
-                            <x-dropdown-link href="{{ route('admin.userCrud') }}">
+                            <x-dropdown-link href="{{ route('admin.userList') }}">
                                 {{ __('Administration') }}
                             </x-dropdown-link>
 
