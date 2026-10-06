@@ -2,6 +2,7 @@
 
 use App\Livewire\administration\article\ArticleFormAdmin;
 use App\Livewire\administration\article\ArticleListAdmin;
+use App\Livewire\administration\role\RoleForm;
 use App\Livewire\administration\role\RoleList;
 use App\Livewire\administration\user\UserForm;
 use App\Livewire\administration\user\UserList;
@@ -23,10 +24,18 @@ Route::middleware([
     ->prefix('admin')
     ->name('admin.')
     ->group(function(){
+
+        //utilisateurs
         Route::get('/users',UserList::class)->name('userList');
         Route::get('/user/create',UserForm::class)->name('userForm.create');
         Route::get('/user/edit/{user}',UserForm::class)->name('userForm.edit');
+
+        //role 
         Route::get('/roles',RoleList::class)->name('roleList');
+        Route::get('/role/create',RoleForm::class)->name('roleForm.create');
+        Route::get('/role/edit/{role}',RoleForm::class)->name('roleForm.edit');
+
+        //Article
         Route::get('/articles',ArticleListAdmin::class)->name('articleListAdmin');
         Route::get('/article/create',ArticleFormAdmin::class)->name('articleForm.create');
         Route::get('/article/edit/{article}',ArticleFormAdmin::class)->name('articleForm.edit');

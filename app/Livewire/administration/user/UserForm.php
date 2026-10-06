@@ -12,7 +12,7 @@ class UserForm extends AdminComponent
 {
     use CrudTrait;
     public User $user;
-    public bool $isEditing=false;
+    
     public $name = '';
     public $first_name = '';
     public $email = '';

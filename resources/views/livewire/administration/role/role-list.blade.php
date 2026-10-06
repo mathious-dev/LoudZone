@@ -16,6 +16,7 @@
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Nombre de personnes
                     </th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -35,7 +36,10 @@
                             {{ $role->users->count() }}
                         </span>
                     </td>
-                    
+                    <td>
+                        <button wire:click='delete({{ $role->id }})' wire:confirm='êtes-vous sûr de vouloir supprimer ce rôle?'>Supprimer</button>
+                        <a href="{{ route('admin.roleForm.edit',$role) }}">Modifier</a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
