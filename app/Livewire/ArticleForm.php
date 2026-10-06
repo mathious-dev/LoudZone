@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class ArticleCrud extends Component
+class ArticleForm extends Component
 {
     public function render()
     {
-        return view('livewire.article-crud');
+        return view('livewire.article-form');
     }
 }

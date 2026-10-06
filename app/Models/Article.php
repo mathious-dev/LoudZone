@@ -29,4 +29,10 @@ class Article extends BaseEntity
     {
         return $this->hasMany(ArticleOrder::class);
     }
+    //On met la relation au pluriel et morphMany pour dire qu'il y a plusieurs images
+    //On met le préfixe imageable pour guider la recherche et dire à laravel de chercher les colonnes commençant par ce préfixe
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }
