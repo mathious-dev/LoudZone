@@ -83,7 +83,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-    public function getNameColumn()
+    public function getValueNameColumn()
     {
         return $this->name;
     }

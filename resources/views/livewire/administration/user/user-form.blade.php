@@ -62,6 +62,6 @@
                 {{ $isEditing ? 'Mettre à jour' : 'Créer' }}
             </button>
         </div>
-        
+    
     </form>
 </div>

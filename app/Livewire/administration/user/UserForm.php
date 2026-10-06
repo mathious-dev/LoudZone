@@ -5,6 +5,7 @@ namespace App\Livewire\administration\user;
 use App\Livewire\AdminComponent;
 use App\Models\User;
 
+
 class UserForm extends AdminComponent
 {
     public User $user;
@@ -18,7 +19,8 @@ class UserForm extends AdminComponent
     'first_name'=>'required|string|max:255|min:2',
     'email'=>'required|string|max:255|min:5',
     'news_letter'=>'boolean',
-    'password'=>'required|string|min:8|max:255'];
+    'password'=>'required|string|min:8|max:255',
+    ];
     public function render()
     {
         return view('livewire.administration.user.user-form');
@@ -39,7 +41,6 @@ class UserForm extends AdminComponent
             $this->user=new User();
             $this->isEditing=false; 
         }
-            
     }
     public function save()
     {

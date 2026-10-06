@@ -8,7 +8,7 @@ trait deleteTrait
     {
         $find=$this->model::findOrFail($id);
         //pour l'affichage dans l'historique
-        $name=$find->getNameColumn();
+        $name=$find->getValueNameColumn();
         saveHistory("$name a été supprimé");
         $find->delete();
     }
