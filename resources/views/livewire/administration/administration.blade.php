@@ -12,13 +12,22 @@
             <div class="w-1/4">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
                     <h3 class="font-bold text-gray-700 mb-4 border-b pb-2">Menu Admin</h3>
-                    <ul class="space-y-3 text-sm">
+                    
+                    <!-- space-y-2 va espacer chaque <li> proprement -->
+                    <ul class="space-y-2 text-sm">
                         <li>
-                            <a href="{{ route('admin.userList') }}" class="text-indigo-600 font-semibold hover:underline">
+                            <a href="{{ route('admin.userList') }}" class="block px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
                                 Utilisateurs
                             </a>
-                            <a href="{{ route('admin.roleList') }}" class="text-indigo-600 font-semibold hover:underline">
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.roleList') }}" class="block px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
                                 Rôles
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.articleListAdmin') }}" class="block px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                                Articles
                             </a>
                         </li>
                     </ul>

@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Livewire\public\article;
+namespace App\Livewire\administration\article;
 
+use App\Livewire\AdminComponent;
 use App\Models\Article;
 use App\Traits\deleteTrait;
-use Livewire\Component;
 use Livewire\WithPagination;
 
-class ArticleList extends Component
+class ArticleListAdmin extends AdminComponent
 {
     use deleteTrait;
     use WithPagination;
     public function render()
     {
-        return view('livewire.public.article.article-list',['listArticles'=>$this->queryArticle()]);
+        return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->queryArticle()]);
     }
     public function queryArticle()
     {
