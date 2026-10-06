@@ -11,7 +11,6 @@ class ArticleFormAdmin extends AdminComponent
 {
     use CrudTrait;
     public Article $article;
-    public $isEditing=false;
     public $title = '';
     public $description = '';
     public $price_ht = '';

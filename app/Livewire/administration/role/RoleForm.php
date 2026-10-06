@@ -3,10 +3,12 @@
 namespace App\Livewire\administration\role;
 
 use App\Livewire\AdminComponent;
+use App\Traits\CrudTrait;
 use Spatie\Permission\Models\Role;
 
 class RoleForm extends AdminComponent
 {
+    use CrudTrait;
     public $role;
     public $label;
     public function render()

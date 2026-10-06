@@ -12,7 +12,6 @@ class UserForm extends AdminComponent
 {
     use CrudTrait;
     public User $user;
-    
     public $name = '';
     public $first_name = '';
     public $email = '';

@@ -7,5 +7,5 @@ use Livewire\Component;
 #[Layout('livewire.administration.administration')]
 class AdminComponent extends Component
 {   
-    protected bool $isEditing=false;
+    public bool $isEditing=false;
 }

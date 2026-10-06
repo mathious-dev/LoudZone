@@ -37,7 +37,7 @@
                         </span>
                     </td>
                     <td>
-                        <button wire:click='delete({{ $role->id }})' wire:confirm='êtes-vous sûr de vouloir supprimer ce rôle?'>Supprimer</button>
+                        <button wire:click="delete({{ $role->id }})" wire:confirm='êtes-vous sûr de vouloir supprimer ce rôle?'>Supprimer</button>
                         <a href="{{ route('admin.roleForm.edit',$role) }}">Modifier</a>
                     </td>
                 </tr>
