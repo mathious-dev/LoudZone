@@ -62,7 +62,7 @@
                                 <a href="{{ route('admin.userForm.edit', $user) }}" class="text-indigo-600 hover:text-indigo-900 transition duration-150">
                                     Modifier
                                 </a>
-                                <button wire:click="delete({{ $user->id }})" class="text-red-600 hover:text-red-900 transition duration-150">
+                                <button wire:click="delete({{ $user->id }})" wire:confirm="êtes-vous sûr de supprimer l'utilisateur?" class="text-red-600 hover:text-red-900 transition duration-150">
                                     Supprimer
                                 </button>
                             </div>

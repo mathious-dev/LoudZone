@@ -8,7 +8,7 @@
     @endif
 
     <!-- .prevent empêche le rechargement brutal de la page -->
-    <form wire:submit.prevent="save" class="space-y-6">
+    <form wire:submit.prevent="saveForm" class="space-y-6">
         
         <!-- Grille pour afficher Nom et Prénom sur la même ligne (sur grand écran) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

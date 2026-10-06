@@ -1,17 +1,13 @@
 <?php
-
 namespace App\Livewire\administration\user;
-
 use App\Livewire\AdminComponent;
 use App\Models\User;
-
-use App\Traits\deleteTrait;
+use App\Traits\CrudTrait;
 use Livewire\WithPagination;
-
 class UserList extends AdminComponent
 {
     protected $model=User::class;
-    use deleteTrait;
+    use CrudTrait;
     use WithPagination;
     public function render()
     {

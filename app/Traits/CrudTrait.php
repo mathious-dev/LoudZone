@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait deleteTrait
+trait CrudTrait
 {
     public function delete($id)
     {
@@ -11,5 +11,11 @@ trait deleteTrait
         $name=$find->getValueNameColumn();
         saveHistory("$name a été supprimé");
         $find->delete();
+    }
+    public function save($dataTab,$object,$route)
+    {
+        $object->fill($dataTab);
+        $object->save();
+        return $this->redirectRoute($route);
     }
 }

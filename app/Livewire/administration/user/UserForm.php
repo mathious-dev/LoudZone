@@ -4,10 +4,13 @@ namespace App\Livewire\administration\user;
 
 use App\Livewire\AdminComponent;
 use App\Models\User;
+use App\Traits\CrudTrait;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserForm extends AdminComponent
 {
+    use CrudTrait;
     public User $user;
     public bool $isEditing=false;
     public $name = '';
@@ -15,12 +18,17 @@ class UserForm extends AdminComponent
     public $email = '';
     public $password = '';
     public $news_letter = false;
-    protected $rules=['name'=>'required|string|max:255|min:2',
-    'first_name'=>'required|string|max:255|min:2',
-    'email'=>'required|string|max:255|min:5',
-    'news_letter'=>'boolean',
-    'password'=>'required|string|min:8|max:255',
-    ];
+    protected function rules()
+    {
+        return [
+            'name'        => 'required|string|max:255|min:2',
+            'first_name'  => 'required|string|max:255|min:2',
+            'email'       => 'required|string|max:255|min:5',
+            'news_letter' => 'boolean',
+            // Le mot de passe est OBLIGATOIRE à la création, mais FACULTATIF à la modification
+            'password'    => $this->isEditing ? 'nullable|string|min:8|max:255' : 'required|string|min:8|max:255',
+        ];
+    }
     public function render()
     {
         return view('livewire.administration.user.user-form');
@@ -30,10 +38,9 @@ class UserForm extends AdminComponent
         if($user&&$user->exists)
         {
             $this->user=$user;
-            $this->name = $user->name;
-            $this->first_name = $user->first_name;
-            $this->email = $user->email;
-            $this->news_letter = $user->news_letter;
+            //on remplit toutes les variables directement
+            //fill va chercher les informations et comparer aux variables publiques pour voir si ça correspond
+            $this->fill($user->toArray());
             $this->isEditing=true;
         }
         else
@@ -42,15 +49,14 @@ class UserForm extends AdminComponent
             $this->isEditing=false; 
         }
     }
-    public function save()
+    public function saveForm()
     {
-        $this->validate();
-        $this->user->name = $this->name;
-        $this->user->first_name = $this->first_name;
-        $this->user->email = $this->email;
-        $this->user->news_letter = $this->news_letter;
-        $this->user->password=$this->password;
-        $this->user->save();
-        return $this->redirectRoute("admin.userList");
+        $dataTab=$this->validate();
+        if(!empty($dataTab['password']))
+            $dataTab['password']=Hash::make($dataTab['password']);
+        else
+            //on retire la ligne du tableau pour éviter de vider le mot de passe en édition
+            unset($dataTab['password']);
+        $this->save($dataTab,$this->user,"admin.userList");
     }
 }

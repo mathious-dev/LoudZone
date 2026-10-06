@@ -1,15 +1,12 @@
 <?php
-
 namespace App\Livewire\administration\article;
-
 use App\Livewire\AdminComponent;
 use App\Models\Article;
-use App\Traits\deleteTrait;
+use App\Traits\CrudTrait;
 use Livewire\WithPagination;
-
 class ArticleListAdmin extends AdminComponent
 {
-    use deleteTrait;
+    use CrudTrait;
     use WithPagination;
     public function render()
     {
