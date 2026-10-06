@@ -1,8 +1,9 @@
 <?php
 
 use App\Livewire\administration\role\RoleList;
-use App\Livewire\administration\user\UserList;
 use App\Livewire\administration\user\UserForm;
+use App\Livewire\administration\user\UserList;
+use App\Livewire\public\article\ArticleList;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,4 +27,5 @@ Route::middleware([
         Route::get('/user/edit/{user}',UserForm::class)->name('userForm.edit');
         Route::get('/roles',RoleList::class)->name('roleList');
     });
+    Route::get('/articles',ArticleList::class)->name('articleList');
 });

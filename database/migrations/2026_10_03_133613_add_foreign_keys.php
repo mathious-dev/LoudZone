@@ -14,7 +14,7 @@ return new class extends Migration
        //Table articles
         Schema::table('articles', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('category_id')->nullable()->constrained();
+            $table->foreignId('article_category_id')->nullable()->constrained();
         });
 
         // Table add_info_by_categories
@@ -95,7 +95,7 @@ return new class extends Migration
 
         // Table articles
         Schema::table('articles', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('category_id');
+            $table->dropConstrainedForeignId('article_category_id');
             $table->dropConstrainedForeignId('user_id');
         });
     }
