@@ -31,10 +31,11 @@ class RoleForm extends AdminComponent
     }
     public function rules()
     {
-        return ['label'=>'required|string|max:255'];
+        return ['name'=>'required|string|max:255'];
     }
     public function saveForm()
     {
         $this->save($this->validate(),$this->role,"admin.roleList");
     }
+    
 }

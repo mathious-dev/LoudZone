@@ -4,13 +4,11 @@ namespace App\Livewire\administration\history;
 
 use App\Livewire\AdminComponent;
 use App\Models\History;
-use App\Traits\CrudTrait;
 use Livewire\WithPagination;
 
 class HistoryList extends AdminComponent
 {
     use WithPagination;
-    use CrudTrait;
     protected $model=History::class;
     public function render()
     {
@@ -20,5 +18,11 @@ class HistoryList extends AdminComponent
     {
         $query=History::query();
         return $query->paginate(10);
+    }
+    public function delete($id)
+    {
+        $historyDelete=History::findOrFail($id);
+        if($historyDelete)
+            $historyDelete->delete();
     }
 }

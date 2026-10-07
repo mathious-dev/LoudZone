@@ -6,14 +6,14 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex gap-6">
+        <!-- 1. Remplacement de max-w-7xl par w-full (ou max-w-[95%]) -->
+        <div class="w-full px-4 sm:px-6 lg:px-8 mx-auto flex gap-6">
             
-            <!-- Menu Admin (Gauche) -->
-            <div class="w-1/4">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+            <!-- 2. Menu : on lui donne une taille FIXE (w-64 = 256px) -->
+            <div class="w-64 flex-shrink-0">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4 sticky top-6">
                     <h3 class="font-bold text-gray-700 mb-4 border-b pb-2">Menu Admin</h3>
                     
-                    <!-- space-y-2 va espacer chaque <li> proprement -->
                     <ul class="space-y-2 text-sm">
                         <li>
                             <a href="{{ route('admin.userList') }}" class="block px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
@@ -39,8 +39,8 @@
                 </div>
             </div>
 
-            <!-- Contenu Livewire (Droite) -->
-            <div class="w-3/4">
+            <!-- 3. Contenu : flex-1 lui dit "Prends absolument TOUT l'espace restant" -->
+            <div class="flex-1 overflow-hidden">
                 {{ $slot }}
             </div>
 

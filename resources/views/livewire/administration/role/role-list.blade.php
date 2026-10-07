@@ -19,6 +19,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
+            <a href="{{ route('admin.roleForm.create') }}">Ajouter un rôle</a>
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach ($listRoles as $role)
                 <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
