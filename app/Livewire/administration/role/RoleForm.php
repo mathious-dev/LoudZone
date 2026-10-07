@@ -10,7 +10,7 @@ class RoleForm extends AdminComponent
 {
     use CrudTrait;
     public $role;
-    public $label;
+    public $name;
     public function render()
     {
         return view('livewire.administration.role.role-form');

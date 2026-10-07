@@ -8,6 +8,7 @@ class ArticleListAdmin extends AdminComponent
 {
     use CrudTrait;
     use WithPagination;
+    protected $model=Article::class;
     public function render()
     {
         return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->queryArticle()]);
