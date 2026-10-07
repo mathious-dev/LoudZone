@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArticleCategory extends BaseEntity
 {
-    protected $nameColumn='label';
+    protected $nameValueColumn='label';
+    protected $nameColumn="La catégorie d'article";
     protected $fillable=['label'];
     public function articles()
     {

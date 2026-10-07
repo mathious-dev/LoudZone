@@ -87,4 +87,8 @@ class User extends Authenticatable
     {
         return $this->name;
     }
+    public function getNameColumn()
+    {
+        return "L'utilisateur";
+    }
 }

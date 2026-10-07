@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends BaseEntity
 {
-    protected $nameColumn='title';
+    protected $nameValueColumn='title';
+    protected $nameColumn="L'article";
     protected $fillable=['title',
     'description',
     'price_ht',
