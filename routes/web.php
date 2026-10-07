@@ -7,6 +7,7 @@ use App\Livewire\administration\role\RoleForm;
 use App\Livewire\administration\role\RoleList;
 use App\Livewire\administration\user\UserForm;
 use App\Livewire\administration\user\UserList;
+use App\Livewire\public\article\ArticleDetail;
 use App\Livewire\public\article\ArticleListPublic;
 use Illuminate\Support\Facades\Route;
 
@@ -48,4 +49,5 @@ Route::middleware([
 
     });
     Route::get('/articles',ArticleListPublic::class)->name('articleListPublic');
+    Route::get('/article/{article}',ArticleDetail::class)->name('articleDetail');
 });

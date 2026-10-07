@@ -16,7 +16,8 @@ class Article extends BaseEntity
     'is_published',
     'tva',
     'user_id',
-    'article_category_id'];
+    'article_category_id',
+    'primary_image'];
     public function user()
     {
         return $this->belongsTo(User::class);

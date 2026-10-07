@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('stock')->default(0);   
             $table->boolean('is_published')->default(false);   
             $table->decimal('tva', 5, 2)->default(21.00);
+            $table->string('primary_image')->nullable();
             $table->timestamps();
         });
     }
