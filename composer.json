@@ -13,6 +13,7 @@
         "laravel/telescope": "^5.25",
         "laravel/tinker": "^3.0",
         "livewire/livewire": "^3.6.4",
+        "mongodb/laravel-mongodb": "^5.11",
         "spatie/laravel-permission": "^8.3"
     },
     "require-dev": {
