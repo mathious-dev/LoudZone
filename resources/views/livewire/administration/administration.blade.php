@@ -30,6 +30,11 @@
                                 Articles
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.historiesList') }}" class="block px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                                Historique
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
