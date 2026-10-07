@@ -4,7 +4,6 @@ namespace App\Traits;
 
 trait CrudTrait
 {
-
     public function delete($id)
     {
         $find=$this->model::findOrFail($id);

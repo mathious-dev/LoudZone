@@ -7,6 +7,7 @@ use App\Livewire\administration\role\RoleForm;
 use App\Livewire\administration\role\RoleList;
 use App\Livewire\administration\user\UserForm;
 use App\Livewire\administration\user\UserList;
+use App\Livewire\public\article\ArticleListPublic;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -43,6 +44,8 @@ Route::middleware([
 
         //Historique
         Route::get('/histories',HistoryList::class)->name('historiesList');
+
+
     });
-    
+    Route::get('/articles',ArticleListPublic::class)->name('articleListPublic');
 });
