@@ -9,7 +9,9 @@
             Ajouter un article
         </a>
     </div>
-
+    <div>
+        <input wire:model.live='search'>
+    </div>
     <!-- Conteneur du tableau -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden">
         <div class="overflow-x-auto">

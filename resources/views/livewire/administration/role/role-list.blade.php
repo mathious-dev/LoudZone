@@ -4,7 +4,9 @@
     <div class="mb-4 flex justify-between items-center">
         <h3 class="text-lg font-medium text-gray-900">Liste des Rôles</h3>
     </div>
-
+    <div>
+        <input wire:model.live='search'>
+    </div>
     <!-- Conteneur du tableau -->
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
