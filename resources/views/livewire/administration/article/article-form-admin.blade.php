@@ -76,7 +76,11 @@
                 </select>
                 @error('article_category_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
-
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Image principale</label>
+                <input type="file" wire:model='primary_image' class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                @error('primary_image') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+            </div>
         </div> <!-- Fin de la grille -->
 
         <!-- Publié (Checkbox stylisée) -->

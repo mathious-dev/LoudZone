@@ -13,4 +13,8 @@ trait FilterTrait
             return $query->where($this->searchWichColumn ,'like','%'.$this->search.'%');
         return $query;
     }
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
 }

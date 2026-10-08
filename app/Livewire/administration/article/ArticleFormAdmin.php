@@ -6,9 +6,11 @@ use App\Livewire\AdminComponent;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Traits\CrudTrait;
+use Livewire\WithFileUploads;
 
 class ArticleFormAdmin extends AdminComponent
 {
+    use WithFileUploads;
     use CrudTrait;
     public Article $article;
     public $title = '';
@@ -20,6 +22,7 @@ class ArticleFormAdmin extends AdminComponent
     public $tva = '';
     public $user_id = '';
     public $article_category_id = '';
+    public $primary_image='';
     public function render()
     {
         return view('livewire.administration.article.article-form-admin',['listArticleCategories'=>$this->queryCategories()]);
@@ -34,6 +37,7 @@ class ArticleFormAdmin extends AdminComponent
             'stock'=> 'required|integer|min:0', 
             'is_published'=> 'boolean',
             'tva'=> 'required|numeric|min:0',
+            'primary_image' => 'nullable|image|max:1024',
             //On vérifie que les ID existent VRAIMENT dans la base de données
             'user_id'             => 'required|exists:users,id',//on vérifie dans la BD qu'il y a bien m'utilisateur
             'article_category_id' => 'required|exists:article_categories,id',
@@ -61,7 +65,14 @@ class ArticleFormAdmin extends AdminComponent
     }
     public function saveForm()
     {
-        $this->save($this->validate(),$this->article,"admin.articleListAdmin");
+        $data = $this->validate();
+        if($this->primary_image)
+        {
+            //store va enregistrer l'image dans un dossier 'articles' et renvoie le texte de l'image, un nom indéchiffrable
+            $textImage = $this->primary_image->store('articles', 'public');
+            $data['primary_image']=$textImage;
+        }
+        $this->save($data,$this->article,"admin.articleListAdmin");
     }
     
 

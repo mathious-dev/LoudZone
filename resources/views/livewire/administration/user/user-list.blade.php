@@ -9,7 +9,7 @@
     <!-- ========================================== -->
     <!-- APPEL DU COMPOSANT DE RECHERCHE            -->
     <!-- ========================================== -->
-    <x-admin-search :options="$tabSearchPossibility" />
+    <x-search :options="$tabSearchPossibility" />
 
     <!-- Le tableau... -->
     <div class="overflow-x-auto shadow-sm rounded-lg border border-gray-200">
