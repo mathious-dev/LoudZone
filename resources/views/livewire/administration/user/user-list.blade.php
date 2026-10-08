@@ -1,21 +1,32 @@
 <div class="p-6 bg-white rounded-lg shadow-md max-w-7xl mx-auto mt-8">
     
-    <!-- En-tête avec le titre et le bouton d'ajout bien alignés -->
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-xl font-semibold text-gray-800">Gestion des utilisateurs</h2>
-        <a href="{{ route('admin.userForm.create') }}" class="...">+ Ajouter un utilisateur</a>
+    <!-- En-tête avec le titre et le bouton d'ajout -->
+    <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Gestion des utilisateurs</h2>
+        <a href="{{ route('admin.userForm.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 transition ease-in-out duration-150 shadow-sm">
+            + Ajouter un utilisateur
+        </a>
     </div>
 
     <!-- ========================================== -->
-    <!-- APPEL DU COMPOSANT DE RECHERCHE            -->
+    <!-- BARRE D'OUTILS (Recherche + Tri)           -->
     <!-- ========================================== -->
-    <x-search :options="$tabSearchPossibility" />
+    <div class="flex flex-col lg:flex-row justify-between items-center gap-4 mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
+        
+        <!-- Le composant de recherche (prend toute la place dispo à gauche) -->
+        <div class="w-full lg:w-2/3">
+            <x-search :options="$tabSearchPossibility" />
+        </div>
 
-    <!-- Le tableau... -->
-    <div class="overflow-x-auto shadow-sm rounded-lg border border-gray-200">
+        <!-- Le composant de tri (aligné à droite) -->
+        <div class="w-full lg:w-auto flex justify-end">
+            <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
+        </div>
+        
+    </div>
 
     <!-- ========================================== -->
-    <!-- LE TABLEAU (Ton code intact)               -->
+    <!-- LE TABLEAU                                 -->
     <!-- ========================================== -->
     <div class="overflow-x-auto shadow-sm rounded-lg border border-gray-200">
         <table class="min-w-full divide-y divide-gray-200">

@@ -15,8 +15,16 @@ class ArticleListAdmin extends AdminComponent
     public function mount()
     {
         $this->searchWichColumn='title';
-        $this->tabSearchPossibility=['title'=>'titre',
-        'slug'=>'lien'];
+        $this->searchAscDescWichColumn = 'title';
+        $this->tabSearchPossibility=[
+            'title'=>'titre',
+            'slug'=>'lien'
+        ];
+        $this->tabSearchAscDescPossibility=[
+            'title'=>'titre',
+            'slug'=>'lien',
+            'price_ht'=>'prix HT'
+        ];
     }
     public function render()
     {
@@ -26,6 +34,7 @@ class ArticleListAdmin extends AdminComponent
     {
         $query=Article::query();
         $query=$this->search($query);
+        $query=$this->searchAscDesc($query);
         return $query->paginate(10);
     }
 }

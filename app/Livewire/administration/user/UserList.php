@@ -14,10 +14,16 @@ class UserList extends AdminComponent
     public function mount()
     {
         $this->searchWichColumn = 'name';
+        $this->searchAscDescWichColumn = 'name';
         $this->tabSearchPossibility=[
             'name'=>'Nom',
             'first_name'=>'Prénom',
             'email'=>'Adresse mail'];
+        $this->tabSearchAscDescPossibility=[
+            'name'=>'Nom',
+            'first_name'=>'Prénom',
+            'email'=>'Adresse mail',
+        ];
     }
     public function render()
     {
@@ -27,6 +33,7 @@ class UserList extends AdminComponent
     {
         $query=User::query();
         $query=$this->search($query);
+        $query=$this->searchAscDesc($query);
         return $query->paginate(10);
     }
 }

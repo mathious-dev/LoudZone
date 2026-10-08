@@ -1,5 +1,5 @@
 <div class="p-6 bg-white rounded-lg shadow-md max-w-7xl mx-auto mt-8">
-    
+
     <!-- En-tête avec le titre et le bouton d'ajout -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <h2 class="text-2xl font-bold text-gray-800">Gestion des Articles</h2>
@@ -11,15 +11,23 @@
         </a>
     </div>
 
-    <!-- Composant de recherche réutilisable -->
-    <x-search :options="$tabSearchPossibility" />
+    <!-- ========================================== -->
+    <!-- BARRE D'OUTILS (Recherche + Tri)           -->
+    <!-- ========================================== -->
+    <div class="flex flex-col lg:flex-row justify-between items-center gap-4 mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
+        <div class="w-full lg:w-2/3">
+            <x-search :options="$tabSearchPossibility" />
+        </div>
+        <div class="w-full lg:w-auto flex justify-end">
+            <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
+        </div>
+    </div>
 
-    <!-- Conteneur du tableau (J'ai gardé overflow-x-auto juste pour les téléphones, mais sur PC ça ne scrollera plus) -->
+    <!-- Conteneur du tableau -->
     <div class="overflow-x-auto shadow-sm rounded-lg border border-gray-200">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
-                    <!-- 7 Colonnes essentielles uniquement -->
                     <th class="w-10 px-4 py-3"></th>
                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Titre</th>
                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix HT</th>
@@ -29,13 +37,12 @@
                     <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
-            
+
             @foreach ($listArticles as $article)
             <tbody x-data="{ expanded: false }" class="bg-white divide-y divide-gray-200">
-                
-                <!-- 1. LA LIGNE PRINCIPALE (Épurée) -->
+
+                <!-- 1. LA LIGNE PRINCIPALE -->
                 <tr class="hover:bg-gray-50 transition-colors duration-200">
-                    
                     <td class="px-4 py-4 whitespace-nowrap text-center cursor-pointer" @click="expanded = !expanded">
                         <button class="text-gray-500 hover:text-indigo-600 focus:outline-none transition-colors">
                             <svg :class="{ 'rotate-90': expanded }" class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,7 +54,7 @@
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{{ $article->title }}</td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 font-medium">{{ number_format($article->price_ht, 2, ',', ' ') }} €</td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-center font-bold {{ $article->stock <= 0 ? 'text-red-500' : 'text-green-600' }}">{{ $article->stock }}</td>
-                    
+
                     <td class="px-4 py-4 whitespace-nowrap text-center">
                         @if($article->is_published)
                             <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Publié</span>
@@ -55,10 +62,9 @@
                             <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Brouillon</span>
                         @endif
                     </td>
-                    
+
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-indigo-600 font-medium">{{ $article->articleCategory?->label ?? 'Aucune' }}</td>
-                    
-                    <!-- Boutons d'actions toujours visibles à droite -->
+
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-right">
                         <div class="flex items-center justify-end space-x-3">
                             <a href="{{ route('admin.articleForm.edit', $article) }}" class="text-indigo-600 hover:text-indigo-900 transition-colors duration-200" title="Modifier">
@@ -71,14 +77,10 @@
                     </td>
                 </tr>
 
-                <!-- 2. LA LIGNE DÉROULANTE (Avec les infos secondaires qu'on a retirées) -->
+                <!-- 2. LA LIGNE DÉROULANTE -->
                 <tr x-show="expanded" x-transition style="display: none;" class="bg-indigo-50/50">
-                    <!-- On passe à colspan="7" car on a réduit le nombre de colonnes -->
                     <td colspan="7" class="px-6 py-6 border-b border-gray-200 shadow-inner">
-                        
                         <div class="flex flex-col md:flex-row gap-6 items-start">
-                            
-                            <!-- Image principale -->
                             <div class="w-48 h-48 flex-shrink-0 bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                                 @if($article->primary_image)
                                     <img src="{{ asset('storage/' . $article->primary_image) }}" alt="Image" class="w-full h-full object-cover">
@@ -90,14 +92,12 @@
                                 @endif
                             </div>
 
-                            <!-- Infos complètes -->
                             <div class="flex-grow w-full">
                                 <h4 class="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wider">Description complète</h4>
                                 <div class="p-4 bg-white rounded-lg border border-gray-200 text-sm text-gray-600 leading-relaxed mb-4">
                                     {{ $article->description ?: 'Aucune description fournie.' }}
                                 </div>
-                                
-                                <!-- On replace ici les infos qu'on a enlevées des colonnes ! -->
+
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                                     <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
                                         <span class="block text-gray-400 text-xs uppercase mb-1">Créateur</span>
@@ -117,13 +117,12 @@
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </td>
                 </tr>
             </tbody>
             @endforeach
-            
+
         </table>
     </div>
 

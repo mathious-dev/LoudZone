@@ -22,11 +22,17 @@ class ArticleListPublic extends Component
     {
         $query=Article::query();
         $query=$this->search($query);
+        $query=$this->searchAscDesc($query);
         return $query->paginate(9);
     }
     public function mount()
     {
         $this->searchWichColumn='title';
+        $this->searchAscDescWichColumn = 'title';
         $this->tabSearchPossibility=['title'=>'titre'];
+        $this->tabSearchAscDescPossibility=[
+            'title'=>'titre',
+            'price_ht'=>'prix HT'
+        ];
     }
 }
