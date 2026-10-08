@@ -50,7 +50,7 @@
                     <!-- Le badge de Catégorie -->
                     <div class="mb-4">
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-100 text-indigo-800">
-                            {{ $article->category->label ?? "Aucune catégorie" }}
+                            {{ $article->articleCategory->label ?? "Aucune catégorie" }}
                         </span>
                     </div>
 
