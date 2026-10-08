@@ -2,13 +2,13 @@
 
 namespace App\Livewire\public\article;
 
+use App\Livewire\PublicComponent;
 use App\Models\Article;
 use App\Traits\CrudTrait;
 use App\Traits\FilterTrait;
-use Livewire\Component;
 use Livewire\WithPagination;
 
-class ArticleListPublic extends Component
+class ArticleListPublic extends PublicComponent
 {
     use CrudTrait;
     use FilterTrait;

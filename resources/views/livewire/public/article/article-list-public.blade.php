@@ -13,9 +13,10 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- GRILLE DES ARTICLES                        -->
+    <!-- GRILLE DES ARTICLES (Forcée en 3 colonnes) -->
     <!-- ========================================== -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    <!-- J'ai retiré xl:grid-cols-4 pour bloquer à 3 colonnes max -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
         @foreach ($listArticles as $article)
         <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 overflow-hidden flex flex-col transition-all duration-300 transform hover:-translate-y-1">

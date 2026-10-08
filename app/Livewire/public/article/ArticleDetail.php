@@ -2,10 +2,10 @@
 
 namespace App\Livewire\public\article;
 
+use App\Livewire\PublicComponent;
 use App\Models\Article;
-use Livewire\Component;
 
-class ArticleDetail extends Component
+class ArticleDetail extends PublicComponent
 {
     public $article;
     public function render()

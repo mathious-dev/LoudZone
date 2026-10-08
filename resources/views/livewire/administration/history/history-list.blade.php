@@ -4,7 +4,8 @@
         <h2 class="text-xl font-semibold text-gray-800">Historique des actions</h2>
         <span class="text-xs font-medium bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">MongoDB</span>
     </div>
-
+        
+    <x-search :options="$tabSearchPossibility"/>
     <!-- Conteneur avec scroll horizontal pour petits écrans -->
     <div class="overflow-x-auto">
         <table class="w-full whitespace-nowrap text-left border-collapse">
