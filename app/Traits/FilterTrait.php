@@ -4,8 +4,13 @@ namespace App\Traits;
 
 trait FilterTrait
 {
-    public function search($search,$query,$column)
+    public $search='';
+    public $searchWichColumn='';
+    public $tabSearchPossibility=[];
+    public function search($query)
     {
-        return $query->where($column ,'like','%'.$search.'%');
+        if(!empty($this->search)&& !empty($this->searchWichColumn))
+            return $query->where($this->searchWichColumn ,'like','%'.$this->search.'%');
+        return $query;
     }
 }

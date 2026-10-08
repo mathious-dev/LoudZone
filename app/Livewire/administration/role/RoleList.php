@@ -12,7 +12,11 @@ class RoleList extends AdminComponent
     use CrudTrait;
     use FilterTrait;
     protected $model=Role::class;
-    public $search='';
+    public function mount()
+    {
+        $this->searchWichColumn='name';
+        $this->tabSearchPossibility=['name'=>'nom'];
+    }
     public function render()
     {
         return view('livewire.administration.role.role-list',['listRoles'=>$this->queryRole()]);
@@ -20,7 +24,7 @@ class RoleList extends AdminComponent
     public function queryRole()
     {
         $query=Role::query();
-        $query=$this->search($this->search,$query,'name');
+        $query=$this->search($query);
         return $query->get();
     }
 }

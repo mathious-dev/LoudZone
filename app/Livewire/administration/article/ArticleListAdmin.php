@@ -12,7 +12,12 @@ class ArticleListAdmin extends AdminComponent
     use FilterTrait;
     use WithPagination;
     protected $model=Article::class;
-    public $search='';
+    public function mount()
+    {
+        $this->searchWichColumn='title';
+        $this->tabSearchPossibility=['title'=>'titre',
+        'slug'=>'lien'];
+    }
     public function render()
     {
         return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->queryArticle()]);
@@ -20,7 +25,7 @@ class ArticleListAdmin extends AdminComponent
     public function queryArticle()
     {
         $query=Article::query();
-        $query=$this->search($this->search,$query,'title');
+        $query=$this->search($query);
         return $query->paginate(10);
     }
 }
