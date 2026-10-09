@@ -60,4 +60,7 @@
             </tbody>
         </table>
     </div>
+    <div class="mt-12">
+        {{ $listHistories->links() }}
+    </div>
 </div>

@@ -8,7 +8,6 @@
         </div>
 
 
-        <x-footer />
-        
+        <livewire:public.Footer />
     </div>
 </x-app-layout>

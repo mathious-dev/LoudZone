@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 use Database\Seeders\ArticleCategorySeeder;
+use Database\Seeders\SupportMessageCategorySeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +20,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ArticleCategorySeeder::class,
-            ArticleSeeder::class
+            ArticleSeeder::class,
+            SupportMessageCategorySeeder::class,
+            SupportMessageSeeder::class
         ]);
         
     }

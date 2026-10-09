@@ -12,4 +12,17 @@ if(!function_exists('saveHistory'))
         ]);
     }
 }
+if(!function_exists('subNewsLetter'))
+{
+    function subNewsLetter()
+    {
+        $user=auth()->user();
+        if($user)
+        {
+            $user->news_letter=true;
+            $user->save();
+            saveHistory('Abonnement à la newsletter');
+        }
+    }
+}
 ?>

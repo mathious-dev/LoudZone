@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseEntity;
 
-class SupportMessage extends Model
+class SupportMessage extends BaseEntity
 {
+    protected $nameValueColumn='title';
+    protected $nameColumn='le message support';
     protected $fillable=['title',
     'content',
     'user_id',
-    'support_message_cateogry_id'];
+    'state',
+    'support_message_category_id'];
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -21,5 +24,10 @@ class SupportMessage extends Model
     public function addInfos()
     {
         return $this->belongsToMany(AddInfo::class,'support_message_add_infos','support_message_id','add_info_id');
+    }
+    public function changeState()
+    {
+        $this->state=true;//La demande est traitée
+        $this->save();
     }
 }

@@ -5,10 +5,12 @@ use App\Livewire\administration\article\ArticleListAdmin;
 use App\Livewire\administration\history\HistoryList;
 use App\Livewire\administration\role\RoleForm;
 use App\Livewire\administration\role\RoleList;
+use App\Livewire\administration\supportMessage\SupportMessageList;
 use App\Livewire\administration\user\UserForm;
 use App\Livewire\administration\user\UserList;
 use App\Livewire\public\article\ArticleDetail;
 use App\Livewire\public\article\ArticleListPublic;
+use App\Livewire\public\supportMessage\SupportMessageForm;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -46,8 +48,14 @@ Route::middleware([
         //Historique
         Route::get('/histories',HistoryList::class)->name('historiesList');
 
-
+        //Message support
+        Route::get('/supportMessages',SupportMessageList::class)->name('supportMessageList');
     });
+
+    //Article
     Route::get('/articles',ArticleListPublic::class)->name('articleListPublic');
     Route::get('/article/{article}',ArticleDetail::class)->name('articleDetail');
+
+    //Message Support
+    Route::get('/supportMessage/create',SupportMessageForm::class)->name('supportMessage.create');
 });
