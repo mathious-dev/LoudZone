@@ -21,8 +21,8 @@ class ArticleListPublic extends PublicComponent
     public function queryArticle()
     {
         $query=Article::query();
-        $query=$this->search($query);
-        $query=$this->searchAscDesc($query);
+        $query=$this->searchFunction($query);
+        $query=$this->searchAscDescFunction($query);
         return $query->paginate(9);
     }
     public function mount()

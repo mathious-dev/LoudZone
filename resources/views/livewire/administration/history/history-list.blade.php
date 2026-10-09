@@ -6,6 +6,7 @@
     </div>
         
     <x-search :options="$tabSearchPossibility"/>
+    <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
     <!-- Conteneur avec scroll horizontal pour petits écrans -->
     <div class="overflow-x-auto">
         <table class="w-full whitespace-nowrap text-left border-collapse">

@@ -10,13 +10,13 @@ trait FilterTrait
     public $searchAscDescWichColumn='';
     public $tabSearchPossibility=[];
     public $tabSearchAscDescPossibility=[];
-    public function search($query)
+    public function searchFunction($query)
     {
         if(!empty($this->search)&& !empty($this->searchWichColumn))
             return $query->where($this->searchWichColumn ,'like','%'.$this->search.'%');
         return $query;
     }
-    public function searchAscDesc($query)
+    public function searchAscDescFunction($query)
     {
         if(!empty($this->searchAscDesc))
         {
@@ -28,6 +28,10 @@ trait FilterTrait
         return $query;
     }
     public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+    public function updatedSearchAscDesc()
     {
         $this->resetPage();
     }

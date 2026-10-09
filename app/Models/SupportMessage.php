@@ -13,6 +13,10 @@ class SupportMessage extends BaseEntity
     'user_id',
     'state',
     'support_message_category_id'];
+    //par défaut le message sera en attente
+    protected $attributes = [
+        'state' => false,
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);

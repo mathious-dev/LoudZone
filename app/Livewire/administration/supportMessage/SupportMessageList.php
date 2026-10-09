@@ -17,7 +17,7 @@ class SupportMessageList extends AdminComponent
     public function mount()
     {
         $this->searchWichColumn='title';
-        $this->searchAscDescWichColumn = 'title';
+        $this->searchAscDescWichColumn = 'created_at';
         $this->tabSearchPossibility=[
             'title'=>'titre',
         ];
@@ -32,8 +32,10 @@ class SupportMessageList extends AdminComponent
     public function querySupportMessage()
     {
         $query=SupportMessage::query();
-        $query=$this->search($query);
-        $query=$this->searchAscDesc($query);
+        $query=$this->searchFunction($query);
+        $query=$this->searchAscDescFunction($query);
+        if(empty($this->searchAscDesc))
+            $query->orderByDesc('created_at');
         return $query->paginate(10);
     }
     public function messageTreat(SupportMessage $message)

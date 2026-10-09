@@ -33,8 +33,8 @@ class ArticleListAdmin extends AdminComponent
     public function queryArticle()
     {
         $query=Article::query();
-        $query=$this->search($query);
-        $query=$this->searchAscDesc($query);
+        $query=$this->searchFunction($query);
+        $query=$this->searchAscDescFunction($query);
         return $query->paginate(10);
     }
 }

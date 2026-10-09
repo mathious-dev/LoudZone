@@ -32,8 +32,8 @@ class UserList extends AdminComponent
     public function queryUser()
     {
         $query=User::query();
-        $query=$this->search($query);
-        $query=$this->searchAscDesc($query);
+        $query=$this->searchFunction($query);
+        $query=$this->searchAscDescFunction($query);
         return $query->paginate(10);
     }
 }

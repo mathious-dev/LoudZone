@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('support_messages', function (Blueprint $table) {
             $table->id();
-            $table->string('title');   
+            $table->string('title')->nullable();   
             $table->text('content');
             $table->boolean('state');
             $table->timestamps();

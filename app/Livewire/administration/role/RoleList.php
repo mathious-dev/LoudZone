@@ -24,7 +24,7 @@ class RoleList extends AdminComponent
     public function queryRole()
     {
         $query=Role::query();
-        $query=$this->search($query);
+        $query=$this->searchFunction($query);
         return $query->get();
     }
 }
