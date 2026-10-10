@@ -1,16 +1,23 @@
 <?php
 
+use App\Livewire\administration\addInfo\AddInfoForm;
+use App\Livewire\administration\addInfo\AddInfoList;
 use App\Livewire\administration\article\ArticleFormAdmin;
 use App\Livewire\administration\article\ArticleListAdmin;
+use App\Livewire\administration\articleCategory\ArticleCategoryForm;
+use App\Livewire\administration\ArticleCategory\ArticleCategoryList;
 use App\Livewire\administration\history\HistoryList;
 use App\Livewire\administration\role\RoleForm;
 use App\Livewire\administration\role\RoleList;
 use App\Livewire\administration\supportMessage\SupportMessageList;
+use App\Livewire\administration\SupportMessageCategory\SupportMessageCategoryForm;
+use App\Livewire\administration\SupportMessageCategory\SupportMessageCategoryList;
 use App\Livewire\administration\user\UserForm;
 use App\Livewire\administration\user\UserList;
 use App\Livewire\public\article\ArticleDetail;
 use App\Livewire\public\article\ArticleListPublic;
 use App\Livewire\public\supportMessage\SupportMessageForm;
+use App\Models\SupportMessageCategory;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -50,6 +57,21 @@ Route::middleware([
 
         //Message support
         Route::get('/supportMessages',SupportMessageList::class)->name('supportMessageList');
+
+        //Catégorie d'articles
+        Route::get('/articleCategories',ArticleCategoryList::class)->name('articleCategoryList');
+        Route::get('/articleCategory/create',ArticleCategoryForm::class)->name('articleCategory.create');
+        Route::get('/articleCategory/edit/{articleCategory}',ArticleCategoryForm::class)->name('articleCategory.edit');
+
+        //Infos supplémentaires
+        Route::get('/addInfos',AddInfoList::class)->name('addInfoList');
+        Route::get('/addInfo/create',AddInfoForm::class)->name('addInfo.create');
+        Route::get('/addInfo/edit/{addInfo}',AddInfoForm::class)->name('addInfo.edit');
+
+        //Catégorie d'articles
+        Route::get('/supportMessageCategories',SupportMessageCategoryList::class)->name('supportMessageCategoryList');
+        Route::get('/supportMessageCategory/create',SupportMessageCategoryForm::class)->name('supportMessageCategory.create');
+        Route::get('/supportMessageCategory/edit/{supportMessageCategory}',SupportMessageCategoryForm::class)->name('supportMessageCategory.edit');
     });
 
     //Article
