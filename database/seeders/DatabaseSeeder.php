@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ArticleCategorySeeder::class,
             ArticleSeeder::class,
             SupportMessageCategorySeeder::class,
+            AddInfoSeeder::class,
             SupportMessageSeeder::class
         ]);
         

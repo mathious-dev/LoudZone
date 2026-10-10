@@ -14,6 +14,8 @@ class SupportMessageForm extends PublicComponent
     public $title;
     public $content;
     public $support_message_category_id;
+    public $add_info_id;
+    public $listAddInfos=[];
     public $isEditing=false;
     public $previousUrl;
     public function render()
@@ -29,7 +31,8 @@ class SupportMessageForm extends PublicComponent
     {
         return['title'=>'max:255',
         'content'=>'required|max:255',
-        'support_message_category_id'=>'required'];
+        'support_message_category_id'=>'required',
+        'add_info_id' => 'nullable'];
     }
     public function querySupportMessageCategory()
     {
@@ -41,5 +44,13 @@ class SupportMessageForm extends PublicComponent
         $data=$this->validate();
         $data['user_id']=auth()->id();
         $this->save($data,$this->supportMessage,$this->previousUrl);
+    }
+    public function updatedSupportMessageCategoryId()
+    {
+        $this->add_info_id = null;
+        if (!empty($this->support_message_category_id)) 
+            $this->listAddInfos = SupportMessageCategory::find($this->support_message_category_id)->addInfos;
+        else 
+            $this->listAddInfos = [];
     }
 }

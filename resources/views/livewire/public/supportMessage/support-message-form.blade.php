@@ -15,7 +15,7 @@
             <!-- Champ Catégorie -->
             <div>
                 <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Catégorie</label>
-                <select id="category" wire:model="support_message_category_id" 
+                <select id="category" wire:model.live="support_message_category_id" 
                     class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-[rgb(72,6,28)] focus:border-[rgb(72,6,28)]">
                     <option value="">-- Sélectionnez une catégorie --</option>
                     @foreach ($listCategories as $category)
@@ -24,6 +24,16 @@
                 </select>
                 @error('support_message_category_id') <span class="text-red-500 text-xs mt-1 block font-medium">{{ $message }}</span> @enderror
             </div>
+            @if (!empty($listAddInfos) && count($listAddInfos) > 0)
+            <div>
+                <select wire:model='add_info_id'>
+                    <option value="">-</option>
+                    @foreach ($listAddInfos as $addInfo)
+                        <option value="{{$addInfo->id}}">{{$addInfo->label}}</option>
+                    @endforeach
+                </select>
+            </div>
+            @endif
             
             <!-- Champ Objet -->
             <div>

@@ -29,12 +29,6 @@ return new class extends Migration
             $table->foreignId('add_info_id')->nullable()->constrained();
             $table->foreignId('support_message_category_id')->constrained();
         });
-        
-        //Table support_message_add_infos
-        Schema::table('support_message_add_infos', function (Blueprint $table) {
-            $table->foreignId('add_info_id')->constrained();
-            $table->foreignId('support_message_id')->constrained();
-        });
 
         //Table orders
         Schema::table('orders', function (Blueprint $table) {
@@ -72,12 +66,6 @@ return new class extends Migration
         // Table orders
         Schema::table('orders', function (Blueprint $table) {
             $table->dropConstrainedForeignId('user_id');
-        });
-
-        // Table support_message_add_infos
-        Schema::table('support_message_add_infos', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('support_message_id');
-            $table->dropConstrainedForeignId('add_info_id');
         });
 
         // Table support_messages

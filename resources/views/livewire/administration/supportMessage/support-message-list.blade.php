@@ -23,6 +23,8 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Demande</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Utilisateur</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Catégorie</th>
+                    <!-- 1. NOUVELLE COLONNE EN-TÊTE -->
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Précision</th>
                     <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">État</th>
                     <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Détails</th>
@@ -33,7 +35,7 @@
             <!-- Alpine.js gère l'accordéon au niveau du <tbody> -->
             <tbody x-data="{ expanded: false }" class="bg-white divide-y divide-gray-200">
                 
-                <!-- 1. LIGNE PRINCIPALE -->
+                <!-- LIGNE PRINCIPALE -->
                 <tr wire:key="msg-{{ $supportMessage->id }}" class="hover:bg-gray-50 transition duration-150 ease-in-out">
                     
                     <!-- Date et Heure -->
@@ -53,6 +55,16 @@
                     
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-indigo-600 font-medium">
                         {{ $supportMessage->supportMessageCategory->label }}
+                    </td>
+                    
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        @if($supportMessage->addInfo) <!-- Singulier ! -->
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                {{ $supportMessage->addInfo->label }}
+                            </span>
+                        @else
+                            <span class="text-gray-400 italic text-xs">Aucune</span>
+                        @endif
                     </td>
                     
                     <td class="px-6 py-4 whitespace-nowrap text-center">
@@ -85,9 +97,10 @@
                     </td>
                 </tr>
 
-                <!-- 2. LIGNE DÉROULANTE (Accordéon) -->
+                <!-- LIGNE DÉROULANTE (Accordéon) -->
                 <tr x-cloak x-show="expanded" x-transition.opacity class="bg-gray-50">
-                    <td colspan="7" class="px-8 py-6 border-t-0">
+                    <!-- 3. MODIFICATION DU COLSPAN DE 7 à 8 -->
+                    <td colspan="8" class="px-8 py-6 border-t-0">
                         <div class="text-sm text-gray-800 p-5 border border-indigo-100 rounded-lg bg-white shadow-sm">
                             <div class="flex items-center justify-between mb-3 border-b border-gray-100 pb-2">
                                 <h4 class="font-bold text-lg text-indigo-900">Détail de la demande</h4>

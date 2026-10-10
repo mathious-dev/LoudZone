@@ -12,7 +12,8 @@ class SupportMessage extends BaseEntity
     'content',
     'user_id',
     'state',
-    'support_message_category_id'];
+    'support_message_category_id',
+    'add_info_id'];
     //par défaut le message sera en attente
     protected $attributes = [
         'state' => false,
@@ -25,9 +26,9 @@ class SupportMessage extends BaseEntity
     {
         return $this->belongsTo(SupportMessageCategory::class);
     }
-    public function addInfos()
+    public function addInfo()
     {
-        return $this->belongsToMany(AddInfo::class,'support_message_add_infos','support_message_id','add_info_id');
+        return $this->belongsTo(AddInfo::class);
     }
     public function changeState()
     {
