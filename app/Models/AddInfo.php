@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\BaseEntity;
 use App\Models\SupportMessage;
-use Illuminate\Database\Eloquent\Model;
 
-class AddInfo extends Model
+
+class AddInfo extends BaseEntity
 {
+    protected $nameValueColumn='label';
+    protected $nameColumn="L'information suuplémentaire";
     protected $fillable=['label'];
     public function supportMessageCategories()
     {

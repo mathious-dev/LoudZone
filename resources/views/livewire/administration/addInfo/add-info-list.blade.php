@@ -8,7 +8,8 @@
             + Ajouter une info
         </a>
     </div>
-
+    <x-search :options="$tabSearchPossibility"/>
+    <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
     <!-- Tableau -->
     <div class="overflow-x-auto shadow-sm rounded-lg border border-gray-200">
         <table class="min-w-full divide-y divide-gray-200">

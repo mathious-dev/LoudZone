@@ -9,8 +9,8 @@ use App\Traits\CrudTrait;
 class AddInfoForm extends AdminComponent
 {
     use CrudTrait;
-    public $model=AddInfo::class;
     public $addInfo;
+    public $label;
     public function render()
     {
         return view('livewire.administration.addInfo.add-info-form');
@@ -31,7 +31,7 @@ class AddInfoForm extends AdminComponent
     }
     public function saveForm()
     {
-        $this->save($this->validate,$this->model,'admin.addInfoList');
+        $this->save($this->validate(),$this->addInfo,'admin.addInfoList');
     }
     public function rules()
     {
