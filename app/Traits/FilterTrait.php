@@ -6,6 +6,7 @@ trait FilterTrait
 {
     public $search='';
     public $searchAscDesc='';
+    public $searchUser='';
     public $searchWichColumn='';
     public $searchAscDescWichColumn='';
     public $tabSearchPossibility=[];
@@ -26,6 +27,17 @@ trait FilterTrait
                 return $query->orderBy($this->searchAscDescWichColumn,'desc');
         }
         return $query;
+    }
+    public function searchFunctionUser($query)
+    {
+        //moyen de simplifier et de faire pareil que la méthode searchFunction
+        if(!empty($this->searchUser))
+        {
+            return $query->whereHas('user',function ($q)
+            {
+                $q->where('name','like','%'.$this->userSeach.'%');
+            });
+        }
     }
     public function updatedSearch()
     {

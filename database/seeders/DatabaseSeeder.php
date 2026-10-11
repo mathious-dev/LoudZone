@@ -23,7 +23,10 @@ class DatabaseSeeder extends Seeder
             ArticleSeeder::class,
             SupportMessageCategorySeeder::class,
             AddInfoSeeder::class,
-            SupportMessageSeeder::class
+            SupportMessageSeeder::class,
+            OrderSeeder::class,
+            ArticleOrderSeeder::class,
+            PaymentSeeder::class
         ]);
         
     }

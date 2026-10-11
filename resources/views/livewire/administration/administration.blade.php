@@ -50,6 +50,21 @@
                                 Information supplémentaire
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.orderListAdmin') }}" class="block px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                                Commande
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.articleOrderListAdmin') }}" class="block px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                                Commande d'articles
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.paymentListAdmin') }}" class="block px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                                Paiement
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

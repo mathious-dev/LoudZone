@@ -11,6 +11,7 @@ class Order extends Model
         'total_price',
         'user_id'
     ];
+    protected $attributes=['state'=>false];
     public function articleOrders()
     {
         return $this->hasMany(ArticleOrder::class);

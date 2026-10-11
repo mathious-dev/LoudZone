@@ -13,6 +13,7 @@ class Payment extends Model
         'payment_method',
         'order_id'
     ];
+    protected $attributes=['state'=>false];
     public function order()
     {
         return $this->belongsTo(Order::class);
