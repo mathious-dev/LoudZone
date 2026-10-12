@@ -24,9 +24,8 @@ trait CrudTrait
         else
             saveHistory("Création de $nameColumn $nameValue");
         //pour la création de message support on vérifie si la route commence par http avec url()->previous()
-        if (str_starts_with($route, 'http')) {
+        if (str_starts_with($route, 'http'))
             return redirect()->to($route); // Redirection vers l'URL
-        }
         return $this->redirectRoute($route);
     }
 }

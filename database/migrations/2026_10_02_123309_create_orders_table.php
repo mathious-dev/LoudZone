@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->boolean('state');
             $table->decimal('total_price', 5, 2);
+            $table->string('reference')->unique();
             $table->timestamps();
         });
     }

@@ -45,6 +45,11 @@ return new class extends Migration
         Schema::table('payments', function (Blueprint $table) {
             $table->foreignId('order_id')->constrained();
         });
+
+        //Table événement
+       Schema::table('events', function(Blueprint $table) {
+            $table->foreignId('address_id')->nullable()->constrained();
+        });
     }   
 
     /**
@@ -85,6 +90,11 @@ return new class extends Migration
         Schema::table('articles', function (Blueprint $table) {
             $table->dropConstrainedForeignId('article_category_id');
             $table->dropConstrainedForeignId('user_id');
+        });
+
+        //Table événement
+        Schema::table('events',function(Blueprint $table) {
+            $table->dropConstrainedForeignId('address_id');
         });
     }
 };
