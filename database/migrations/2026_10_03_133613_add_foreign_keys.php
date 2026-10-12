@@ -13,42 +13,42 @@ return new class extends Migration
     {
        //Table articles
         Schema::table('articles', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('article_category_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('article_category_id')->nullable()->constrained()->nullOnDelete();
         });
 
         // Table add_info_by_categories
         Schema::table('add_info_by_categories', function (Blueprint $table) {
-            $table->foreignId('add_info_id')->constrained();
-            $table->foreignId('support_message_category_id')->constrained();
+            $table->foreignId('add_info_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('support_message_category_id')->constrained()->cascadeOnDelete();
         });
 
         // Table support_messages
         Schema::table('support_messages', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('add_info_id')->nullable()->constrained();
             $table->foreignId('support_message_category_id')->constrained();
         });
 
         //Table orders
         Schema::table('orders', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
         });
 
         //Table article_orders
         Schema::table('article_orders', function (Blueprint $table) {
-            $table->foreignId('article_id')->constrained();
-            $table->foreignId('order_id')->constrained();
+            $table->foreignId('article_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
         });
 
         //Table payment
         Schema::table('payments', function (Blueprint $table) {
-            $table->foreignId('order_id')->constrained();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
         });
 
         //Table événement
        Schema::table('events', function(Blueprint $table) {
-            $table->foreignId('address_id')->nullable()->constrained();
+            $table->foreignId('address_id')->nullable()->constrained()->nullOnDelete();
         });
     }   
 
