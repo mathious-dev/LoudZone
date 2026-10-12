@@ -75,7 +75,7 @@ Route::middleware([
         Route::get('/addInfo/create',AddInfoForm::class)->name('addInfo.create');
         Route::get('/addInfo/edit/{addInfo}',AddInfoForm::class)->name('addInfo.edit');
 
-        //Catégorie d'articles
+        //Catégorie de message support
         Route::get('/supportMessageCategories',SupportMessageCategoryList::class)->name('supportMessageCategoryList');
         Route::get('/supportMessageCategory/create',SupportMessageCategoryForm::class)->name('supportMessageCategory.create');
         Route::get('/supportMessageCategory/edit/{supportMessageCategory}',SupportMessageCategoryForm::class)->name('supportMessageCategory.edit');
