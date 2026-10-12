@@ -8,6 +8,8 @@ use App\Livewire\administration\articleCategory\ArticleCategoryForm;
 use App\Livewire\administration\ArticleCategory\ArticleCategoryList;
 use App\Livewire\administration\articleOrder\ArticleOrderFormAdmin;
 use App\Livewire\administration\articleOrder\ArticleOrderListAdmin;
+use App\Livewire\administration\event\EventFormAdmin;
+use App\Livewire\administration\event\EventListAdmin;
 use App\Livewire\administration\history\HistoryList;
 use App\Livewire\administration\order\OrderListAdmin;
 use App\Livewire\administration\payment\PaymentFormAdmin;
@@ -87,10 +89,15 @@ Route::middleware([
         Route::get('/articleOrder/create',ArticleOrderFormAdmin::class)->name('articleOrderFormAdmin.create');
         Route::get('/articleOrder/edit/{articleOrder}',ArticleOrderFormAdmin::class)->name('articleOrderFormAdmin.edit');
 
-        //paiement
+        //Paiement
         Route::get('/payments',PaymentListAdmin::class)->name('paymentListAdmin');
         Route::get('/payment/create',PaymentFormAdmin::class)->name('paymentFormAdmin.create');
         Route::get('/payment/edit/{order}',PaymentFormAdmin::class)->name('paymentFormAdmin.edit');
+
+        //événement
+        Route::get('/events',EventListAdmin::class)->name('eventListAdmin');
+        Route::get('/event/create',EventFormAdmin::class)->name('eventFormAdmin.create');
+        Route::get('/event/edit/{event}',EventFormAdmin::class)->name('eventFormAdmin.edit');
     });
 
     //Article

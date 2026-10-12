@@ -1,4 +1,6 @@
 <div class="overflow-x-auto bg-white rounded-lg shadow-md mb-8">
+    <x-search :options="$tabSearchPossibility"/>
+    <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
     <table class="min-w-full text-left text-sm whitespace-nowrap">
         <thead class="bg-gray-100 text-gray-600 uppercase tracking-wider border-b-2 border-gray-200">
             <tr>

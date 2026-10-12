@@ -1,5 +1,7 @@
 <div class="overflow-x-auto bg-white rounded-lg shadow-md mb-8">
     <table class="min-w-full text-left text-sm whitespace-nowrap">
+        {{-- <x-search :options="$tabSearchPossibility"/>
+        <x-search-asc-desc :options="$tabSearchAscDescPossibility"/> --}}
         <thead class="bg-gray-100 text-gray-600 uppercase tracking-wider border-b-2 border-gray-200">
             <tr>
                 <th scope="col" class="px-6 py-4 font-semibold">Numéro de commande</th>

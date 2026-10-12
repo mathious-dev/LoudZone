@@ -19,11 +19,11 @@ class OrderListAdmin extends AdminComponent
         $this->searchWichColumn='reference';
         $this->searchAscDescWichColumn = 'total_price';
         $this->tabSearchPossibility=[
-            'reference'=>'numéro de commande',
-            'user_id'=>"nom d'utilisateur",
+            'reference'=>'Numéro de commande',
+            'user_id'=>"Nom d'utilisateur",
         ];
         $this->tabSearchAscDescPossibility=[
-            'total_price'=>'prix total',
+            'total_price'=>'Prix total',
         ];
     }
 }

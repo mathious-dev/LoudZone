@@ -38,7 +38,7 @@ class HistoryList extends AdminComponent
         $this->tabSearchPossibility=[
             'user_name'=>"Nom d'utilisateur"];
         $this->tabSearchAscDescPossibility=[
-            'created_at'=>"date"
+            'created_at'=>"Date"
         ];
     }
 }
