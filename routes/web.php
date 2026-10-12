@@ -8,7 +8,7 @@ use App\Livewire\administration\articleCategory\ArticleCategoryForm;
 use App\Livewire\administration\ArticleCategory\ArticleCategoryList;
 use App\Livewire\administration\articleOrder\ArticleOrderFormAdmin;
 use App\Livewire\administration\articleOrder\ArticleOrderListAdmin;
-use App\Livewire\administration\event\EventFormAdmin;
+use App\Livewire\administration\event\EventForm;
 use App\Livewire\administration\event\EventListAdmin;
 use App\Livewire\administration\history\HistoryList;
 use App\Livewire\administration\order\OrderListAdmin;
@@ -96,8 +96,8 @@ Route::middleware([
 
         //événement
         Route::get('/events',EventListAdmin::class)->name('eventListAdmin');
-        Route::get('/event/create',EventFormAdmin::class)->name('eventFormAdmin.create');
-        Route::get('/event/edit/{event}',EventFormAdmin::class)->name('eventFormAdmin.edit');
+        Route::get('/event/create',EventForm::class)->name('eventForm.create');
+        Route::get('/event/edit/{event}',EventForm::class)->name('eventForm.edit');
     });
 
     //Article

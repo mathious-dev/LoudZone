@@ -22,6 +22,8 @@ class EventListAdmin extends AdminComponent
         ];
         $this->tabSearchAscDescPossibility=[
             'label'=>'nom',
+            'start_date'=>'date de début',
+            'end_date'=>'date de fin',
         ];
     }
 }
