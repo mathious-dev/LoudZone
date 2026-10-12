@@ -14,7 +14,14 @@ trait FilterTrait
     public function searchFunction($query)
     {
         if(!empty($this->search)&& !empty($this->searchWichColumn))
-            return $query->where($this->searchWichColumn ,'like','%'.$this->search.'%');
+        {
+            if($this->searchWichColumn=='user_id')
+                return $query->whereHas('user',function($q){
+                $q->where('name','like','%'.$this->search.'%');
+                });
+            else
+                return $query->where($this->searchWichColumn ,'like','%'.$this->search.'%');
+        }
         return $query;
     }
     public function searchAscDescFunction($query)
@@ -27,17 +34,6 @@ trait FilterTrait
                 return $query->orderBy($this->searchAscDescWichColumn,'desc');
         }
         return $query;
-    }
-    public function searchFunctionUser($query)
-    {
-        //moyen de simplifier et de faire pareil que la méthode searchFunction
-        if(!empty($this->searchUser))
-        {
-            return $query->whereHas('user',function ($q)
-            {
-                $q->where('name','like','%'.$this->userSeach.'%');
-            });
-        }
     }
     public function updatedSearch()
     {

@@ -4,15 +4,9 @@ namespace App\Livewire\administration\supportMessage;
 
 use App\Livewire\AdminComponent;
 use App\Models\SupportMessage;
-use App\Traits\CrudTrait;
-use App\Traits\FilterTrait;
-use Livewire\WithPagination;
-
 class SupportMessageList extends AdminComponent
 {
-    use WithPagination;
-    use CrudTrait;
-    use FilterTrait;
+
     protected $model=SupportMessage::class;
     public function mount()
     {

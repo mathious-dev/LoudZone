@@ -4,29 +4,26 @@ namespace App\Livewire\administration\order;
 
 use App\Livewire\AdminComponent;
 use App\Models\Order;
-use App\Traits\CrudTrait;
-use App\Traits\FilterTrait;
-use Livewire\WithPagination;
+
 
 class OrderListAdmin extends AdminComponent
 {
-    use CrudTrait;
-    use FilterTrait;
-    use WithPagination;
+
     public $model=Order::class;
     public function render()
     {
-        return view('livewire.administration.order.order-list-admin');
+        return view('livewire.administration.order.order-list-admin',['listOrders'=>$this->query(10)]);
     }
     public function mount()
     {
-        $this->searchWichColumn='user_id->';
-        $this->searchAscDescWichColumn = 'totalPrice';
+        $this->searchWichColumn='reference';
+        $this->searchAscDescWichColumn = 'total_price';
         $this->tabSearchPossibility=[
-            'name'=>'nom',
+            'reference'=>'numéro de commande',
+            'user_id'=>"nom d'utilisateur",
         ];
         $this->tabSearchAscDescPossibility=[
-            'totalPrice'=>'prix total',
+            'total_price'=>'prix total',
         ];
     }
 }

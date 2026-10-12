@@ -19,12 +19,6 @@ class RoleList extends AdminComponent
     }
     public function render()
     {
-        return view('livewire.administration.role.role-list',['listRoles'=>$this->queryRole()]);
-    }
-    public function queryRole()
-    {
-        $query=Role::query();
-        $query=$this->searchFunction($query);
-        return $query->get();
+        return view('livewire.administration.role.role-list',['listRoles'=>$this->query(10)]);
     }
 }

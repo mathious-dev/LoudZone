@@ -4,8 +4,6 @@ namespace App\Livewire\administration\SupportMessageCategory;
 
 use App\Livewire\AdminComponent;
 
-
-
 class SupportMessageCategoryList extends AdminComponent
 {
     public function render()
