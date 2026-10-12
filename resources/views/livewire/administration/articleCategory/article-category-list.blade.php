@@ -31,7 +31,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-center">
                             <!-- Badge pour le nombre d'articles -->
                             <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-blue-100 text-blue-800">
-                                {{ count($category->articles) }}
+                                {{ $category->articles?->count() ?? 0 }}
                             </span>
                         </td>
                         

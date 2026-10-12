@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseEntity;
 
-class ArticleOrder extends Model
+
+
+class ArticleOrder extends BaseEntity
 {
+    protected $nameValueColumn='id';
+    protected $nameColumn='la commande article';
     protected $fillable = [
         'quantity',
         'unit_price',

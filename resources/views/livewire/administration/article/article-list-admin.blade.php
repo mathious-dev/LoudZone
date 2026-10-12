@@ -63,7 +63,7 @@
                         @endif
                     </td>
 
-                    <td class="px-4 py-4 whitespace-nowrap text-sm text-indigo-600 font-medium">{{ $article->articleCategory?->label ?? 'Aucune' }}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-indigo-600 font-medium">{{ $article->articleCategory?->label ?? 'Catégorie supprimée' }}</td>
 
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-right">
                         <div class="flex items-center justify-end space-x-3">
@@ -101,7 +101,7 @@
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                                     <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
                                         <span class="block text-gray-400 text-xs uppercase mb-1">Créateur</span>
-                                        <span class="font-medium text-gray-800">{{ $article->user?->first_name }} {{ $article->user?->name }}</span>
+                                        <span class="font-medium text-gray-800">{{ $article->user ? $article->user->first_name . ' ' . $article->user->name : 'Utilisateur supprimé' }}</span>
                                     </div>
                                     <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
                                         <span class="block text-gray-400 text-xs uppercase mb-1">Slug (URL)</span>

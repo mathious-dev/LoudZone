@@ -50,11 +50,11 @@
                     </td>
                     
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {{ $supportMessage->user->name }} {{ $supportMessage->user->first_name }}
+                        {{ $supportMessage->user ? $supportMessage->user->name . ' ' . $supportMessage->user->first_name : 'Utilisateur supprimé' }}
                     </td>
                     
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-indigo-600 font-medium">
-                        {{ $supportMessage->supportMessageCategory->label }}
+                        {{ $supportMessage->supportMessageCategory?->label ?? 'Catégorie supprimée' }}
                     </td>
                     
                     <td class="px-6 py-4 whitespace-nowrap text-sm">

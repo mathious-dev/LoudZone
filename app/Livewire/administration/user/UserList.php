@@ -13,7 +13,8 @@ class UserList extends AdminComponent
         $this->tabSearchPossibility=[
             'name'=>'Nom',
             'first_name'=>'Prénom',
-            'email'=>'Adresse mail'];
+            'email'=>'Adresse mail',
+            'id'=>'Id'];
         $this->tabSearchAscDescPossibility=[
             'name'=>'Nom',
             'first_name'=>'Prénom',

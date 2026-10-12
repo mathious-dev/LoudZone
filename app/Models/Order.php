@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseEntity;
 
-class Order extends Model
+
+class Order extends BaseEntity
 {
+    protected $nameValueColumn='reference';
+    protected $nameColumn='la commande';
     protected $fillable = [
         'state',
         'total_price',

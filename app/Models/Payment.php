@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseEntity;
 
-class Payment extends Model
+
+class Payment extends BaseEntity
 {
+    protected $nameValueColumn='transaction_id';
+    protected $nameColumn='le paiement';
     protected $fillable = [
         'amount',
         'state',
