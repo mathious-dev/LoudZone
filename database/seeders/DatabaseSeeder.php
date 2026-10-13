@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 use Database\Seeders\ArticleCategorySeeder;
+use Database\Seeders\PromotionSeeder;
 use Database\Seeders\SupportMessageCategorySeeder;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
+            PromotionSeeder::class,
             ArticleCategorySeeder::class,
             ArticleSeeder::class,
             SupportMessageCategorySeeder::class,
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
             PaymentSeeder::class,
             AddressSeeder::class,
             EventSeeder::class,
+            
         ]);
         
     }

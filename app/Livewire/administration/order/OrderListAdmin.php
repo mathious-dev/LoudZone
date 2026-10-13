@@ -2,13 +2,16 @@
 
 namespace App\Livewire\administration\order;
 
+use App\Enum\StateEnum;
 use App\Livewire\AdminComponent;
 use App\Models\Order;
 
 
 class OrderListAdmin extends AdminComponent
 {
-
+    public $refused=StateEnum::REFUSED;
+    public $waiting=StateEnum::WAITING;
+    public $finished=StateEnum::FINISHED;
     public $model=Order::class;
     public function render()
     {

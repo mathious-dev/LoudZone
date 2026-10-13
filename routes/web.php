@@ -6,7 +6,6 @@ use App\Livewire\administration\article\ArticleFormAdmin;
 use App\Livewire\administration\article\ArticleListAdmin;
 use App\Livewire\administration\articleCategory\ArticleCategoryForm;
 use App\Livewire\administration\ArticleCategory\ArticleCategoryList;
-use App\Livewire\administration\articleOrder\ArticleOrderFormAdmin;
 use App\Livewire\administration\articleOrder\ArticleOrderListAdmin;
 use App\Livewire\administration\event\EventForm;
 use App\Livewire\administration\event\EventListAdmin;
@@ -14,6 +13,8 @@ use App\Livewire\administration\history\HistoryList;
 use App\Livewire\administration\order\OrderListAdmin;
 use App\Livewire\administration\payment\PaymentFormAdmin;
 use App\Livewire\administration\payment\PaymentListAdmin;
+use App\Livewire\administration\promotion\PromotionForm;
+use App\Livewire\administration\promotion\PromotionList;
 use App\Livewire\administration\role\RoleForm;
 use App\Livewire\administration\role\RoleList;
 use App\Livewire\administration\supportMessage\SupportMessageList;
@@ -24,6 +25,7 @@ use App\Livewire\administration\user\UserList;
 use App\Livewire\public\article\ArticleDetail;
 use App\Livewire\public\article\ArticleListPublic;
 use App\Livewire\public\order\OrderForm;
+use App\Livewire\public\order\OrderListUser;
 use App\Livewire\public\supportMessage\SupportMessageForm;
 use Illuminate\Support\Facades\Route;
 
@@ -86,8 +88,6 @@ Route::middleware([
 
          //Commande d'articles
         Route::get('/articleOrders',ArticleOrderListAdmin::class)->name('articleOrderListAdmin');
-        Route::get('/articleOrder/create',ArticleOrderFormAdmin::class)->name('articleOrderFormAdmin.create');
-        Route::get('/articleOrder/edit/{articleOrder}',ArticleOrderFormAdmin::class)->name('articleOrderFormAdmin.edit');
 
         //Paiement
         Route::get('/payments',PaymentListAdmin::class)->name('paymentListAdmin');
@@ -98,6 +98,11 @@ Route::middleware([
         Route::get('/events',EventListAdmin::class)->name('eventListAdmin');
         Route::get('/event/create',EventForm::class)->name('eventForm.create');
         Route::get('/event/edit/{event}',EventForm::class)->name('eventForm.edit');
+
+        //Promotion
+        Route::get('/promotions',PromotionList::class)->name('promotionList');
+        Route::get('/promotion/create',PromotionForm::class)->name('promotionForm.create');
+        Route::get('/promotion/edit/{promotion}',PromotionForm::class)->name('promotionForm.edit');
     });
 
     //Article
@@ -108,6 +113,7 @@ Route::middleware([
     Route::get('/supportMessage/create',SupportMessageForm::class)->name('supportMessage.create');
 
     //Commande
+    Route::get('/orders',OrderListUser::class)->name('orderListUser');
     Route::get('/order/create',OrderForm::class)->name('orderForm.create');
     Route::get('/order/edit/{order}',OrderForm::class)->name('orderForm.edit');
 });

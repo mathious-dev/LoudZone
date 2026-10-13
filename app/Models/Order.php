@@ -15,7 +15,6 @@ class Order extends BaseEntity
         'reference',
         'user_id'
     ];
-    protected $attributes=['state'=>false];
     public function articleOrders()
     {
         return $this->hasMany(ArticleOrder::class);

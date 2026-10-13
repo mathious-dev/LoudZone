@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Promotion;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends BaseEntity
@@ -17,7 +18,9 @@ class Article extends BaseEntity
     'tva',
     'user_id',
     'article_category_id',
-    'primary_image'];
+    'primary_image',
+    'promotion_id'
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -36,5 +39,9 @@ class Article extends BaseEntity
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+    public function promotion()
+    {
+        return $this->belongsTo(Promotion::class);
     }
 }

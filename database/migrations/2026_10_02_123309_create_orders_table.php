@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->boolean('state');
+            $table->string('state');
             $table->decimal('total_price', 5, 2);
             $table->string('reference')->unique();
             $table->timestamps();

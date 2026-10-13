@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Promotion;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,6 +19,7 @@ class ArticleSeeder extends Seeder
     {
         $listUser=User::all();
         $listArticleCategory=ArticleCategory::all();
+        $listPromotion=Promotion::all();
         for ($i = 0; $i < 50; $i++) {
             $title = fake()->sentence(4); 
             Article::create([
@@ -30,6 +32,7 @@ class ArticleSeeder extends Seeder
                 'tva'=> fake()->randomElement([6, 12, 21]), 
                 'user_id'=> $listUser->random()->id,
                 'article_category_id' => $listArticleCategory->random()->id,
+                'promotion_id' => fake()->boolean(30) ? $listPromotion->random()->id : null
             ]);
         }
     }

@@ -8,6 +8,7 @@ use App\Models\Event;
 
 class EventForm extends AdminComponent
 {
+    public $model=Event::class;
     public $event;
     public $address;
     public $label;

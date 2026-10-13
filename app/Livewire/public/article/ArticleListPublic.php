@@ -16,14 +16,7 @@ class ArticleListPublic extends PublicComponent
     protected $model=Article::class;
     public function render()
     {
-        return view('livewire.public.article.article-list-public',['listArticles'=>$this->queryArticle()]);
-    }
-    public function queryArticle()
-    {
-        $query=Article::query();
-        $query=$this->searchFunction($query);
-        $query=$this->searchAscDescFunction($query);
-        return $query->paginate(9);
+        return view('livewire.public.article.article-list-public',['listArticles'=>$this->query(9)]);
     }
     public function mount()
     {

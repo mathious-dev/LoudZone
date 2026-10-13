@@ -15,6 +15,8 @@ return new class extends Migration
         Schema::table('articles', function (Blueprint $table) {
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete()->change();
             $table->foreignId('article_category_id')->nullable()->constrained()->nullOnDelete()->change();
+            //le ->restrictOnDelete() va nous permettre d'empêcher la suppression si un aticle utilise toujours la promotion
+            $table->foreignId('promotion_id')->nullable()->constrained()->restrictOnDelete()->change();
         });
 
         // Table add_info_by_categories (Ici ce sont des cascades, donc pas de nullable, c'est bon)

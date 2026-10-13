@@ -16,7 +16,6 @@ class SupportMessageForm extends PublicComponent
     public $support_message_category_id;
     public $add_info_id;
     public $listAddInfos=[];
-    public $isEditing=false;
     public $previousUrl;
     public function render()
     {

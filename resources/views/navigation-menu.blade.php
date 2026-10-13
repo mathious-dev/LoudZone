@@ -17,7 +17,9 @@
                     </x-nav-link>
                 </div>
             </div>
-
+            <div>
+                <a href="{{ route('orderListUser') }}">Vos commandes</a>
+            </div>
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Settings Dropdown -->
                 <div class="ms-3 relative">
