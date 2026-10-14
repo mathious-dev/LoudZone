@@ -9,9 +9,6 @@ use App\Models\Order;
 
 class OrderListAdmin extends AdminComponent
 {
-    public $refused=StateEnum::REFUSED;
-    public $waiting=StateEnum::WAITING;
-    public $finished=StateEnum::FINISHED;
     public $model=Order::class;
     public function render()
     {

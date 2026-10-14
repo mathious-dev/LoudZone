@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Livewire\administration\payment;
-
 use App\Livewire\AdminComponent;
 use App\Models\Payment;
+
 class PaymentListAdmin extends AdminComponent
 {
     public $model=Payment::class;

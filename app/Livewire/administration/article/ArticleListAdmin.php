@@ -24,6 +24,11 @@ class ArticleListAdmin extends AdminComponent
             'price_ht'=>'prix HT'
         ];
         $this->tabSearchCategoryPossibility=ArticleCategory::pluck('label','id')->toArray();
+
+        if(request()->query('article_category_id'))
+        {
+            $this->searchCategory=request()->query('article_category_id');
+        }
     }
     public function render()
     {

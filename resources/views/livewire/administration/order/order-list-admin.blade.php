@@ -18,13 +18,13 @@
                     <td class="px-6 py-4 font-bold text-gray-800">{{ $order->reference }}</td>
                     <td class="px-6 py-4">{{ number_format($order->total_price, 2, ',', ' ') }} €</td>
                     
-                    <!-- Gestion des États avec l'Enum -->
+                    <!-- Gestion des États avec nos belles méthodes du Modèle -->
                     <td class="px-6 py-4">
-                        @if($order->state === $finished)
+                        @if($order->isFinished())
                             <span class="px-2 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">Confirmée</span>
-                        @elseif($order->state === $waiting)
+                        @elseif($order->isWaiting())
                             <span class="px-2 py-1 text-xs font-medium text-yellow-700 bg-yellow-100 rounded-full">En attente</span>
-                        @elseif($order->state === $refused)
+                        @elseif($order->isRefused())
                             <span class="px-2 py-1 text-xs font-medium text-red-700 bg-red-100 rounded-full">Refusée / Annulée</span>
                         @endif
                     </td>
@@ -33,14 +33,15 @@
                         {{ $order->user?->name ?? 'Anonyme (Compte supprimé)' }}
                     </td>
                     
+                    <!-- ACTIONS -->
                     <td class="px-6 py-4 text-right">
                         <!-- Bouton Détails pour voir les articles -->
                         <button wire:click="show({{ $order->id }})" class="text-indigo-600 hover:text-indigo-900 font-semibold transition-colors mr-3">
                             Détails
                         </button>
                         
-                        <!-- Bouton Annuler (Uniquement si la commande n'est pas déjà refusée/annulée) -->
-                        @if($order->state !== $refused)
+                        <!-- Bouton Annuler (Uniquement si la commande n'est PAS refusée) -->
+                        @if(!$order->isRefused()) <!-- 👈 La méthode est super propre ici aussi ! -->
                             <button wire:click="cancelOrder({{ $order->id }})" wire:confirm="Êtes-vous sûr de vouloir annuler cette commande ?" class="text-red-600 hover:text-red-900 font-semibold transition-colors">
                                 Annuler
                             </button>

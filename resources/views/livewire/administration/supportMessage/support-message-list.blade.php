@@ -12,6 +12,9 @@
         <div class="w-full sm:w-1/2">
             <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
         </div>
+        <div>
+            <x-search-category :options="$tabSearchCategoryPossibility"/>
+        </div>
     </div>
 
     <!-- Tableau -->

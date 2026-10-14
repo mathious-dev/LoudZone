@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\StateEnum;
 use App\Models\BaseEntity;
 
 
@@ -14,6 +15,9 @@ class Order extends BaseEntity
         'total_price',
         'reference',
         'user_id'
+    ];
+    protected $casts = [
+        'state' => StateEnum::class,
     ];
     public function articleOrders()
     {
@@ -36,5 +40,17 @@ class Order extends BaseEntity
             //ici on additionne la date + le nombre aléatoire
             $order->reference=date('Ymd').random_int(1000, 9999);
         });
+    }
+    public function isFinished(): bool
+    {
+        return $this->state === StateEnum::FINISHED;
+    }
+    public function isWaiting(): bool
+    {
+        return $this->state === StateEnum::WAITING;
+    }
+    public function isRefused(): bool
+    {
+        return $this->state === StateEnum::REFUSED;
     }
 }

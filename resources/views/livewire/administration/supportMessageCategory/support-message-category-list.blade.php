@@ -33,9 +33,10 @@
                         
                         <!-- Compteur (avec un badge élégant) -->
                         <td class="px-6 py-4 text-center">
+                            <a href="{{ route('admin.supportMessageList',['support_message_category_id'=>$category->id]) }}">
                             <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-blue-100 text-blue-800">
                                 {{ $category->addInfos?->count() ?? 0 }}
-                            </span>
+                            </span></a>
                         </td>
                         
                         <!-- Actions -->
