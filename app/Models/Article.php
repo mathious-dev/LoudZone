@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\BaseEntity;
 use App\Models\Promotion;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 
 class Article extends BaseEntity
 {
@@ -48,5 +50,12 @@ class Article extends BaseEntity
     {
         $this->is_published = !$this->is_published;
         $this->save();
+    }
+    public function priceWithTva():Attribute
+    {
+        return Attribute::make(get:function(){
+            //calcul de tva où l'on multiplie le prix HT par 1,21 par exemple
+            return round($this->price_ht * (1 + ($this->tva / 100)), 2);
+        });
     }
 }

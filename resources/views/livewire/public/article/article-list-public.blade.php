@@ -47,8 +47,8 @@
 
                 <div class="mt-auto pt-6 flex items-center justify-between">
                     <div class="flex items-baseline">
-                        <span class="text-2xl font-black text-gray-900">{{ number_format($article->price_ht, 2, ',', ' ') }}</span>
-                        <span class="ml-1 text-sm font-medium text-gray-500">€ HT</span>
+                        <span class="text-2xl font-black text-gray-900">{{ $article->price_with_tva }}</span>
+                        <span class="ml-1 text-sm font-medium text-gray-500">€ </span>
                     </div>
 
                     <a href="{{ route('articleDetail', $article->id) }}" class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
