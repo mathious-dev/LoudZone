@@ -44,4 +44,9 @@ class Article extends BaseEntity
     {
         return $this->belongsTo(Promotion::class);
     }
+    public function changeStatePublishArticleModel()
+    {
+        $this->is_published = !$this->is_published;
+        $this->save();
+    }
 }

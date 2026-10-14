@@ -54,6 +54,7 @@ class ArticleFormAdmin extends AdminComponent
         {
             $this->article=$article;
             $this->fill($article->toArray());
+
             $this->isEditing=true;
         }
         else
@@ -72,7 +73,7 @@ class ArticleFormAdmin extends AdminComponent
             $textImage = $this->primary_image->store('articles', 'public');
             $data['primary_image']=$textImage;
         }
-        $this->save($data,$this->article,"admin.articleListAdmin");
+        $this->save($data,$this->article,"admin.articleListAdmin",'articleCategory',$this->ArticleCategoryChoice);
     }
     
 

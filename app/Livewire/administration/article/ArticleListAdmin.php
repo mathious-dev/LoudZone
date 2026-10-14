@@ -34,4 +34,10 @@ class ArticleListAdmin extends AdminComponent
     {
         return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->query(10)]);
     }
+    public function changeStatePublishArticle(Article $article)
+    {
+        $article->changeStatePublishArticleModel();
+        $stateTexte = $article->is_published ? 'Publié' : 'Dépublié';
+        saveHistory("Modification de l'état de l'article : $article->title en $stateTexte");
+    }
 }

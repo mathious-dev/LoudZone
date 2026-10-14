@@ -4,19 +4,14 @@ namespace App\Livewire\public\article;
 
 use App\Livewire\PublicComponent;
 use App\Models\Article;
-use App\Traits\CrudTrait;
-use App\Traits\FilterTrait;
-use Livewire\WithPagination;
 
 class ArticleListPublic extends PublicComponent
 {
-    use CrudTrait;
-    use FilterTrait;
-    use WithPagination;
+
     protected $model=Article::class;
     public function render()
     {
-        return view('livewire.public.article.article-list-public',['listArticles'=>$this->query(9)]);
+        return view('livewire.public.article.article-list-public',['listArticles'=>$this->queryArticle()]);
     }
     public function mount()
     {
@@ -27,5 +22,13 @@ class ArticleListPublic extends PublicComponent
             'title'=>'titre',
             'price_ht'=>'prix HT'
         ];
+    }
+    public function queryArticle()
+    {
+        $query=Article::query();
+        $query=$query->where('is_published',true);
+        $query=$this->searchFunction($query);
+        $query=$this->searchAscDescFunction($query);
+        return $query->paginate(9);
     }
 }
