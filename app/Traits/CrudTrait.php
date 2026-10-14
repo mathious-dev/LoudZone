@@ -13,12 +13,14 @@ trait CrudTrait
         saveHistory("$nameColumn $nameValue a été supprimé");
         $find->delete();
     }
-    public function save($dataTab,$object,$route)
+    public function save($dataTab,$object,$route, $relationName=null,$dataTabForRelation=[])
     {
         $object->fill($dataTab);
         $nameValue=$object->getValueNameColumn();
         $nameColumn=$object->getNameColumn();
         $object->save();
+        if ($relationName!==null) 
+            $object->$relationName()->sync($dataTabForRelation);
         if($this->isEditing)
             saveHistory("Modification de $nameColumn $nameValue");
         else

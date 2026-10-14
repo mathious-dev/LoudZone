@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\SupportMessage;
 
 class SupportMessageCategory extends BaseEntity
 {
@@ -12,5 +12,9 @@ class SupportMessageCategory extends BaseEntity
     public function addInfos()
     {
         return $this->belongsToMany(AddInfo::class,'add_info_by_categories','support_message_category_id','add_info_id');
+    }
+    public function supportMessages()
+    {
+        return $this->hasMany(SupportMessage::class);
     }
 }

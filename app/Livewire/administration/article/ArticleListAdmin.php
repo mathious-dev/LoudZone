@@ -23,7 +23,7 @@ class ArticleListAdmin extends AdminComponent
             'slug'=>'lien',
             'price_ht'=>'prix HT'
         ];
-        $this->tabSearchCategoryPossibility=ArticleCategory::pluck('label','id')->toArray();
+        $this->tabSearchCategoryPossibility=ArticleCategory::pluck('label','id');
 
         if(request()->query('article_category_id'))
         {

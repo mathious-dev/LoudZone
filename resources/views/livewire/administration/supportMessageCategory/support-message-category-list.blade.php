@@ -11,14 +11,16 @@
             Ajouter une catégorie
         </a>
     </div>
-
+    <x-search :options="$tabSearchPossibility"/>
+    <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
     <!-- Conteneur du tableau -->
     <div class="overflow-x-auto">
         <table class="min-w-full text-left text-sm whitespace-nowrap">
             <thead class="bg-gray-100 text-gray-600 uppercase tracking-wider border-b-2 border-gray-200">
                 <tr>
                     <th scope="col" class="px-6 py-4 font-semibold">Nom de catégorie</th>
-                    <th scope="col" class="px-6 py-4 font-semibold text-center">Infos supplémentaires associées</th>
+                    <th scope="col" class="px-6 py-4 font-semibold text-center">Messages support associées</th>
+                    <th>Informations supplémentaires associées</th>
                     <th scope="col" class="px-6 py-4 font-semibold text-right">Actions</th>
                 </tr>
             </thead>
@@ -35,10 +37,12 @@
                         <td class="px-6 py-4 text-center">
                             <a href="{{ route('admin.supportMessageList',['support_message_category_id'=>$category->id]) }}">
                             <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-blue-100 text-blue-800">
-                                {{ $category->addInfos?->count() ?? 0 }}
+                                {{ $category->supportMessages?->count() ?? 0 }}
                             </span></a>
                         </td>
-                        
+                        <td>
+                            {{ $category->addInfos?->count()??0 }}
+                        </td>
                         <!-- Actions -->
                         <td class="px-6 py-4 text-right text-sm font-medium space-x-3">
                             <a href="{{ route('admin.supportMessageCategory.edit', $category) }}" class="text-indigo-600 hover:text-indigo-900 font-semibold transition-colors">
