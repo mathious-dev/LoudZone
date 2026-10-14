@@ -10,6 +10,8 @@ trait QueryTrait
         $query=$this->model::query();
         $query=$this->searchFunction($query);
         $query=$this->searchAscDescFunction($query);
+        $query=$this->searchCategoryFunction($query);
         return $query->paginate($pagination);
     }
+
 }

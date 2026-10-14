@@ -4,13 +4,21 @@ namespace App\Traits;
 
 trait FilterTrait
 {
+    //La variable de recherche 
     public $search='';
     public $searchAscDesc='';
-    public $searchUser='';
+    public $searchCategory='';
+
+    //La variable de la colonne de recherche
     public $searchWichColumn='';
     public $searchAscDescWichColumn='';
+    public $searchCategoryWichColumn='';
+
+    //Le tableau de colonne de recherche possible
     public $tabSearchPossibility=[];
     public $tabSearchAscDescPossibility=[];
+    public $tabSearchCategoryPossibility=[];
+
     public function searchFunction($query)
     {
         if(!empty($this->search)&& !empty($this->searchWichColumn))
@@ -32,6 +40,14 @@ trait FilterTrait
                 return $query->orderBy($this->searchAscDescWichColumn,'asc');
             else
                 return $query->orderBy($this->searchAscDescWichColumn,'desc');
+        }
+        return $query;
+    }
+    public function searchCategoryFunction($query)
+    {
+        if(!empty($this->searchCategory))
+        {
+            return $query->where($this->searchCategoryWichColumn,$this->searchCategory);
         }
         return $query;
     }

@@ -21,6 +21,9 @@
         <div class="w-full lg:w-auto flex justify-end">
             <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
         </div>
+        <div>
+            <x-search-category :options="$tabSearchCategoryPossibility"/>
+        </div>
     </div>
 
     <!-- Conteneur du tableau -->

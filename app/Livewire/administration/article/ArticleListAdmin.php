@@ -2,6 +2,7 @@
 namespace App\Livewire\administration\article;
 use App\Livewire\AdminComponent;
 use App\Models\Article;
+use App\Models\ArticleCategory;
 
 
 class ArticleListAdmin extends AdminComponent
@@ -12,6 +13,7 @@ class ArticleListAdmin extends AdminComponent
     {
         $this->searchWichColumn='title';
         $this->searchAscDescWichColumn = 'title';
+        $this->searchCategoryWichColumn='article_category_id';
         $this->tabSearchPossibility=[
             'title'=>'titre',
             'slug'=>'lien'
@@ -21,6 +23,7 @@ class ArticleListAdmin extends AdminComponent
             'slug'=>'lien',
             'price_ht'=>'prix HT'
         ];
+        $this->tabSearchCategoryPossibility=ArticleCategory::pluck('label','id')->toArray();
     }
     public function render()
     {
