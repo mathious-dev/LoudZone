@@ -58,4 +58,13 @@ class Article extends BaseEntity
             return round($this->price_ht * (1 + ($this->tva / 100)), 2);
         });
     }
+    public function priceWithTvaAndPromotion():Attribute
+    {
+        return Attribute::make(get:function(){
+            if (!$this->promotion) 
+                return $this->priceWithTva;
+            else
+                return round($this->priceWithTva*(1-($this->promotion->amount)/100),2);
+        });
+    }
 }

@@ -35,7 +35,7 @@ trait CrudTrait
         $object->update([
             $column => $data
         ]);
-        // $nameValue=$object->getValueNameColumn();
-        saveHistory("La colonne null $column  a été mise à jour.");
+        $nameObject=$object->getNameColumn();
+        saveHistory("La colonne null $column de {$nameObject} {$object->id} avec le nom : {$object->title} a été mise à jour.");
     }
 }

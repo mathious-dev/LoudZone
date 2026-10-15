@@ -9,7 +9,7 @@ class ArticleListAdmin extends AdminComponent
 {
     //Variable pour la colonne de la catégorie d'un article, il faut que ça soit un tableau pour bien séparer les infos dans chaque objet
     public $categoryNullInfoId=[];
-    public $userNullInfoId;
+    // public $userNullInfoId=[];
     public $listArticleCategories;
     protected $model=Article::class;
     public function mount()

@@ -44,14 +44,17 @@
     <!-- ========================================== -->
     <!-- TABLEAU DES ARTICLES                       -->
     <!-- ========================================== -->
-    <div class="overflow-hidden shadow-sm rounded-lg border border-gray-200">
+    <div class="overflow-x-auto shadow-sm rounded-lg border border-gray-200">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
                     <th scope="col" class="w-10 px-4 py-3"></th>
                     <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Titre</th>
                     <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Prix HT</th>
+                    <th scope="col" class="px-4 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">TVA</th>
                     <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Prix TTC</th>
+                    <th scope="col" class="px-4 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Promo</th>
+                    <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Prix final</th>
                     <th scope="col" class="px-4 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Stock</th>
                     <th scope="col" class="px-4 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Statut</th>
                     <th scope="col" class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Catégorie</th>
@@ -76,11 +79,33 @@
 
                     <!-- Infos principales -->
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">{{ $article->title }}</td>
-                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-600">{{ number_format($article->price_ht, 2, ',', ' ') }} €</td>
-                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">{{ number_format($article->price_with_tva, 2, ',', ' ') }} €</td>
+                    
+                    <!-- Tarification -->
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($article->price_ht, 2, ',', ' ') }} €</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-center text-gray-500">{{ $article->tva }} %</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
+                        {{ number_format($article->price_with_tva, 2, ',', ' ') }} €
+                    </td>
+                    
+                    <!-- Promotion -->
+                    <td class="px-4 py-4 whitespace-nowrap text-center">
+                        @if($article->promotion)
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">
+                                -{{ $article->promotion->amount }}%
+                            </span>
+                        @else
+                            <span class="text-gray-300">-</span>
+                        @endif
+                    </td>
+                    
+                    <!-- Prix Final -->
+                    <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-indigo-600">
+                        {{ number_format($article->price_with_tva_and_promotion, 2, ',', ' ') }} €
+                    </td>
+
+                    <!-- Stock & Statut -->
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-center font-bold {{ $article->stock <= 0 ? 'text-red-500 bg-red-50 rounded-lg px-2' : 'text-green-600' }}">{{ $article->stock }}</td>
 
-                    <!-- Statut -->
                     <td class="px-4 py-4 whitespace-nowrap text-center">
                         @if($article->is_published)
                             <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">Publié</span>
@@ -89,20 +114,22 @@
                         @endif
                     </td>
 
-                    <!-- Catégorie -->
+                    <!-- Catégorie avec formulaire compact -->
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-indigo-600 font-medium">
-                        {{ $article->articleCategory?->label ?? 'Aucune catégorie ' }}
-                        @if( $article->articleCategory?->label==null)
-                        <form wire:submit.prevent="saveFormCategory({{ $article }})">
-                            <select wire:model='categoryNullInfoId.{{ $article->id }}'>
-                                <option value="">-</option>
-                                @foreach ($listCategories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->label }}</option>
-                                @endforeach
-                            </select>
-                            <button type="submit">Confirmer</button>
-                        </form>
-                        
+                        @if($article->articleCategory)
+                            {{ $article->articleCategory->label }}
+                        @else
+                            <form wire:submit.prevent="saveFormCategory({{ $article->id }})" class="flex items-center gap-2">
+                                <select wire:model='categoryNullInfoId.{{ $article->id }}' class="block w-full min-w-[120px] rounded-md border-gray-300 py-1 pl-2 pr-8 text-xs text-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <option value="">Sélectionner...</option>
+                                    @foreach ($listCategories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->label }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="submit" class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    OK
+                                </button>
+                            </form>
                         @endif
                     </td>
 
@@ -132,7 +159,7 @@
 
                 <!-- 2. LA LIGNE DÉROULANTE (Infos Supplémentaires) -->
                 <tr x-show="expanded" x-transition.opacity.duration.300ms style="display: none;" class="bg-gray-50/80">
-                    <td colspan="8" class="px-6 py-6 border-b border-gray-200 shadow-inner">
+                    <td colspan="11" class="px-6 py-6 border-b border-gray-200 shadow-inner">
                         <div class="flex flex-col md:flex-row gap-8 items-start">
                             
                             <!-- Image -->
@@ -187,9 +214,8 @@
     </div>
 
     <!-- Pagination -->
-
-        <div class="mt-6">
-            {{ $listArticles->links() }}
-        </div>
+    <div class="mt-6">
+        {{ $listArticles->links() }}
+    </div>
 
 </div>
