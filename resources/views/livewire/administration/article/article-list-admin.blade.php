@@ -91,7 +91,19 @@
 
                     <!-- Catégorie -->
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-indigo-600 font-medium">
-                        {{ $article->articleCategory?->label ?? 'Catégorie supprimée' }}
+                        {{ $article->articleCategory?->label ?? 'Aucune catégorie ' }}
+                        @if( $article->articleCategory?->label==null)
+                        <form wire:submit.prevent="saveFormCategory({{ $article }})">
+                            <select wire:model='categoryNullInfoId.{{ $article->id }}'>
+                                <option value="">-</option>
+                                @foreach ($listCategories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->label }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit">Confirmer</button>
+                        </form>
+                        
+                        @endif
                     </td>
 
                     <!-- Actions -->
@@ -149,7 +161,7 @@
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                                     <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Créateur</span>
-                                        <span class="font-medium text-gray-800">{{ $article->user ? $article->user->first_name . ' ' . $article->user->name : 'Utilisateur supprimé' }}</span>
+                                        <span class="font-medium text-gray-800">{{ $article->user ? $article->user->first_name . ' ' . $article->user->name : 'aucun utilisateur ' }}</span>
                                     </div>
                                     <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Slug (URL)</span>

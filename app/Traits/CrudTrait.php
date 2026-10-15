@@ -30,4 +30,12 @@ trait CrudTrait
             return redirect()->to($route); // Redirection vers l'URL
         return $this->redirectRoute($route);
     }
+    public function saveNullInfo($data,$object,$column)
+    {
+        $object->update([
+            $column => $data
+        ]);
+        // $nameValue=$object->getValueNameColumn();
+        saveHistory("La colonne null $column  a été mise à jour.");
+    }
 }
