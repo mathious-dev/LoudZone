@@ -35,21 +35,13 @@ trait FilterTrait
     public function searchAscDescFunction($query)
     {
         if(!empty($this->searchAscDesc))
-        {
-            if($this->searchAscDesc=='price_with_tva_and_promotion')
-                //Ici on va envoyer le calcul de prix
-                return $query->orderByRaw("(price_ht * (1 + (tva / 100)))* " . $this->searchAscDesc);
-            else
-                return $query->orderBy($this->searchAscDescWichColumn,$this->searchAscDesc);
-        }
+            return $query->orderBy($this->searchAscDescWichColumn,$this->searchAscDesc);
         return $query;
     }
     public function searchCategoryFunction($query)
     {
         if(!empty($this->searchCategory))
-        {
             return $query->where($this->searchCategoryWichColumn,$this->searchCategory);
-        }
         return $query;
     }
     public function updatedSearch()

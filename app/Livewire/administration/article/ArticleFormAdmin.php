@@ -23,6 +23,7 @@ class ArticleFormAdmin extends AdminComponent
     public $user_id = '';
     public $article_category_id = '';
     public $primary_image='';
+    public $pictures=[];
     public function render()
     {
         return view('livewire.administration.article.article-form-admin',['listArticleCategories'=>$this->queryCategories()]);
@@ -41,6 +42,7 @@ class ArticleFormAdmin extends AdminComponent
             //On vérifie que les ID existent VRAIMENT dans la base de données
             'user_id'             => 'required|exists:users,id',//on vérifie dans la BD qu'il y a bien m'utilisateur
             'article_category_id' => 'required|exists:article_categories,id',
+            'pictures'=>'nullable|max:1024'
         ];
     }
     public function queryCategories()
@@ -54,7 +56,7 @@ class ArticleFormAdmin extends AdminComponent
         {
             $this->article=$article;
             $this->fill($article->toArray());
-
+            $this->primary_image = null;
             $this->isEditing=true;
         }
         else
@@ -73,7 +75,18 @@ class ArticleFormAdmin extends AdminComponent
             $textImage = $this->primary_image->store('articles', 'public');
             $data['primary_image']=$textImage;
         }
-        $this->save($data,$this->article,"admin.articleListAdmin",'articleCategory',$this->ArticleCategoryChoice);
+        else
+            unset($data['primary_image']);
+        $article=$this->save($data,$this->article,"admin.articleListAdmin");
+        if($this->pictures)
+        {
+            foreach($this->pictures as $picture)
+            {
+                $textImage=$picture->store('articles','public');
+                $article->images()->create(['url'=>$textImage]);
+            }
+        }
+        return redirect()->route('admin.articleListAdmin');
     }
     
 

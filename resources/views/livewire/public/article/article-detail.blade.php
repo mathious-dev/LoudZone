@@ -9,21 +9,29 @@
                 <!-- SECTION GAUCHE : LA GALERIE D'IMAGES       -->
                 <!-- ========================================== -->
                 <div>
-                    @if(is_array($article->images) && count($article->images) > 0)
+                    {{-- S'il y a une image principale OU des images polymorphiques --}}
+                    @if($article->primary_image || ($article->images && $article->images->count() > 0))
                         
-                        <!-- Image mise en avant (La première de la galerie) -->
+                        <!-- Image mise en avant (Soit primary_image, soit la 1ère de la galerie) -->
                         <div class="w-full h-96 mb-4 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
-                            <img src="{{ asset('storage/' . $article->images[0]) }}" 
-                                 alt="Image principale" 
-                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            @if($article->primary_image)
+                                <img src="{{ asset('storage/' . $article->primary_image) }}" 
+                                    alt="Image principale" 
+                                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            @else
+                                <img src="{{ asset('storage/' . $article->images->first()->url) }}" 
+                                    alt="Image principale" 
+                                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            @endif
                         </div>
                         
-                        <!-- La grille des miniatures en dessous -->
-                        @if(count($article->images) > 1)
+                        <!-- La grille des miniatures (Images polymorphiques) -->
+                        @if($article->images && $article->images->count() > 0)
                             <div class="grid grid-cols-4 gap-4">
                                 @foreach($article->images as $image)
                                     <div class="aspect-w-1 aspect-h-1 rounded-md overflow-hidden bg-gray-100 border border-gray-200">
-                                        <img src="{{ asset('storage/'. $image) }}" 
+                                        <!-- On utilise bien $image->url ici ! -->
+                                        <img src="{{ asset('storage/'. $image->url) }}" 
                                             alt="Miniature" 
                                             class="w-full h-full object-cover hover:opacity-75 transition-opacity cursor-pointer">
                                     </div>
@@ -32,7 +40,7 @@
                         @endif
                         
                     @else
-                        <!-- Si l'article n'a aucune image -->
+                        <!-- Si l'article n'a AUCUNE image -->
                         <div class="w-full h-96 bg-gray-100 rounded-lg flex flex-col items-center justify-center border-2 border-dashed border-gray-300">
                             <svg class="h-16 w-16 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />

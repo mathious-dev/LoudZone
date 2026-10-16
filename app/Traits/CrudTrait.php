@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use App\Models\Article;
+
 trait CrudTrait
 {
     public function delete($id)
@@ -28,6 +30,8 @@ trait CrudTrait
         //pour la création de message support on vérifie si la route commence par http avec url()->previous()
         if (str_starts_with($route, 'http'))
             return redirect()->to($route); // Redirection vers l'URL
+        if($object instanceof Article)
+            return $object;
         return $this->redirectRoute($route);
     }
     public function saveNullInfo($data,$object,$column)
