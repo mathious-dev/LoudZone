@@ -45,13 +45,41 @@
                     </h3>
                 </a>
 
-                <div class="mt-auto pt-6 flex items-center justify-between">
-                    <div class="flex items-baseline">
-                        <span class="text-2xl font-black text-gray-900">{{ $article->price_with_tva }}</span>
-                        <span class="ml-1 text-sm font-medium text-gray-500">€ </span>
+                <div class="mt-auto pt-6 flex items-end justify-between">
+    
+                    <!-- Zone de Prix -->
+                    <div class="flex flex-col">
+                        @if($article->promotion)
+                            <!-- S'il y a une promotion -->
+                            <div class="flex items-center gap-2 mb-1">
+                                <!-- Ancien prix barré : ICI on garde price_with_tva pour montrer le prix de départ -->
+                                <span class="text-sm font-medium text-gray-400 line-through">
+                                    {{ number_format($article->price_with_tva, 2, ',', ' ') }} €
+                                </span>
+                                <!-- Badge de pourcentage -->
+                                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-bold bg-red-100 text-red-700">
+                                    -{{ $article->promotion->amount }}%
+                                </span>
+                            </div>
+                            
+                            <!-- Nouveau prix final : On utilise final_price -->
+                            <div class="flex items-baseline">
+                                <span class="text-2xl font-black text-indigo-600">{{ number_format($article->final_price, 2, ',', ' ') }}</span>
+                                <span class="ml-1 text-sm font-medium text-gray-500">€</span>
+                            </div>
+
+                        @else
+                            <!-- S'il n'y a PAS de promotion -->
+                            <div class="flex items-baseline">
+                                <!-- On affiche directement final_price ! -->
+                                <span class="text-2xl font-black text-gray-900">{{ number_format($article->final_price, 2, ',', ' ') }}</span>
+                                <span class="ml-1 text-sm font-medium text-gray-500">€</span>
+                            </div>
+                        @endif
                     </div>
 
-                    <a href="{{ route('articleDetail', $article->id) }}" class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <!-- Bouton Voir -->
+                    <a href="{{ route('articleDetail', $article->id) }}" class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mb-0.5">
                         Voir
                     </a>
                 </div>

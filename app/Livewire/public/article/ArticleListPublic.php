@@ -17,10 +17,10 @@ class ArticleListPublic extends PublicComponent
     {
         $this->searchWichColumn='title';
         $this->searchAscDescWichColumn = 'title';
-        $this->tabSearchPossibility=['title'=>'titre'];
+        $this->tabSearchPossibility=['title'=>'Titre'];
         $this->tabSearchAscDescPossibility=[
-            'title'=>'titre',
-            'price_ht'=>'prix HT'
+            'title'=>'Titre',
+            'final_price'=>'Prix'
         ];
     }
     public function queryArticle()

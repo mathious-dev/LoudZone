@@ -36,10 +36,11 @@ trait FilterTrait
     {
         if(!empty($this->searchAscDesc))
         {
-            if($this->searchAscDesc=='asc')
-                return $query->orderBy($this->searchAscDescWichColumn,'asc');
+            if($this->searchAscDesc=='price_with_tva_and_promotion')
+                //Ici on va envoyer le calcul de prix
+                return $query->orderByRaw("(price_ht * (1 + (tva / 100)))* " . $this->searchAscDesc);
             else
-                return $query->orderBy($this->searchAscDescWichColumn,'desc');
+                return $query->orderBy($this->searchAscDescWichColumn,$this->searchAscDesc);
         }
         return $query;
     }

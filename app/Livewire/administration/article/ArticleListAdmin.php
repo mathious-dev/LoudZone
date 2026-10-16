@@ -18,13 +18,13 @@ class ArticleListAdmin extends AdminComponent
         $this->searchAscDescWichColumn = 'title';
         $this->searchCategoryWichColumn='article_category_id';
         $this->tabSearchPossibility=[
-            'title'=>'titre',
-            'slug'=>'lien'
+            'title'=>'Titre',
+            'slug'=>'Lien'
         ];
         $this->tabSearchAscDescPossibility=[
-            'title'=>'titre',
-            'slug'=>'lien',
-            'price_ht'=>'prix HT'
+            'title'=>'Titre',
+            'slug'=>'Lien',
+            'final_price'=>'Prix final'
         ];
         $this->tabSearchCategoryPossibility=ArticleCategory::pluck('label','id');
 

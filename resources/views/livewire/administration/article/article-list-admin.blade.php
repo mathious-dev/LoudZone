@@ -100,7 +100,7 @@
                     
                     <!-- Prix Final -->
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-indigo-600">
-                        {{ number_format($article->price_with_tva_and_promotion, 2, ',', ' ') }} €
+                        {{ number_format($article->final_price, 2, ',', ' ') }} €
                     </td>
 
                     <!-- Stock & Statut -->

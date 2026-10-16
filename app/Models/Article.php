@@ -21,7 +21,8 @@ class Article extends BaseEntity
     'user_id',
     'article_category_id',
     'primary_image',
-    'promotion_id'
+    'promotion_id',
+    'final_price'
     ];
     public function user()
     {
@@ -58,13 +59,14 @@ class Article extends BaseEntity
             return round($this->price_ht * (1 + ($this->tva / 100)), 2);
         });
     }
-    public function priceWithTvaAndPromotion():Attribute
+    protected static function booted()
     {
-        return Attribute::make(get:function(){
-            if (!$this->promotion) 
-                return $this->priceWithTva;
+        static::saving(function (Article $article)
+        {
+            if($article->promotion)
+                $article->final_price=round($article->priceWithTva*(1-($article->promotion->amount)/100),2);
             else
-                return round($this->priceWithTva*(1-($this->promotion->amount)/100),2);
+                $article->final_price=$article->price_with_tva;
         });
     }
 }
