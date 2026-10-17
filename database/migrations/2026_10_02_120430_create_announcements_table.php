@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('label');
             $table->text('content');
-            $table->dateTime('start_date');
+            $table->boolean('is_showing')->default(false);
+            $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->timestamps();
         });

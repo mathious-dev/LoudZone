@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use Database\Seeders\AnnouncementSeeder;
 use Database\Seeders\ArticleCategorySeeder;
 use Database\Seeders\PromotionSeeder;
 use Database\Seeders\SupportMessageCategorySeeder;
@@ -30,7 +31,7 @@ class DatabaseSeeder extends Seeder
             PaymentSeeder::class,
             AddressSeeder::class,
             EventSeeder::class,
-            
+            AnnouncementSeeder::class
         ]);
         
     }

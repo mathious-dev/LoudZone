@@ -8,6 +8,7 @@ class Announcement extends Model
 {
     protected $fillable=['label',
     'content',
+    'is_showing',
     'start_date',
     'end_date',];
 }

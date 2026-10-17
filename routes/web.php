@@ -2,6 +2,8 @@
 
 use App\Livewire\administration\addInfo\AddInfoForm;
 use App\Livewire\administration\addInfo\AddInfoList;
+use App\Livewire\administration\announcement\AnnouncementForm;
+use App\Livewire\administration\announcement\AnnouncementList;
 use App\Livewire\administration\article\ArticleFormAdmin;
 use App\Livewire\administration\article\ArticleListAdmin;
 use App\Livewire\administration\articleCategory\ArticleCategoryForm;
@@ -27,6 +29,7 @@ use App\Livewire\public\article\ArticleListPublic;
 use App\Livewire\public\order\OrderForm;
 use App\Livewire\public\order\OrderListUser;
 use App\Livewire\public\supportMessage\SupportMessageForm;
+use App\Models\Announcement;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -103,6 +106,12 @@ Route::middleware([
         Route::get('/promotions',PromotionList::class)->name('promotionList');
         Route::get('/promotion/create',PromotionForm::class)->name('promotionForm.create');
         Route::get('/promotion/edit/{promotion}',PromotionForm::class)->name('promotionForm.edit');
+
+        //Annonce
+        Route::get('/announcements',AnnouncementList::class)->name('announcementList');
+        Route::get('/announcement/create',AnnouncementForm::class)->name('announcementForm.create');
+        Route::get('/announcement/edit/{announcement}',AnnouncementForm::class)->name('announcementForm.edit');
+
     });
 
     //Article
