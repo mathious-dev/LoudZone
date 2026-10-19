@@ -13,7 +13,7 @@ class AnnouncementForm extends AdminComponent
     public $content;
     public $start_date;
     public $end_date;
-    public $is_showing;
+    public $is_showing=false;
     public function render()
     {
         return view('livewire.administration.announcement.announcement-form');
@@ -34,7 +34,7 @@ class AnnouncementForm extends AdminComponent
     }
     public function rules()
     {
-        return ['label'=>'required|max:255','content'=>'required'];
+        return ['label'=>'required|max:255','content'=>'required','start_date'=>'date|nullable','end_date'=>'date|nullable','is_showing'=>'boolean'];
     }
     public function saveForm()
     {
