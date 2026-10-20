@@ -33,6 +33,6 @@ class CreateNewUser implements CreatesNewUsers
             'first_name'=>$input['first_name'],
             'news_letter' => isset($input['news_letter']) ? true : false,
             'password' => Hash::make($input['password']),
-        ]);
+        ])->assignRole('user');
     }
 }

@@ -16,18 +16,36 @@
 
     <!-- BARRE D'OUTILS (Recherche + Filtres + Tri) -->
     <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm mb-6">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            
+            <!-- Barre de recherche (Prend tout l'espace libre) -->
             <div class="flex-1 w-full">
                 <x-search :options="$tabSearchPossibility" />
             </div>
-            <div class="hidden md:block w-px h-10 bg-gray-200"></div>
-            <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-                <div class="w-full sm:w-56">
+            
+            <!-- Séparateur vertical (Visible sur écran large) -->
+            <div class="hidden lg:block w-px h-10 bg-gray-200"></div>
+            
+            <!-- Zone des 3 filtres (Souple, ne s'écrase plus) -->
+            <div class="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap gap-4 w-full lg:w-auto">
+                
+                <!-- sm:flex-1 permet au filtre de s'adapter, lg:w-56 assure une bonne largeur sur PC (224px minimum) -->
+                <div class="w-full sm:flex-1 lg:w-56">
                     <x-search-category :options="$tabSearchCategoryPossibility"/>
                 </div>
-                <div class="w-full sm:w-56">
+                
+                <div class="w-full sm:flex-1 lg:w-56">
                     <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
                 </div>
+                
+                <div class="w-full sm:flex-1 lg:w-56">
+                    <x-search-boolean 
+                        wire:model.live="searchBoolean" 
+                        label-true="Publié" 
+                        label-false="Non publié" 
+                    />
+                </div>
+                
             </div>
         </div>
     </div>

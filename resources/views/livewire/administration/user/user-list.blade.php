@@ -22,7 +22,9 @@
         <div class="w-full lg:w-auto flex justify-end">
             <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
         </div>
-        
+        <div>
+            <x-search-boolean label-true="Avec NewsLetter" label-false="Sans NewsLetter"/>
+        </div>
     </div>
 
     <!-- ========================================== -->

@@ -8,11 +8,13 @@ trait FilterTrait
     public $search='';
     public $searchAscDesc='';
     public $searchCategory='';
+    public $searchBoolean='';
 
     //La variable de la colonne de recherche
     public $searchWichColumn='';
     public $searchAscDescWichColumn='';
     public $searchCategoryWichColumn='';
+    public $searchBooleanWichColumn='';
 
     //Le tableau de colonne de recherche possible
     public $tabSearchPossibility=[];
@@ -44,11 +46,25 @@ trait FilterTrait
             return $query->where($this->searchCategoryWichColumn,$this->searchCategory);
         return $query;
     }
+    public function searchBooleanFunction($query)
+    {
+        if ($this->searchBoolean !== '')
+            return $query->where($this->searchBooleanWichColumn,$this->searchBoolean);
+        return $query;
+    }
     public function updatedSearch()
     {
         $this->resetPage();
     }
     public function updatedSearchAscDesc()
+    {
+        $this->resetPage();
+    }
+    public function updatedSearchCategory()
+    {
+        $this->resetPage();
+    }
+    public function updatedSearchBoolean()
     {
         $this->resetPage();
     }

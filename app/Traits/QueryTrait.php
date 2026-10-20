@@ -11,6 +11,7 @@ trait QueryTrait
         $query=$this->searchFunction($query);
         $query=$this->searchAscDescFunction($query);
         $query=$this->searchCategoryFunction($query);
+        $query=$this->searchBooleanFunction($query);
         return $query->paginate($pagination);
     }
 

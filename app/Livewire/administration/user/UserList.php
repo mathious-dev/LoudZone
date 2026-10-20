@@ -10,6 +10,7 @@ class UserList extends AdminComponent
     {
         $this->searchWichColumn = 'name';
         $this->searchAscDescWichColumn = 'name';
+        $this->searchBooleanWichColumn='news_letter';
         $this->tabSearchPossibility=[
             'name'=>'Nom',
             'first_name'=>'Prénom',

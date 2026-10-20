@@ -50,8 +50,8 @@
                 <nav class="flex flex-col sm:flex-row items-center justify-center gap-4">
                     @auth
                         <!-- Bouton si l'utilisateur est déjà connecté -->
-                        <a href="{{ url('/dashboard') }}" class="w-full sm:w-auto px-8 py-3 bg-[#48041B] text-white font-bold rounded-lg shadow-lg hover:bg-[#300211] transition-all hover:-translate-y-0.5">
-                            Mon Dashboard
+                        <a href="{{ route('articleListPublic') }}" class="w-full sm:w-auto px-8 py-3 bg-[#48041B] text-white font-bold rounded-lg shadow-lg hover:bg-[#300211] transition-all hover:-translate-y-0.5">
+                            Accéder au site
                         </a>
                     @else
                         <!-- Boutons si c'est un visiteur -->

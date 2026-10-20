@@ -10,6 +10,9 @@
         <div class="w-full md:w-auto flex justify-end">
              <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
         </div>
+        <div>
+            <x-search-category :options="$tabSearchCategoryPossibility"/>
+        </div>
     </div>
 
     <!-- ========================================== -->
@@ -44,7 +47,17 @@
                         {{ $article->title }}
                     </h3>
                 </a>
-
+                <div class="mb-4">
+                    @if($article->articleCategory)
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                            {{ $article->articleCategory->label }}
+                        </span>
+                    @else
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-500 border border-red-100">
+                            Pas de catégorie
+                        </span>
+                    @endif
+                </div>
                 <div class="mt-auto pt-6 flex items-end justify-between">
     
                     <!-- Zone de Prix -->

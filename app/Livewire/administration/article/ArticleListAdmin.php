@@ -19,6 +19,7 @@ class ArticleListAdmin extends AdminComponent
         $this->searchWichColumn='title';
         $this->searchAscDescWichColumn = 'title';
         $this->searchCategoryWichColumn='article_category_id';
+        $this->searchBooleanWichColumn='is_published';
         $this->tabSearchPossibility=[
             'title'=>'Titre',
             'slug'=>'Lien'
@@ -29,11 +30,8 @@ class ArticleListAdmin extends AdminComponent
             'final_price'=>'Prix final'
         ];
         $this->tabSearchCategoryPossibility=ArticleCategory::pluck('label','id');
-
         if(request()->query('article_category_id'))
-        {
             $this->searchCategory=request()->query('article_category_id');
-        }
     }
     public function render()
     {

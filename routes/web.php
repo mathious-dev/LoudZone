@@ -41,9 +41,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/articles', function () {
+        return view('articles');
+    })->name('articles');
     Route::middleware(['role:admin'])
     ->prefix('admin')
     ->name('admin.')
