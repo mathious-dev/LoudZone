@@ -30,10 +30,11 @@ class AnnouncementList extends AdminComponent
             $this->end_date = null;
         }
     }
+   
     public function rules()
     {
         return 
         ['start_date'=>'required',
-        'end_date'=>'required',];
+        'end_date'=>'nullable'];
     }
 }

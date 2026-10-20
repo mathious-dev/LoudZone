@@ -27,8 +27,13 @@ class Announcement extends BaseEntity
     }
     public function IsDateCorrect($start,$end)
     {
-        if($start<=$end)
-            return true;
-        return false;
+        if($end)
+        {
+            if($start<=$end)
+                return true;
+            return false;
+        }
+        return true;
+        
     }
 }

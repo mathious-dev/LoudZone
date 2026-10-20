@@ -34,7 +34,7 @@
                 <!-- Date de début -->
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Date de début</label>
-                    <input type="date" wire:model="start_date" 
+                    <input type="datetime-local" wire:model="start_date" 
                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#48041B] focus:ring focus:ring-[#48041B] focus:ring-opacity-20 transition-colors">
                     @error('start_date') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                 </div>
@@ -42,7 +42,7 @@
                 <!-- Date de fin -->
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Date de fin</label>
-                    <input type="date" wire:model="end_date" 
+                    <input type="datetime-local" wire:model="end_date" 
                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#48041B] focus:ring focus:ring-[#48041B] focus:ring-opacity-20 transition-colors">
                     @error('end_date') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                 </div>

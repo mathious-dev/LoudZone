@@ -47,10 +47,23 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $announcement->start_date ? \Carbon\Carbon::parse($announcement->start_date)->format('d/m/Y à H:i') : 'Non définie' }}
+                                @if($announcement->start_date)
+                                    {{ \Carbon\Carbon::parse($announcement->start_date)->format('d/m/Y à H:i') }}
+                                @elseif($announcement->is_showing)
+                                    <!-- Le message d'erreur en rouge si c'est publié mais vide -->
+                                    <span class="text-red-500 font-bold">Problème : Date requise</span>
+                                @else
+                                    Non définie
+                                @endif
                             </td>
+
+                            <!-- Date de fin -->
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $announcement->end_date ? \Carbon\Carbon::parse($announcement->end_date)->format('d/m/Y à H:i') : 'Non définie' }}
+                                @if($announcement->end_date)
+                                    {{ \Carbon\Carbon::parse($announcement->end_date)->format('d/m/Y à H:i') }}
+                                @else
+                                    Non définie
+                                @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end items-center gap-4">

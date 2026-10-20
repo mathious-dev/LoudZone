@@ -4,6 +4,7 @@ namespace App\Livewire\administration\announcement;
 
 use App\Livewire\AdminComponent;
 use App\Models\Announcement;
+use Carbon\Carbon;
 
 
 class AnnouncementForm extends AdminComponent
@@ -20,7 +21,7 @@ class AnnouncementForm extends AdminComponent
     }
     public function mount(Announcement $announcement=null)
     {
-         if($announcement&&!empty($announcement))
+        if($announcement&&!empty($announcement))
         {
             $this->announcement=$announcement;
             $this->fill($announcement->toArray());
@@ -38,6 +39,8 @@ class AnnouncementForm extends AdminComponent
     }
     public function saveForm()
     {
-        $this->save($this->validate(),$this->announcement,'admin.announcementList');
+        $data=$this->validate();
+        if($this->announcement->IsDateCorrect($data['start_date'],$data['end_date']))
+            $this->save($this->validate(),$this->announcement,'admin.announcementList');
     }
 }
