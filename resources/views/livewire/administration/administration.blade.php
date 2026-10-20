@@ -1,9 +1,12 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Administration
-        </h2>
-    </x-slot>
+    @livewire('navigation-menu')
+    <header class="bg-white shadow">
+        <div class="w-full px-4 sm:px-6 lg:px-8 mx-auto py-6">
+            <h2 class="font-bold text-xl text-gray-800 leading-tight">
+                Administration
+            </h2>
+        </div>
+    </header>
 
     <div class="py-12">
         <!-- 1. Remplacement de max-w-7xl par w-full (ou max-w-[95%]) -->

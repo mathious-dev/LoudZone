@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Announcement;
 use App\Models\History;
 if(!function_exists('saveHistory'))
 {
@@ -23,6 +24,22 @@ if(!function_exists('subNewsLetter'))
             $user->save();
             saveHistory('Abonnement à la newsletter');
         }
+    }
+}
+if(!function_exists('showAnnouncement'))
+{
+    function showAnnouncement()
+    {
+        $listAnnouncement=Announcement::all();
+        foreach($listAnnouncement as $announcement)
+        {
+            if($announcement->start_date&&$announcement->start_date>=now()&&$announcement->is_showing)
+            {
+                saveHistory("Affichage de l'annonce {$announcement->label} jusqu'à " . ($announcement->end_date ?? 'date indéterminée'));
+                return $announcement;
+            }
+        }
+        
     }
 }
 ?>

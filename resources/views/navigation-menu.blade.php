@@ -5,11 +5,17 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                @role('admin')
+                    <a href="{{ route('admin.userList') }}">
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
+                @endrole
+                @role('user')
+                    <a href="{{ route('articleListPublic') }}">
+                        <x-application-mark class="block h-9 w-auto" />
+                    </a>
+                @endrole
                 </div>
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('articleListPublic') }}" :active="request()->routeIs('articleListPublic')">
