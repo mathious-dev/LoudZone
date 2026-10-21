@@ -47,6 +47,10 @@ class Article extends BaseEntity
     {
         return $this->belongsTo(Promotion::class);
     }
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
     public function changeStatePublishArticleModel()
     {
         $this->is_published = !$this->is_published;

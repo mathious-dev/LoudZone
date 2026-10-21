@@ -13,7 +13,7 @@ return new class extends Migration
     {
        // Table articles
         Schema::table('articles', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete()->change();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->change();
             $table->foreignId('article_category_id')->nullable()->constrained()->nullOnDelete()->change();
             //le ->restrictOnDelete() va nous permettre d'empêcher la suppression si un aticle utilise toujours la promotion
             $table->foreignId('promotion_id')->nullable()->constrained()->restrictOnDelete()->change();
@@ -48,11 +48,24 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
         });
 
-        // Table événement
+        // Table event
         Schema::table('events', function(Blueprint $table) {
             $table->foreignId('address_id')->nullable()->constrained()->nullOnDelete()->change();
         });
+        
+        // Table carts
+        Schema::table('carts', function (Blueprint $table) {
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->change();
+        });
+
+        // Table cart_items
+        Schema::table('cart_items', function (Blueprint $table) {
+            $table->foreignId('article_id')->constrained()->cascadeOnDelete()->change();
+            $table->foreignId('cart_id')->constrained()->cascadeOnDelete()->change();
+        });
     }   
+
+
 
     /**
      * Reverse the migrations.
@@ -97,6 +110,17 @@ return new class extends Migration
         //Table événement
         Schema::table('events',function(Blueprint $table) {
             $table->dropConstrainedForeignId('address_id');
+        });
+
+        // Table carts
+        Schema::table('carts', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('user_id');
+        });
+
+        // Table cart_items
+        Schema::table('cart_items', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('article_id');
+            $table->dropConstrainedForeignId('cart_id');
         });
     }
 };

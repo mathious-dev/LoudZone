@@ -9,6 +9,7 @@ use App\Livewire\administration\article\ArticleListAdmin;
 use App\Livewire\administration\articleCategory\ArticleCategoryForm;
 use App\Livewire\administration\ArticleCategory\ArticleCategoryList;
 use App\Livewire\administration\articleOrder\ArticleOrderListAdmin;
+use App\Livewire\administration\cart\CartList;
 use App\Livewire\administration\event\EventForm;
 use App\Livewire\administration\event\EventListAdmin;
 use App\Livewire\administration\history\HistoryList;
@@ -29,7 +30,6 @@ use App\Livewire\public\article\ArticleListPublic;
 use App\Livewire\public\order\OrderForm;
 use App\Livewire\public\order\OrderListUser;
 use App\Livewire\public\supportMessage\SupportMessageForm;
-use App\Models\Announcement;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -111,6 +111,9 @@ Route::middleware([
         Route::get('/announcements',AnnouncementList::class)->name('announcementList');
         Route::get('/announcement/create',AnnouncementForm::class)->name('announcementForm.create');
         Route::get('/announcement/edit/{announcement}',AnnouncementForm::class)->name('announcementForm.edit');
+
+        //Panier
+        Route::get('/carts',CartList::class)->name('cartList');
 
     });
 
