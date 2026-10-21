@@ -5,6 +5,7 @@ namespace App\Livewire\public\article;
 use App\Livewire\PublicComponent;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Services\CartServices;
 
 class ArticleListPublic extends PublicComponent
 {
@@ -13,6 +14,10 @@ class ArticleListPublic extends PublicComponent
     public function render()
     {
         return view('livewire.public.article.article-list-public',['listArticles'=>$this->queryArticle(),'listCategories'=>$this->queryCategory()]);
+    }
+    public function addArticleToCart(CartServices $cartServices,$articleId,$quantity)
+    {
+        $cartServices->AddArticleInCart($articleId,$quantity);
     }
     public function mount()
     {

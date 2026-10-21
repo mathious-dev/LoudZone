@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     protected $fillable=[
+        'is_payed',
         'user_id',
         'session_id',
     ];

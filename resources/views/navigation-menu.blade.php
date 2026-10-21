@@ -34,7 +34,9 @@
                 <a href="{{ route('orderListUser') }}" class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out mr-4">
                     Vos commandes
                 </a>
-
+                <a href="{{ route('cartList',auth()->id()) }}">
+                    Panier
+                </a>
                 <!-- Settings Dropdown -->
                 <div class="ms-3 relative">
                     <x-dropdown align="right" width="48">
