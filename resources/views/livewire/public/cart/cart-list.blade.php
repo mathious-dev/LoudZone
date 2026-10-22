@@ -1,12 +1,14 @@
 <div>
+    
     <!-- On vérifie d'abord que le panier existe -->
     @if($cart && $cart->cartItems->isNotEmpty())
-        
+        <button wire:confirm="êtes-vous sûr de vider le panier?" wire:click='deleteItems({{$cart->id  }})'>Vider le panier</button>
         <table class="min-w-full text-left">
             <thead>
                 <tr>
                     <th class="px-4 py-2">Article</th>
                     <th class="px-4 py-2">Quantité</th>
+                    <td>Actions</td>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +21,10 @@
                         </td>
                         <td class="border px-4 py-2">
                             {{ $item->quantity }}
+                            <button wire:click='addOrRemoveItem({{ $item }})'>+</button>
+                            <button wire:click='addOrRemoveItem({{ $item }},-1)'>-</button>
                         </td>
+                        <td> <button wire:click='deleteItem({{ $item->id }})'>Supprimer</button></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -27,7 +32,7 @@
 
     @else
         <div class="p-4 text-gray-500 italic">
-            Ce panier est vide ou n'existe pas encore.
+            Votre panier est vide
         </div>
     @endif
 </div>

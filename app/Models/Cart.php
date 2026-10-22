@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-
-class Cart extends Model
+use App\Models\BaseEntity;
+class Cart extends BaseEntity
 {
+    protected $nameValueColumn='id';
+    protected $nameColumn="le panier";
     protected $fillable=[
         'is_payed',
         'user_id',
         'session_id',
     ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

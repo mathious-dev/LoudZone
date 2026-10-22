@@ -114,7 +114,7 @@ Route::middleware([
         Route::get('/announcement/edit/{announcement}',AnnouncementForm::class)->name('announcementForm.edit');
 
         //Panier
-        Route::get('/carts',CartListAdmin::class)->name('cartListadmin');
+        Route::get('/carts',CartListAdmin::class)->name('cartListAdmin');
 
     });
 

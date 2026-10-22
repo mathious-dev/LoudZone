@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class CartItem extends Model
+use App\Models\BaseEntity;
+class CartItem extends BaseEntity
 {
     protected $fillable=[
         'cart_id',

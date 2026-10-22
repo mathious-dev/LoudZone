@@ -15,7 +15,7 @@ class ArticleListPublic extends PublicComponent
     {
         return view('livewire.public.article.article-list-public',['listArticles'=>$this->queryArticle(),'listCategories'=>$this->queryCategory()]);
     }
-    public function addArticleToCart(CartServices $cartServices,$articleId,$quantity)
+    public function addArticleToCart(CartServices $cartServices,$articleId,$quantity=1)
     {
         $cartServices->AddArticleInCart($articleId,$quantity);
     }

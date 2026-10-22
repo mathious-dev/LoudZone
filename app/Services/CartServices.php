@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CartServices
 {
-    public function AddArticleInCart($articleId,$quantity)
+    public function AddArticleInCart($articleId,$quantity=1)
     {
         //Utilisateur connecté
         if(Auth::check())
@@ -28,28 +28,30 @@ class CartServices
         }     
         $cartItem=CartItem::where('article_id',$articleId)->where('cart_id',$cart->id)->first();
         if($cartItem)
+            $this->changeQuantity($cartItem,$quantity);
+        else
         {
-            $newQuantity=$cartItem->quantity + $quantity;
-            if($newQuantity>0)
+            if($quantity>0) //si la quantité est positive
             {
-                $cartItem->increment('quantity',$quantity);
-                saveHistory("Ajout de $quantity en plus pour l'article id $articleId dans le panier $cart->id");
+                CartItem::create(['cart_id'=>$cart->id,'article_id'=>$articleId,'quantity'=>$quantity]);
+                saveHistory("Ajout d'un nouvel article $articleId pour le panier $cart->id");
             }
-            else
-            {
-                $cartItem->delete();
-                saveHistory("Suppression du CartItem $cartItem->id du panier $cart->id");
-            }
+        }
+    }
+    public function changeQuantity(CartItem $cartItem,$quantity)
+    {
+        $newQuantity=$cartItem->quantity + $quantity;
+        if($newQuantity>0)
+        {
+            $cartItem->increment('quantity',$quantity);
+            $action = $quantity > 0 ? "Ajout" : "Retrait";
+            $value = abs($quantity); // Enlève le signe "moins" pour le texte
+            saveHistory("$action de $value en plus pour l'article id {$cartItem->article_id} dans le panier {$cartItem->cart_id}");
         }
         else
         {
-            $this->createCartItem($articleId,$quantity,$cart);
-            saveHistory("Création de CartItem pour le panier $cart->id");
+            $cartItem->delete();
+            saveHistory("Suppression de l'article $cartItem->article_id du panier {$cartItem->cart_id}");
         }
-            
-    }
-    public function createCartItem($articleId,$quantity,$cart)
-    {
-        CartItem::create(['cart_id'=>$cart->id,'article_id'=>$articleId,'quantity'=>$quantity]);
     }
 }
