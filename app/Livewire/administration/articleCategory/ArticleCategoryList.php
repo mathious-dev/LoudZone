@@ -11,7 +11,7 @@ class ArticleCategoryList extends AdminComponent
 
     public function render()
     {
-        return view('livewire.administration.articleCategory.article-category-list',['listArticleCategories'=>$this->query(10)]);
+        return view('livewire.administration.articleCategory.article-category-list',['listArticleCategories'=>$this->query(10),'listSearch'=>$this->querySearch()]);
     }
     public function mount()
     {

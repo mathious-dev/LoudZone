@@ -29,7 +29,7 @@ class SupportMessageList extends AdminComponent
     }
     public function render()
     {
-        return view('livewire.administration.supportMessage.support-message-list',['listSupportMessages'=>$this->querySupportMessage()]);
+        return view('livewire.administration.supportMessage.support-message-list',['listSupportMessages'=>$this->querySupportMessage(),'listSearch'=>$this->querySearch()]);
     }
     //On utilise pas le trait avec le query car celui-ci est trié par défaut par date
     public function querySupportMessage()

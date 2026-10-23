@@ -13,7 +13,9 @@ class ArticleListPublic extends PublicComponent
     protected $model=Article::class;
     public function render()
     {
-        return view('livewire.public.article.article-list-public',['listArticles'=>$this->queryArticle(),'listCategories'=>$this->queryCategory()]);
+        return view('livewire.public.article.article-list-public',['listArticles'=>$this->queryArticle(),
+        'listCategories'=>$this->queryCategory(),
+        'listSearch'=>$this->querySearch()]);
     }
     public function addArticleToCart(CartServices $cartServices,$articleId,$quantity=1)
     {

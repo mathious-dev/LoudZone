@@ -24,6 +24,6 @@ class UserList extends AdminComponent
     }
     public function render()
     {
-        return view('livewire.administration.user.user-list',['listUsers'=>$this->query(10)]);
+        return view('livewire.administration.user.user-list',['listUsers'=>$this->query(10),'listSearch'=>$this->querySearch()]);
     }
 }

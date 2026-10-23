@@ -52,6 +52,12 @@ trait FilterTrait
             return $query->where($this->searchBooleanWichColumn,$this->searchBoolean);
         return $query;
     }
+    public function selectSearch($id)
+    {
+        $findObject=$this->model::find($id);
+        if($findObject)
+            $this->search=$findObject->{$this->searchWichColumn};//{} pour propriété dynamique sinon il ne comprend pas que c un $this->
+    }
     public function updatedSearch()
     {
         $this->resetPage();

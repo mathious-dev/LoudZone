@@ -14,5 +14,13 @@ trait QueryTrait
         $query=$this->searchBooleanFunction($query);
         return $query->paginate($pagination);
     }
+    public function querySearch()
+    {
+        if (empty($this->search)) 
+            return [];
+        $query=$this->model::query();
+        $query=$this->searchFunction($query);
+        return $query->take(5)->get();
+    }
 
 }

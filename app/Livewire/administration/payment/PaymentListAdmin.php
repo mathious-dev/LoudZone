@@ -9,7 +9,7 @@ class PaymentListAdmin extends AdminComponent
     public $model=Payment::class;
     public function render()
     {
-        return view('livewire.administration.payment.payment-list-admin',['listPayments'=>$this->query(10)]);
+        return view('livewire.administration.payment.payment-list-admin',['listPayments'=>$this->query(10),'listSearch'=>$this->querySearch()]);
     }
     public function mount()
     {

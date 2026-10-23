@@ -7,7 +7,7 @@
     <!-- Espace de recherche et filtres -->
     <div class="flex flex-col sm:flex-row gap-4 mb-6">
         <div class="w-full sm:w-1/2">
-            <x-search :options="$tabSearchPossibility"/>
+            <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
         </div>
         <div class="w-full sm:w-1/2">
             <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>

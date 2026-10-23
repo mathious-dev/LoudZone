@@ -11,7 +11,7 @@
             Ajouter une catégorie
         </a>
     </div>
-    <x-search :options="$tabSearchPossibility"/>
+    <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
     <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
     <!-- Conteneur du tableau -->
     <div class="overflow-x-auto">

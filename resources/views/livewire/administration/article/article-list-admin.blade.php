@@ -20,7 +20,7 @@
             
             <!-- Barre de recherche (Prend tout l'espace libre) -->
             <div class="flex-1 w-full">
-                <x-search :options="$tabSearchPossibility" />
+                <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
             </div>
             
             <!-- Séparateur vertical (Visible sur écran large) -->

@@ -35,7 +35,10 @@ class ArticleListAdmin extends AdminComponent
     }
     public function render()
     {
-        return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->query(10),'listCategories'=>$this->queryCategory(),'listPromotions'=>$this->queryPromotion()]);
+        return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->query(10),
+        'listCategories'=>$this->queryCategory(),
+        'listPromotions'=>$this->queryPromotion(),
+        'listSearch'=>$this->querySearch()]);
     }
     public function changeStatePublishArticle(Article $article)
     {

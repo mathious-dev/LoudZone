@@ -7,7 +7,7 @@
     <!-- Fond blanc pur pour détacher la barre, avec un texte Noir (Color 2) -->
     <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-10 bg-white p-4 rounded-xl border border-[#84796F]/30 shadow-sm">
         <div class="w-full md:w-2/3 text-[#0B0A0B]">
-            <x-search :options="$tabSearchPossibility"/>
+            <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
         </div>
         <div class="w-full md:w-auto flex justify-end text-[#0B0A0B]">
              <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>

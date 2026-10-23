@@ -8,7 +8,7 @@
             + Ajouter une info
         </a>
     </div>
-    <x-search :options="$tabSearchPossibility"/>
+    <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
     <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
     <!-- Tableau -->
     <div class="overflow-x-auto shadow-sm rounded-lg border border-gray-200">

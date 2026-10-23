@@ -1,7 +1,7 @@
 
 
 <div class="overflow-x-auto bg-white rounded-lg shadow-md mb-8">
-    <x-search :options="$tabSearchPossibility"/>
+    <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
     <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
     
     <table class="min-w-full text-left text-sm whitespace-nowrap">

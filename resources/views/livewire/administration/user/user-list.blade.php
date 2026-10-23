@@ -15,7 +15,7 @@
         
         <!-- Le composant de recherche (prend toute la place dispo à gauche) -->
         <div class="w-full lg:w-2/3">
-            <x-search :options="$tabSearchPossibility" />
+            <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
         </div>
 
         <!-- Le composant de tri (aligné à droite) -->
