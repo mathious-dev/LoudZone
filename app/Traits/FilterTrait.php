@@ -9,6 +9,7 @@ trait FilterTrait
     public $searchAscDesc='';
     public $searchCategory='';
     public $searchBoolean='';
+    public $searchRole='';
 
     //La variable de la colonne de recherche
     public $searchWichColumn='';
@@ -46,17 +47,32 @@ trait FilterTrait
             return $query->where($this->searchCategoryWichColumn,$this->searchCategory);
         return $query;
     }
+    
     public function searchBooleanFunction($query)
     {
-        if ($this->searchBoolean !== '')
+        if (!empty($this->searchBoolean))
             return $query->where($this->searchBooleanWichColumn,$this->searchBoolean);
         return $query;
+    }
+    public function searchRoleFunction($query)
+{
+    if (!empty($this->searchRole)) 
+    {
+        return $query->whereHas('roles', function($q) {
+            $q->where('id', $this->searchRole);
+        });
+    }
+    return $query;
+}
+    public function deleteSearch()
+    {
+        $this->search='';
     }
     public function selectSearch($id)
     {
         $findObject=$this->model::find($id);
         if($findObject)
-            $this->search=$findObject->{$this->searchWichColumn};//{} pour propriété dynamique sinon il ne comprend pas que c un $this->
+            $this->search=$findObject->{$this->searchWichColumn};//{} pour propriété dynamique sinon il ne comprend pas que c'est un $this->
     }
     public function updatedSearch()
     {
@@ -71,6 +87,10 @@ trait FilterTrait
         $this->resetPage();
     }
     public function updatedSearchBoolean()
+    {
+        $this->resetPage();
+    }
+    public function updatedSearchRole()
     {
         $this->resetPage();
     }

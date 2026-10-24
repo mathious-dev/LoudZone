@@ -13,7 +13,7 @@
     </div>
 
     <!-- Composant de recherche réutilisable -->
-    <x-search :options="$tabSearchPossibility" />
+    <x-search :options="$tabSearchPossibility"/>
 
     <!-- Conteneur du tableau -->
     <div class="overflow-x-auto shadow-sm rounded-lg border border-gray-200">
@@ -35,9 +35,12 @@
                     </td>
                     
                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-700">
-                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-indigo-100 text-indigo-800">
+                        <a href="{{ route('admin.userList',['roleId'=>$role->id]) }}">
+                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-indigo-100 text-indigo-800">
                             {{ $role->users->count() }} utilisateurs
-                        </span>
+                            </span>
+                        </a>
+                        
                     </td>
                     
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -46,7 +49,7 @@
                                 Modifier
                             </a>
                             <!-- J'ai bloqué la suppression si c'est le rôle Admin pour éviter de casser le site -->
-                            @if(strtolower($role->name) !== 'admin')
+                            @if(strtolower($role->name) !== 'admin'&&strtolower($role->name) !== 'user')
                                 <button wire:click="delete({{ $role->id }})" wire:confirm="Êtes-vous sûr de vouloir supprimer ce rôle ?" class="text-red-600 hover:text-red-900 transition duration-150">
                                     Supprimer
                                 </button>

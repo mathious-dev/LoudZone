@@ -26,6 +26,23 @@
                    type="text" 
                    placeholder="Rechercher..." 
                    class="block w-full pl-12 pr-4 py-3 text-base border-l-0 border-gray-300 rounded-none rounded-r-lg focus:ring-indigo-500 focus:border-indigo-500 placeholder-gray-400">
+            @if(!empty($search))
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                <!-- 
+                bg-gray-200 + rounded-full = fond gris circulaire
+                hover:bg-gray-300 = s'assombrit légèrement au survol 
+                -->
+                <button wire:click="deleteSearch" 
+                        type="button"
+                        class="flex items-center justify-center w-6 h-6 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-900 focus:outline-none transition-colors"
+                        title="Effacer la recherche">
+                    <!-- Belle icône de croix -->
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            @endif
             
             <!-- ========================================== -->
             <!-- MENU FLOTTANT DES SUGGESTIONS              -->

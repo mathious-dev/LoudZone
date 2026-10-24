@@ -25,6 +25,12 @@
         <div>
             <x-search-boolean label-true="Avec NewsLetter" label-false="Sans NewsLetter"/>
         </div>
+        <select wire:model.live='searchRole'>
+            <option>-</option>
+            @foreach ($listRoles as $role)
+                <option value="{{ $role->id }}">{{$role->name  }}</option>
+            @endforeach
+        </select>
     </div>
 
     <!-- ========================================== -->
@@ -38,6 +44,7 @@
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prénom</th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NewsLetter</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rôle</th>
                     <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
@@ -55,7 +62,9 @@
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">Non</span>
                         @endif
                     </td>
-                    
+                    <td>
+                        {{ $user->roles->pluck('name')->implode(', ') }}
+                    </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         @if(auth()->id() !== $user->id)
                             <div class="flex justify-end space-x-3">

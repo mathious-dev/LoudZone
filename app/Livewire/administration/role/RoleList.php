@@ -15,7 +15,7 @@ class RoleList extends AdminComponent
     public function mount()
     {
         $this->searchWichColumn='name';
-        $this->tabSearchPossibility=['name'=>'nom'];
+        $this->tabSearchPossibility=['name'=>'Nom'];
     }
     public function render()
     {

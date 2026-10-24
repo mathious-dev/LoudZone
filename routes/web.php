@@ -16,6 +16,8 @@ use App\Livewire\administration\history\HistoryList;
 use App\Livewire\administration\order\OrderListAdmin;
 use App\Livewire\administration\payment\PaymentFormAdmin;
 use App\Livewire\administration\payment\PaymentListAdmin;
+use App\Livewire\administration\permission\PermissionForm;
+use App\Livewire\administration\permission\PermissionList;
 use App\Livewire\administration\promotion\PromotionForm;
 use App\Livewire\administration\promotion\PromotionList;
 use App\Livewire\administration\role\RoleForm;
@@ -115,6 +117,11 @@ Route::middleware([
 
         //Panier
         Route::get('/carts',CartListAdmin::class)->name('cartListAdmin');
+
+        //Permission
+        Route::get('/permissions',PermissionList::class)->name('permissionList');
+        Route::get('/permission/create',PermissionForm::class)->name('permissionForm.create');
+        Route::get('/permission/edit/{permission}',PermissionForm::class)->name('permissionForm.edit');
 
     });
 

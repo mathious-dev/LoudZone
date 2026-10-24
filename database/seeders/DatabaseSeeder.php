@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 use Database\Seeders\AnnouncementSeeder;
 use Database\Seeders\ArticleCategorySeeder;
+use Database\Seeders\PermissionSeeder;
 use Database\Seeders\PromotionSeeder;
 use Database\Seeders\SupportMessageCategorySeeder;
 use Illuminate\Database\Seeder;
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         
         $this->call([
+            PermissionSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
             PromotionSeeder::class,
