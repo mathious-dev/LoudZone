@@ -30,7 +30,9 @@ class PermissionForm extends AdminComponent
     }
     public function saveForm()
     {
-        $this->save($this->validate(),$this->permission,'admin.permissionList');
+        $data=$this->validate();
+        $data['guard_name']='web';
+        $this->save($data,$this->permission,'admin.permissionList');
     }
     public function rules()
     {

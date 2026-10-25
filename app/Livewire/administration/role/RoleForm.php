@@ -35,7 +35,9 @@ class RoleForm extends AdminComponent
     }
     public function saveForm()
     {
-        $this->save($this->validate(),$this->role,"admin.roleList");
+        $data=$this->validate();
+        $data['guard_name']='web';
+        $this->save($data,$this->role,"admin.roleList");
     }
     
 }
