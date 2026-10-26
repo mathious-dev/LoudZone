@@ -5,8 +5,9 @@ namespace App\Livewire\administration\article;
 use App\Livewire\AdminComponent;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Clothe;
+use App\Services\ArticleService;
 use App\Traits\CrudTrait;
-use ArticleService;
 use Livewire\WithFileUploads;
 
 class ArticleFormAdmin extends AdminComponent
@@ -25,9 +26,12 @@ class ArticleFormAdmin extends AdminComponent
     public $article_category_id = '';
     public $primary_image='';
     public $pictures=[];
+    public $size='';
     public function render()
     {
-        return view('livewire.administration.article.article-form-admin',['listArticleCategories'=>$this->queryCategories()]);
+        return view('livewire.administration.article.article-form-admin',
+        ['listArticleCategories'=>$this->queryCategories(),
+        'availableSizes'=> Clothe::getAvailableSizes()]);
     }
     protected function rules()
     {

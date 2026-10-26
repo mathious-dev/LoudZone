@@ -53,7 +53,7 @@ class Article extends BaseEntity
     }
     public function clothe()
     {
-        return $this->hasOne(Article::class,'article_id');
+        return $this->hasOne(Clothe::class,'article_id');
     }
     public function changeStatePublishArticleModel()
     {

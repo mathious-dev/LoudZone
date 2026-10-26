@@ -64,7 +64,7 @@
             <!-- Catégorie -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Catégorie</label>
-                <select wire:model='article_category_id' class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <select wire:model.live='article_category_id' class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     <!-- Option par défaut vide TRÈS IMPORTANTE pour forcer le choix -->
                     <option value="">-- Sélectionnez une catégorie --</option>
                     
@@ -76,6 +76,17 @@
                 </select>
                 @error('article_category_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
+            @if($this->isClothe())
+            <div>
+                <select wire:model='size'>
+                    <option value="">-</option>
+                    @foreach($availableSizes as $key => $label)
+                        <option value="{{ $key }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @endif
+
             <div>
                 <img src="{{asset('storage/'.$article->primary_image)  }}">
             </div>

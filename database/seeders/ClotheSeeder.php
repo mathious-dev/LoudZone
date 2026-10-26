@@ -14,13 +14,13 @@ class ClotheSeeder extends Seeder
      */
     public function run(): void
     {
-        $categoryVetement = ArticleCategory::firstOrCreate(['name'=>'Vêtement']);
+        $categoryVetement = ArticleCategory::firstOrCreate(['label'=>'Vêtement']);
         $articles = Article::doesntHave('clothe')->inRandomOrder()->take(10)->get();
         $tailles = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
         foreach ($articles as $article) {
             
             $article->update([
-                'category_id' => $categoryVetement->id 
+                'article_category_id' => $categoryVetement->id 
             ]);
             $article->clothe()->create([
                 'size' => $tailles[array_rand($tailles)]

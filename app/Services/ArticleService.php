@@ -1,14 +1,15 @@
 <?php
-
+namespace App\Services;
 use App\Models\Article;
-use App\Models\Clothe;
 use App\Traits\CrudTrait;
 
 class ArticleService 
 {
+    public $isEditing = false;
     use CrudTrait;
     public function saveArticle(Article $article,$data,$primary_image,$pictures,$isEditing)
     {
+        $this->isEditing=$isEditing;
         //Pour l'image principale
         if($primary_image)
         {
@@ -27,12 +28,19 @@ class ArticleService
 
         if($size)
         {
-            $articleSave->clothe()->updateOrCreate(['article_id'=>$articleSave->id,'size'=>$size]);
+            $articleSave->clothe()->updateOrCreate(['article_id'=>$articleSave->id],['size'=>$size]);
             if($isEditing==true)
                 saveHistory("Modification du vêtement {$articleSave->title}");
             else
                 saveHistory("Création du vêtement {$articleSave->title}");
-
+        }
+        else
+        {
+            if($articleSave->clothe()->exists())
+            {
+                $articleSave->delete();
+                saveHistory("Suppression de l'extension vêtement pour {$articleSave->title}");
+            }
         }
         //Pour les différentes images
         if($pictures)

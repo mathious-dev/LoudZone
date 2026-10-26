@@ -18,8 +18,15 @@ class Clothe extends BaseEntity
     {
         return $this->belongsTo(Article::class,'article_id');
     }
-    public function getSize()
+    public static function getAvailableSizes()
     {
-        return ['XS','S','M','L','XL','XXL'];
+        return [
+            'XS'=>'Extra Small (XS)',
+            'S'   =>'Small (S)',
+            'M'   =>'Medium (M)',
+            'L'   =>'Large (L)',
+            'XL'  =>'Extra Large (XL)',
+            'XXL' =>'Double Extra Large (XXL)',
+        ];
     }
 }

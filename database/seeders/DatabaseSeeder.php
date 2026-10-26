@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             PromotionSeeder::class,
             ArticleCategorySeeder::class,
             ArticleSeeder::class,
+            ClotheSeeder::class,
             CartSeeder::class,
             SupportMessageCategorySeeder::class,
             AddInfoSeeder::class,
