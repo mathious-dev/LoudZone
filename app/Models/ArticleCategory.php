@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseEntity;
 
 class ArticleCategory extends BaseEntity
 {
@@ -12,5 +12,14 @@ class ArticleCategory extends BaseEntity
     public function articles()
     {
         return $this->hasMany(Article::class);
+    }
+    public static function isClotheCategory($id)
+    {
+        if (!$id) 
+            return false;
+        $category=ArticleCategory::find($id);
+        if ($category) 
+            return $category->label === 'Vêtement';
+        return false;
     }
 }

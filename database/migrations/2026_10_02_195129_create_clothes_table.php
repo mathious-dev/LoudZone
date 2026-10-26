@@ -15,6 +15,7 @@ return new class extends Migration
             //unsignedBigInteger est le type des clés primaires
             $table->unsignedBigInteger('article_id')->primary();
             $table->string('size');
+            $table->string('color')->default('aucune')->nullable();
             $table->timestamps();
         });
     }

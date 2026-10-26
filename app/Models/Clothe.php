@@ -12,7 +12,8 @@ class Clothe extends BaseEntity
     public $incrementing = false;
     protected $fillable=[
         'article_id',
-        'size'
+        'size',
+        'color'
     ];
     public function article()
     {

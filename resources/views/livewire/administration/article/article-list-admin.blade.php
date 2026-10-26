@@ -225,6 +225,15 @@
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Dernière modif.</span>
                                         <span class="font-medium text-gray-800">{{ $article->updated_at ? $article->updated_at->format('d/m/Y') : '-' }}</span>
                                     </div>
+                                    @if ($article->articleCategory->isClotheCategory($article->article_category_id))
+                                        <div>
+                                            {{ $article->clothe?->size }}
+                                        </div> 
+                                        <div>
+                                            {{ $article->clothe?->color?? 'Aucune' }}
+                                        </div> 
+                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>

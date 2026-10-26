@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Traits\CrudTrait;
 
 class ArticleService 
@@ -26,7 +27,8 @@ class ArticleService
         //Sauvegarde de l'article
         $articleSave=$this->save($data,$article,"admin.articleListAdmin");
 
-        if($size)
+        //Si c'est un vêtement
+        if(ArticleCategory::isClotheCategory($articleSave->article_category_id))
         {
             $articleSave->clothe()->updateOrCreate(['article_id'=>$articleSave->id],['size'=>$size]);
             if($isEditing==true)
@@ -38,7 +40,7 @@ class ArticleService
         {
             if($articleSave->clothe()->exists())
             {
-                $articleSave->delete();
+                $articleSave->clothe()->delete();
                 saveHistory("Suppression de l'extension vêtement pour {$articleSave->title}");
             }
         }

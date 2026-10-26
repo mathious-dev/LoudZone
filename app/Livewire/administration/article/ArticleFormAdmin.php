@@ -76,11 +76,7 @@ class ArticleFormAdmin extends AdminComponent
     }
     public function isClothe()
     {
-        if(!$this->article_category_id)
-            return false;
-
-        $category=ArticleCategory::find($this->article_category_id);
-        return $category->label==='Vêtement';
+        return ArticleCategory::isClotheCategory($this->article_category_id);
     }
     public function saveForm(ArticleService $articleService)
     {
@@ -88,6 +84,5 @@ class ArticleFormAdmin extends AdminComponent
         $articleService->saveArticle($this->article,$data,$this->primary_image,$this->pictures,$this->isEditing);
         return redirect()->route('admin.articleListAdmin');
     }
-    
 
 }
