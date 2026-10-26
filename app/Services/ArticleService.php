@@ -1,0 +1,48 @@
+<?php
+
+use App\Models\Article;
+use App\Models\Clothe;
+use App\Traits\CrudTrait;
+
+class ArticleService 
+{
+    use CrudTrait;
+    public function saveArticle(Article $article,$data,$primary_image,$pictures,$isEditing)
+    {
+        //Pour l'image principale
+        if($primary_image)
+        {
+            //store va enregistrer l'image dans un dossier 'articles' et renvoie le texte de l'image, un nom indéchiffrable
+            $textImage = $primary_image->store('articles', 'public');
+            $data['primary_image']=$textImage;
+        }
+        else
+            //On supprime l'information du tableau ainsi à la sauvegarde il ne supprime pas l'image qui est déjà là si c'est null
+            unset($data['primary_image']);
+        
+        $size=$data['size'] ?? null;
+        
+        //Sauvegarde de l'article
+        $articleSave=$this->save($data,$article,"admin.articleListAdmin");
+
+        if($size)
+        {
+            $articleSave->clothe()->updateOrCreate(['article_id'=>$articleSave->id,'size'=>$size]);
+            if($isEditing==true)
+                saveHistory("Modification du vêtement {$articleSave->title}");
+            else
+                saveHistory("Création du vêtement {$articleSave->title}");
+
+        }
+        //Pour les différentes images
+        if($pictures)
+        {
+            foreach($pictures as $picture)
+            {
+                $textImage=$picture->store('articles','public');
+                $articleSave->images()->create(['url'=>$textImage]);
+            }
+        }
+    }
+
+}

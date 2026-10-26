@@ -5,7 +5,7 @@ namespace App\Livewire\public\article;
 use App\Livewire\PublicComponent;
 use App\Models\Article;
 use App\Models\ArticleCategory;
-use App\Services\CartServices;
+use App\Services\CartService;
 
 class ArticleListPublic extends PublicComponent
 {
@@ -17,9 +17,9 @@ class ArticleListPublic extends PublicComponent
         'listCategories'=>$this->queryCategory(),
         'listSearch'=>$this->querySearch()]);
     }
-    public function addArticleToCart(CartServices $cartServices,$articleId,$quantity=1)
+    public function addArticleToCart(CartService $CartService,$articleId,$quantity=1)
     {
-        $cartServices->AddArticleInCart($articleId,$quantity);
+        $CartService->AddArticleInCart($articleId,$quantity);
     }
     public function mount()
     {

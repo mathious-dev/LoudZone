@@ -51,6 +51,10 @@ class Article extends BaseEntity
     {
         return $this->hasMany(CartItem::class);
     }
+    public function clothe()
+    {
+        return $this->hasOne(Article::class,'article_id');
+    }
     public function changeStatePublishArticleModel()
     {
         $this->is_published = !$this->is_published;

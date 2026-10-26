@@ -6,7 +6,7 @@ use App\Livewire\PublicComponent;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\User;
-use App\Services\CartServices;
+use App\Services\CartService;
 
 class CartList extends PublicComponent
 {
@@ -41,8 +41,8 @@ class CartList extends PublicComponent
             saveHistory("Suppression de l'article $cartItem->article_id du panier $cartItem->cart_id");
         }
     }
-    public function addOrRemoveItem(CartServices $cartServices,CartItem $cartItem,$quantity=1)
+    public function addOrRemoveItem(CartService $CartService,CartItem $cartItem,$quantity=1)
     {
-        $cartServices->changeQuantity($cartItem,$quantity);
+        $CartService->changeQuantity($cartItem,$quantity);
     }
 }

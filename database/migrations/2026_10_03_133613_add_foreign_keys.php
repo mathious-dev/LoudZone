@@ -63,6 +63,11 @@ return new class extends Migration
             $table->foreignId('article_id')->constrained()->cascadeOnDelete()->change();
             $table->foreignId('cart_id')->constrained()->cascadeOnDelete()->change();
         });
+
+        // Table clothes
+        Schema::table('clothes', function (Blueprint $table) {
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
+        });
     }   
 
 
@@ -121,6 +126,11 @@ return new class extends Migration
         Schema::table('cart_items', function (Blueprint $table) {
             $table->dropConstrainedForeignId('article_id');
             $table->dropConstrainedForeignId('cart_id');
+        });
+
+        // Table clothes
+        Schema::table('clothes', function (Blueprint $table) {
+            $table->dropForeign(['article_id']);
         });
     }
 };

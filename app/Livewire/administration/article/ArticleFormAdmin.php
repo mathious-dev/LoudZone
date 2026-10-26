@@ -6,6 +6,7 @@ use App\Livewire\AdminComponent;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Traits\CrudTrait;
+use ArticleService;
 use Livewire\WithFileUploads;
 
 class ArticleFormAdmin extends AdminComponent
@@ -30,7 +31,7 @@ class ArticleFormAdmin extends AdminComponent
     }
     protected function rules()
     {
-        return [
+        $rules= [
             'title'=> 'required|string|max:255',
             'description'=> 'nullable|string',
             'price_ht'=> 'required|numeric|min:0', 
@@ -44,6 +45,9 @@ class ArticleFormAdmin extends AdminComponent
             'article_category_id' => 'required|exists:article_categories,id',
             'pictures'=>'nullable|max:1024'
         ];
+        if($this->isClothe())
+            $rules['size']='required|string';
+        return $rules;
     }
     public function queryCategories()
     {
@@ -66,26 +70,18 @@ class ArticleFormAdmin extends AdminComponent
             $this->user_id = auth()->id();
         }
     }
-    public function saveForm()
+    public function isClothe()
+    {
+        if(!$this->article_category_id)
+            return false;
+
+        $category=ArticleCategory::find($this->article_category_id);
+        return $category->label==='Vêtement';
+    }
+    public function saveForm(ArticleService $articleService)
     {
         $data = $this->validate();
-        if($this->primary_image)
-        {
-            //store va enregistrer l'image dans un dossier 'articles' et renvoie le texte de l'image, un nom indéchiffrable
-            $textImage = $this->primary_image->store('articles', 'public');
-            $data['primary_image']=$textImage;
-        }
-        else
-            unset($data['primary_image']);
-        $article=$this->save($data,$this->article,"admin.articleListAdmin");
-        if($this->pictures)
-        {
-            foreach($this->pictures as $picture)
-            {
-                $textImage=$picture->store('articles','public');
-                $article->images()->create(['url'=>$textImage]);
-            }
-        }
+        $articleService->saveArticle($this->article,$data,$this->primary_image,$this->pictures,$this->isEditing);
         return redirect()->route('admin.articleListAdmin');
     }
     

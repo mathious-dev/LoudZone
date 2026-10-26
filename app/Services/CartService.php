@@ -5,7 +5,7 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 
-class CartServices
+class CartService
 {
     public function AddArticleInCart($articleId,$quantity=1)
     {
