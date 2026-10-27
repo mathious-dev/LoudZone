@@ -2,18 +2,30 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-[#FAF1E3] min-h-screen rounded-xl">
 
     <!-- ========================================== -->
-    <!-- BARRE D'OUTILS (Recherche + Tri)           -->
+    <!-- BARRE D'OUTILS (Recherche + Filtres + Tri) -->
     <!-- ========================================== -->
-    <!-- Fond blanc pur pour détacher la barre, avec un texte Noir (Color 2) -->
-    <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-10 bg-white p-4 rounded-xl border border-[#84796F]/30 shadow-sm">
-        <div class="w-full md:w-2/3 text-[#0B0A0B]">
-            <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
+    <div class="mb-10 bg-white p-5 rounded-xl border border-[#84796F]/30 shadow-sm flex flex-col gap-4">
+        
+        <div class="flex flex-col md:flex-row items-center gap-2 w-full">
+            
+            <!-- Barre de recherche (prend un maximum d'espace) -->
+            <div class="flex-grow w-full text-[#0B0A0B]">
+                <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
+            </div>
+            
+            <!-- Filtre Catégorie (à droite, largeur fixe sur grand écran) -->
+            <div class="w-full md:w-56 shrink-0 text-[#0B0A0B]">
+                <x-search-category :options="$tabSearchCategoryPossibility"/>
+            </div>
         </div>
-        <div class="w-full md:w-auto flex justify-end text-[#0B0A0B]">
-             <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
-        </div>
-        <div class="text-[#0B0A0B]">
-            <x-search-category :options="$tabSearchCategoryPossibility"/>
+
+        <!-- LIGNE 2 : Tri et autres filtres (en dessous, alignés à gauche) -->
+        <div class="flex flex-wrap items-center gap-4 justify-start pt-4 border-t border-[#84796F]/10">
+            
+            <!-- Tri Asc/Desc -->
+            <div class="w-full md:w-auto text-[#0B0A0B]">
+                <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
+            </div>
         </div>
     </div>
 

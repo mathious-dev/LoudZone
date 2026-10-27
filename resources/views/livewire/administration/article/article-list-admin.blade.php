@@ -205,32 +205,44 @@
                                     <svg class="w-4 h-4 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     Description complète
                                 </h4>
+                                
                                 <div class="p-4 bg-white rounded-lg border border-gray-200 text-sm text-gray-600 leading-relaxed mb-5 shadow-sm">
                                     {{ $article->description ?: 'Aucune description fournie pour cet article.' }}
                                 </div>
+                                
+                                <!-- Grille des caractéristiques -->
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                    
                                     <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Créateur</span>
-                                        <span class="font-medium text-gray-800">{{ $article->user ? $article->user->first_name . ' ' . $article->user->name : 'aucun utilisateur ' }}</span>
+                                        <span class="font-medium text-gray-800">{{ $article->user ? $article->user->first_name . ' ' . $article->user->name : 'Aucun utilisateur' }}</span>
                                     </div>
+                                    
                                     <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Slug (URL)</span>
                                         <span class="font-medium text-gray-800 truncate block" title="{{ $article->slug }}">{{ $article->slug }}</span>
                                     </div>
+                                    
                                     <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Taux TVA</span>
                                         <span class="font-medium text-gray-800">{{ $article->tva }} %</span>
                                     </div>
+                                    
                                     <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Dernière modif.</span>
                                         <span class="font-medium text-gray-800">{{ $article->updated_at ? $article->updated_at->format('d/m/Y') : '-' }}</span>
                                     </div>
+
+                                    <!-- On applique le MÊME style ici pour les vêtements -->
                                     @if ($article->articleCategory->isClotheCategory($article->article_category_id))
-                                        <div>
-                                            {{ $article->clothe?->size }}
+                                        <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
+                                            <span class="block text-indigo-400 text-[10px] font-bold uppercase mb-1">Taille</span>
+                                            <span class="font-medium text-gray-800">{{ $article->clothe?->size ?? 'N/A' }}</span>
                                         </div> 
-                                        <div>
-                                            {{ $article->clothe?->color?? 'Aucune' }}
+                                        
+                                        <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
+                                            <span class="block text-indigo-400 text-[10px] font-bold uppercase mb-1">Couleur</span>
+                                            <span class="font-medium text-gray-800">{{ $article->clothe?->color ?? 'Aucune' }}</span>
                                         </div> 
                                     @endif
                                     

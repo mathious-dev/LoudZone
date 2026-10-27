@@ -27,11 +27,13 @@ class ArticleFormAdmin extends AdminComponent
     public $primary_image='';
     public $pictures=[];
     public $size='';
+    public $color='';
     public function render()
     {
         return view('livewire.administration.article.article-form-admin',
         ['listArticleCategories'=>$this->queryCategories(),
-        'availableSizes'=> Clothe::getAvailableSizes()]);
+        'listSizes'=> Clothe::getAvailableSizes(),
+        'listColors'=>Clothe::getAvailableColors()]);
     }
     protected function rules()
     {
@@ -50,7 +52,10 @@ class ArticleFormAdmin extends AdminComponent
             'pictures'=>'nullable|max:1024'
         ];
         if($this->isClothe())
+        {
             $rules['size']='required|string';
+            $rules['color']='nullable|string';
+        }
         return $rules;
     }
     public function queryCategories()

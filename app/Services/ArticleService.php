@@ -38,6 +38,7 @@ class ArticleService
         }
         else
         {
+            //Si le lien est encore là on le supprime
             if($articleSave->clothe()->exists())
             {
                 $articleSave->clothe()->delete();

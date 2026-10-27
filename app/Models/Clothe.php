@@ -30,4 +30,30 @@ class Clothe extends BaseEntity
             'XXL' =>'Double Extra Large (XXL)',
         ];
     }
+    //Peut être en faire une table si les couleurs sont utilisées pour une autre table
+    public static function getAvailableColors()
+    {
+        return [
+        'black'       => 'Noir',
+        'white'       => 'Blanc',
+        'grey'        => 'Gris',
+        'beige'       => 'Beige',
+        'brown'       => 'Marron',
+        'navy_blue'   => 'Bleu marine',
+        'light_blue'  => 'Bleu ciel',
+        'blue'        => 'Bleu',
+        'red'         => 'Rouge',
+        'bordeaux'    => 'Bordeaux',
+        'green'       => 'Vert',
+        'khaki'       => 'Kaki',
+        'yellow'      => 'Jaune',
+        'orange'      => 'Orange',
+        'pink'        => 'Rose',
+        'purple'      => 'Violet',
+        'gold'        => 'Doré',
+        'silver'      => 'Argenté',
+        'multicolor'  => 'Multicolore',
+        'pattern'     => 'Motifs / Imprimé',
+    ];
+    }
 }
