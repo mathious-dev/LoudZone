@@ -5,6 +5,7 @@ namespace App\Livewire\public\article;
 use App\Livewire\PublicComponent;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Event;
 use App\Services\CartService;
 
 class ArticleListPublic extends PublicComponent
@@ -13,9 +14,11 @@ class ArticleListPublic extends PublicComponent
     protected $model=Article::class;
     public function render()
     {
-        return view('livewire.public.article.article-list-public',['listArticles'=>$this->queryArticle(),
+        return view('livewire.public.article.article-list-public',
+        ['listArticles'=>$this->queryArticle(),
         'listCategories'=>$this->queryCategory(),
-        'listSearch'=>$this->querySearch()]);
+        'listSearch'=>$this->querySearch(),
+        'importantEvent'=>$this->queryEvent()]);
     }
     public function addArticleToCart(CartService $CartService,$articleId,$quantity=1)
     {
@@ -46,5 +49,10 @@ class ArticleListPublic extends PublicComponent
     {
         $query=ArticleCategory::query();
         return $query->get();
+    }
+    public function queryEvent()
+    {
+        $query=Event::query();
+        return $query->where('is_important',true)->first();
     }
 }

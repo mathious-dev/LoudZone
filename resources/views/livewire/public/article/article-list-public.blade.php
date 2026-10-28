@@ -1,6 +1,36 @@
 <!-- Fond de page en Crème (Color 3) pour la lumière et le côté luxe -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-[#FAF1E3] min-h-screen rounded-xl">
+    
+    <!-- ========================================== -->
+    <!-- ÉVÉNEMENT À LA UNE (Bannière pleine largeur) -->
+    <!-- ========================================== -->
+    @if ($importantEvent)
+    <div class="w-full mb-10 bg-[#5D0824] text-[#FAF1E3] rounded-xl shadow-lg p-6 md:p-10 relative overflow-hidden flex flex-col justify-center border border-[#41342D]/20">
+        
+        <!-- Effet de lumière décoratif en arrière-plan -->
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white opacity-10 rounded-full blur-3xl pointer-events-none"></div>
 
+        <div class="relative z-10">
+            <!-- Badge -->
+            <div class="mb-4">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black bg-[#FAF1E3] text-[#5D0824] uppercase tracking-wider shadow-sm">
+                    ✨ Événement spécial
+                </span>
+            </div>
+            
+            <!-- Titre -->
+            <h1 class="text-3xl md:text-4xl font-black mb-4 leading-tight">
+                {{ $importantEvent->label }}
+            </h1>
+            
+            <!-- Description -->
+            <p class="text-base md:text-lg opacity-90 max-w-3xl leading-relaxed">
+                {{ $importantEvent->description }}
+            </p>
+        </div>
+    </div>  
+    @endif
+    
     <!-- ========================================== -->
     <!-- BARRE D'OUTILS (Recherche + Filtres + Tri) -->
     <!-- ========================================== -->
@@ -75,6 +105,12 @@
                         </span>
                     @endif
                 </div>
+                @if ($article->clothe)
+                <div>
+                {{ $article->clothe->size??"Aucune taille" }}
+                 {{ $article->clothe->color?? "Aucune couleur" }}
+                </div>
+                @endif
                 
                 <div class="mt-auto pt-6 flex items-end justify-between gap-2">
     

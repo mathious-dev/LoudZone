@@ -11,8 +11,17 @@
             Ajouter un événement
         </a>
     </div>
-    <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
-    <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
+
+    <!-- Zone de Recherche et Filtres (Avec un fond légèrement gris et du padding) -->
+    <div class="p-4 bg-gray-50 border-b border-gray-200 flex flex-col md:flex-row gap-4 items-center">
+        <div class="w-full md:w-2/3">
+            <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
+        </div>
+        <div class="w-full md:w-1/3 flex justify-end">
+            <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
+        </div>
+    </div>
+
     <!-- Conteneur du tableau -->
     <div class="overflow-x-auto">
         <table class="min-w-full text-left text-sm whitespace-nowrap">
@@ -23,6 +32,7 @@
                     <th scope="col" class="px-6 py-4 font-semibold">Date de début</th>
                     <th scope="col" class="px-6 py-4 font-semibold">Date de fin</th>
                     <th scope="col" class="px-6 py-4 font-semibold">Adresse</th>
+                    <th scope="col" class="px-6 py-4 font-semibold text-center">Statut</th>
                     <th scope="col" class="px-6 py-4 font-semibold text-right">Actions</th>
                 </tr>
             </thead>
@@ -58,12 +68,33 @@
                             @endif
                         </td>
                         
-                        <!-- Actions (Alignées à droite avec espacement) -->
+                        <!-- Statut (Important / Publié) avec des badges visuels -->
+                        <td class="px-6 py-4 text-center">
+                            @if($event->is_important)
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800 border border-green-200">
+                                    En avant (Accueil)
+                                </span>
+                            @else
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">
+                                    Standard
+                                </span>
+                            @endif
+                        </td>
+
+                        <!-- Actions -->
                         <td class="px-6 py-4 text-right text-sm font-medium space-x-3">
+                            
+                            <!-- Bouton Dynamique Publier / Dépublier -->
+                            <button wire:click="changePublish({{ $event->id }})" 
+                                    class="font-semibold transition-colors focus:outline-none {{ $event->is_important ? 'text-orange-600 hover:text-orange-900' : 'text-green-600 hover:text-green-900' }}">
+                                {{ $event->is_important ? 'Dépublier' : 'Mettre en avant' }}
+                            </button>
+
                             <a href="{{ route('admin.eventForm.edit', $event) }}" class="text-indigo-600 hover:text-indigo-900 font-semibold transition-colors">
                                 Modifier
                             </a>
-                            <button wire:click="delete({{ $event->id }})" wire:confirm="Êtes-vous sûr de vouloir supprimer cet événement ?" class="text-red-600 hover:text-red-900 font-semibold transition-colors">
+                            
+                            <button wire:click="delete({{ $event->id }})" wire:confirm="Êtes-vous sûr de vouloir supprimer cet événement ?" class="text-red-600 hover:text-red-900 font-semibold transition-colors focus:outline-none">
                                 Supprimer
                             </button>
                         </td>
@@ -72,5 +103,10 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    
+    <!-- Pagination (avec un peu d'espace autour) -->
+    <div class="p-4 bg-white border-t border-gray-200">
+        {{ $listEvents->links() }}
     </div>
 </div>

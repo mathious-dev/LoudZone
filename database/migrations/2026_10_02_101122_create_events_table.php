@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->boolean('is_important')->default(false);
             $table->timestamps();
         });
     }

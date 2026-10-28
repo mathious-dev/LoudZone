@@ -14,9 +14,26 @@ class Event extends BaseEntity
     'description',
     'start_date',
     'end_date',
+    'is_important',
     'address_id'];
     public function address()
     {
         return $this->belongsTo(Address::class);
+    }
+    public function publishOrNot()
+    {
+        $this->is_important=!$this->is_important;
+        $this->save();
+    }
+    public static function booted()
+    {
+        static::saving(function($event)
+        {
+            if($event->is_important)
+            {
+                Event::where('is_important',true)->update(['is_important'=>false]);
+                saveHistory("événement $event->label est publié");
+            }
+        });
     }
 }

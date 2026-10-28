@@ -26,4 +26,8 @@ class EventListAdmin extends AdminComponent
             'end_date'=>'date de fin',
         ];
     }
+    public function changePublish(Event $event)
+    {
+        $event->publishOrNot();
+    }
 }

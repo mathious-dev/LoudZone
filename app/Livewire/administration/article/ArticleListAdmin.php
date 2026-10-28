@@ -3,6 +3,7 @@ namespace App\Livewire\administration\article;
 use App\Livewire\AdminComponent;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Event;
 use App\Models\Promotion;
 
 
@@ -69,4 +70,5 @@ class ArticleListAdmin extends AdminComponent
         $idPromotion=$this->promotionNullInfoId[$article->id];
         $this->saveNullInfo($idPromotion,$article,'promotion_id');
     }
+    
 }
