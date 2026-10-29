@@ -6,14 +6,14 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 p-8">
                 
                 <!-- ========================================== -->
-                <!-- SECTION GAUCHE : LA GALERIE D'IMAGES       -->
+                <!-- SECTION GAUCHE : IMAGES + DÉCLINAISONS     -->
                 <!-- ========================================== -->
-                <div>
+                <div class="flex flex-col">
                     {{-- S'il y a une image principale OU des images polymorphiques --}}
                     @if($article->primary_image || ($article->images && $article->images->count() > 0))
                         
-                        <!-- Image mise en avant (Soit primary_image, soit la 1ère de la galerie) -->
-                        <div class="w-full h-96 mb-4 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+                        <!-- Image mise en avant -->
+                        <div class="w-full h-96 mb-4 bg-gray-100 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
                             @if($article->primary_image)
                                 <img src="{{ asset('storage/' . $article->primary_image) }}" 
                                     alt="Image principale" 
@@ -25,12 +25,11 @@
                             @endif
                         </div>
                         
-                        <!-- La grille des miniatures (Images polymorphiques) -->
+                        <!-- La grille des miniatures -->
                         @if($article->images && $article->images->count() > 0)
                             <div class="grid grid-cols-4 gap-4">
                                 @foreach($article->images as $image)
                                     <div class="aspect-w-1 aspect-h-1 rounded-md overflow-hidden bg-gray-100 border border-gray-200">
-                                        <!-- On utilise bien $image->url ici ! -->
                                         <img src="{{ asset('storage/'. $image->url) }}" 
                                             alt="Miniature" 
                                             class="w-full h-full object-cover hover:opacity-75 transition-opacity cursor-pointer">
@@ -48,6 +47,27 @@
                             <span class="text-gray-500 font-medium">Aucune image disponible</span>
                         </div>
                     @endif
+
+                    <!-- L'affichage des variantes (Tailles & Couleurs) juste en dessous des images -->
+                    @if($article->clothes()->exists())
+                        <div class="mt-8 bg-gray-50 p-5 rounded-xl border border-gray-100">
+                            <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4 flex items-center">
+                                <svg class="w-4 h-4 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                                Modèles disponibles
+                            </h3>
+                            <div class="flex flex-wrap gap-2">
+                                @foreach($article->clothes as $clothe)
+                                    <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold bg-white text-indigo-800 border border-indigo-200 shadow-sm hover:border-indigo-400 transition-colors">
+                                        {{ $clothe->size ?? 'Unique' }}
+                                        @if($clothe->color)
+                                            <span class="mx-2 text-indigo-200">|</span> 
+                                            {{ $clothe->color }}
+                                        @endif
+                                    </span>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <!-- ========================================== -->
@@ -62,7 +82,7 @@
                         </span>
                     </div>
 
-                    <!-- Le Titre (J'ai ajouté le titre car c'est indispensable sur une page détail !) -->
+                    <!-- Le Titre -->
                     <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight mb-4">
                         {{ $article->title }}
                     </h1>

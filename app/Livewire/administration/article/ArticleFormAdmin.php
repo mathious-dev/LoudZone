@@ -74,6 +74,17 @@ class ArticleFormAdmin extends AdminComponent
         {
             $this->article=$article;
             $this->fill($article->toArray());
+            if($this->article->clothes()->exists())
+            {
+                $this->tabClothes=[];
+                foreach($this->article->clothes as $clothe)
+                {
+                    $this->tabClothes[]=[
+                        'size'=>$clothe->size,
+                        'color'=>$clothe->color
+                    ];
+                }
+            }
             $this->primary_image = null;
             $this->isEditing=true;
         }

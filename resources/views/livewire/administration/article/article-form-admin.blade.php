@@ -94,8 +94,8 @@
                         <label class="block text-sm font-bold text-indigo-700 mb-1">Taille du vêtement</label>
                         <select wire:model='tabClothes.{{ $index }}.size' class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="">-- Choisir une taille --</option>
-                            @foreach($listSizes as $label)
-                                <option value="{{ $label }}">{{ $label }}</option>
+                            @foreach($listSizes as $key=>$label)
+                                <option value="{{ $key }}">{{ $label }}</option>
                             @endforeach
                         </select>
                         @error('tabClothes.'.$index.'.size') 
