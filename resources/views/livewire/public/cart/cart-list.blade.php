@@ -99,7 +99,7 @@
             </div>
             <h2 class="text-xl font-bold text-[#0B0A0B] mb-2">Votre panier est vide</h2>
             <p class="text-[#84796F] mb-6">On dirait que vous n'avez pas encore trouvé votre bonheur.</p>
-            <a href="{{ route('articleListUser') }}" class="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-[#FAF1E3] bg-[#5D0824] rounded-lg hover:bg-[#0B0A0B] transition-colors shadow-md">
+            <a href="{{ route('articleListPublic') }}" class="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-[#FAF1E3] bg-[#5D0824] rounded-lg hover:bg-[#0B0A0B] transition-colors shadow-md">
                 Découvrir nos articles
             </a>
         </div>

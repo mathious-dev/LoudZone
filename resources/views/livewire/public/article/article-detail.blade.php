@@ -103,7 +103,10 @@
 
                     <!-- Séparateur -->
                     <hr class="border-gray-200 mb-6">
-
+                    <button wire:click='addArticleToCart({{$article->id }},{{ $quantity }})'>Ajouter au panier</button>
+                    <button wire:click='addRemoveNumberArticle({{ 1 }})'>+</button>
+                    <p>{{ $quantity }}</p>
+                    <button wire:click='addRemoveNumberArticle({{ -1 }})'>-</button>
                     <!-- Gestion du Stock -->
                     <div class="mt-auto">
                         @if($article->stock > 0)
@@ -127,6 +130,7 @@
                                 Retour à la liste
                             </a>
                         </div>
+
                     </div>
 
                 </div>
