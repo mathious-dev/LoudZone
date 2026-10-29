@@ -26,8 +26,12 @@ class ArticleFormAdmin extends AdminComponent
     public $article_category_id = '';
     public $primary_image='';
     public $pictures=[];
-    public $size='';
-    public $color='';
+    // public $size='';
+    // public $color='';
+    public $tabClothes = [
+        ['size' => '','color' => '']
+    ];
+
     public function render()
     {
         return view('livewire.administration.article.article-form-admin',
@@ -53,8 +57,9 @@ class ArticleFormAdmin extends AdminComponent
         ];
         if($this->isClothe())
         {
-            $rules['size']='required|string';
-            $rules['color']='nullable|string';
+            $rules['tabClothes'] = 'array';
+            $rules['tabClothes.*.size']='required|string';
+            $rules['tabClothes.*.color']='nullable|string';
         }
         return $rules;
     }
@@ -89,5 +94,15 @@ class ArticleFormAdmin extends AdminComponent
         $articleService->saveArticle($this->article,$data,$this->primary_image,$this->pictures,$this->isEditing);
         return redirect()->route('admin.articleListAdmin');
     }
+    public function addTabClothes()
+    {
+        $this->tabClothes[]= ['size' => '','color' => ''];
+    }
+    public function deleteTabClothes($index)
+    {
+        unset($this->tabClothes[$index]);
 
+        //on réorganise le tableau
+        $this->tabClothes = array_values($this->tabClothes);
+    }
 }

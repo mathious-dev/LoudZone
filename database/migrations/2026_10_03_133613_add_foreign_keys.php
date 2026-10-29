@@ -66,7 +66,7 @@ return new class extends Migration
 
         // Table clothes
         Schema::table('clothes', function (Blueprint $table) {
-            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
+            $table->foreignId('article_id')->constrained()->cascadeOnDelete()->change();
         });
     }   
 
@@ -130,7 +130,7 @@ return new class extends Migration
 
         // Table clothes
         Schema::table('clothes', function (Blueprint $table) {
-            $table->dropForeign(['article_id']);
+            $table->dropConstrainedForeignId('article_id');
         });
     }
 };

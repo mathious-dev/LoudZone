@@ -88,27 +88,39 @@
 
             <!-- Options Vêtements (Taille & Couleur) -->
             @if($this->isClothe())
+                @foreach ($tabClothes as $index=>$clothe)
                 <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-gray-50 rounded-lg border border-gray-100">
                     <div>
                         <label class="block text-sm font-bold text-indigo-700 mb-1">Taille du vêtement</label>
-                        <select wire:model='size' class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        <select wire:model='tabClothes.{{ $index }}.size' class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="">-- Choisir une taille --</option>
-                            @foreach($listSizes as $key => $label)
-                                <option value="{{ $key }}">{{ $label }}</option>
+                            @foreach($listSizes as $label)
+                                <option value="{{ $label }}">{{ $label }}</option>
                             @endforeach
                         </select>
-                        @error('size') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        @error('tabClothes.'.$index.'.size') 
+                            <span class="text-red-500 text-xs">{{ $message }}</span> 
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-indigo-700 mb-1">Couleur (Optionnel)</label>
-                        <select wire:model='color' class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        <select wire:model='tabClothes.{{ $index }}.color' class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="">-- Choisir une couleur --</option>
-                            @foreach ($listColors as $key => $label)
-                                <option value="{{ $key }}">{{ $label }}</option>
+                            @foreach ($listColors as $label)
+                                <option value="{{ $label }}">{{ $label }}</option>
                             @endforeach
                         </select> 
-                        @error('color') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                         @error('tabClothes.'.$index.'.color') 
+                            <span class="text-red-500 text-xs">{{ $message }}</span> 
+                        @enderror
                     </div>
+                </div>
+                <div>
+                    <button type="button" wire:click='deleteTabClothes({{ $index }})'>-</button>
+                </div>
+                @endforeach
+                <div>
+                    <button type="button" wire:click='addTabClothes'>+</button>
                 </div>
             @endif
 

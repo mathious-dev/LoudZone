@@ -105,11 +105,18 @@
                         </span>
                     @endif
                 </div>
-                @if ($article->clothe)
-                <div>
-                {{ $article->clothe->size??"Aucune taille" }}
-                 {{ $article->clothe->color?? "Aucune couleur" }}
-                </div>
+                @if ($article->clothes->isNotEmpty())
+                    <div>
+                        <strong>vêtements disponibles :</strong>
+                        <ul>
+                            @foreach($article->clothes as $clothe)
+                                <li>
+                                    Taille : {{ $clothe->size ?? "Unique" }} | 
+                                    Couleur : {{ $clothe->color ?? "Standard" }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
                 
                 <div class="mt-auto pt-6 flex items-end justify-between gap-2">

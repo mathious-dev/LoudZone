@@ -55,15 +55,15 @@ trait FilterTrait
         return $query;
     }
     public function searchRoleFunction($query)
-{
-    if (!empty($this->searchRole)) 
     {
-        return $query->whereHas('roles', function($q) {
-            $q->where('id', $this->searchRole);
-        });
+        if (!empty($this->searchRole)) 
+        {
+            return $query->whereHas('roles', function($q) {
+                $q->where('id', $this->searchRole);
+            });
+        }
+        return $query;
     }
-    return $query;
-}
     public function deleteSearch()
     {
         $this->search='';

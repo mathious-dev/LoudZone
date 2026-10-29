@@ -17,7 +17,7 @@ class Clothe extends BaseEntity
     ];
     public function article()
     {
-        return $this->belongsTo(Article::class,'article_id');
+        return $this->belongsTo(Article::class);
     }
     public static function getAvailableSizes()
     {

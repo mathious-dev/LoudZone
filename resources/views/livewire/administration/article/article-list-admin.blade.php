@@ -183,7 +183,6 @@
                 </tr>
 
                 <!-- 2. LA LIGNE DÉROULANTE (Infos Supplémentaires) -->
-                <!-- Le colspan passe de 11 à 8 car on a réduit le nombre de colonnes ! -->
                 <tr x-show="expanded" x-transition.opacity.duration.300ms style="display: none;" class="bg-gray-50/80">
                     <td colspan="8" class="px-6 py-6 border-b border-gray-200 shadow-inner">
                         <div class="flex flex-col md:flex-row gap-8 items-start">
@@ -233,17 +232,21 @@
                                         <span class="font-medium text-gray-800">{{ $article->updated_at ? $article->updated_at->format('d/m/Y') : '-' }}</span>
                                     </div>
 
-                                    <!-- On applique le MÊME style ici pour les vêtements -->
-                                    @if ($article->articleCategory->isClotheCategory($article->article_category_id))
-                                        <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
-                                            <span class="block text-indigo-400 text-[10px] font-bold uppercase mb-1">Taille</span>
-                                            <span class="font-medium text-gray-800">{{ $article->clothe?->size ?? 'N/A' }}</span>
-                                        </div> 
-                                        
-                                        <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
-                                            <span class="block text-indigo-400 text-[10px] font-bold uppercase mb-1">Couleur</span>
-                                            <span class="font-medium text-gray-800">{{ $article->clothe?->color ?? 'Aucune' }}</span>
-                                        </div> 
+                                    @if ($article->clothes->isNotEmpty())
+                                        <!-- Ce bloc entier ne s'affichera que si l'article possède des vêtements -->
+                                        <div class="col-span-2 md:col-span-4 bg-white p-4 rounded-lg border border-gray-200 shadow-sm mt-2">
+                                            <span class="block text-gray-400 text-[10px] font-bold uppercase mb-3">Vêtements (Tailles & Couleurs)</span>
+                                            
+                                            <div class="flex flex-wrap gap-2">
+                                                @foreach ($article->clothes as $clothe)
+                                                    <span class="inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100 shadow-sm">
+                                                        {{ $clothe->size ?? 'Unique' }} 
+                                                        <span class="mx-2 text-indigo-300">|</span> 
+                                                        {{ $clothe->color ?? 'Standard' }}
+                                                    </span>
+                                                @endforeach
+                                            </div>
+                                        </div>
                                     @endif
                                     
                                 </div>

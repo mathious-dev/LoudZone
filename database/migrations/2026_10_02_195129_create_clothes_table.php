@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clothes', function (Blueprint $table) {
-            //unsignedBigInteger est le type des clés primaires
-            $table->unsignedBigInteger('article_id')->primary();
+            $table->id();
             $table->string('size');
             $table->string('color')->default('aucune')->nullable();
             $table->timestamps();

@@ -51,9 +51,9 @@ class Article extends BaseEntity
     {
         return $this->hasMany(CartItem::class);
     }
-    public function clothe()
+    public function clothes()
     {
-        return $this->hasOne(Clothe::class,'article_id');
+        return $this->hasMany(Clothe::class);
     }
     public function changeStatePublishArticleModel()
     {

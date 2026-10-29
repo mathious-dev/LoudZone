@@ -22,15 +22,20 @@ class ArticleService
             //On supprime l'information du tableau ainsi à la sauvegarde il ne supprime pas l'image qui est déjà là si c'est null
             unset($data['primary_image']);
         
-        $size=$data['size'] ?? null;
-        
         //Sauvegarde de l'article
         $articleSave=$this->save($data,$article,"admin.articleListAdmin");
 
         //Si c'est un vêtement
         if(ArticleCategory::isClotheCategory($articleSave->article_category_id))
         {
-            $articleSave->clothe()->updateOrCreate(['article_id'=>$articleSave->id],['size'=>$size]);
+            $tabClothes = $data['tabClothes'] ?? [];
+            foreach ($tabClothes as $clothe) 
+            {
+                $articleSave->clothes()->updateOrCreate([
+                    'size'  => $clothe['size'],
+                    'color' => $clothe['color']
+                ]);
+            }
             if($isEditing==true)
                 saveHistory("Modification du vêtement {$articleSave->title}");
             else
@@ -39,10 +44,10 @@ class ArticleService
         else
         {
             //Si le lien est encore là on le supprime
-            if($articleSave->clothe()->exists())
+            if($articleSave->clothes()->exists())
             {
                 $articleSave->clothe()->delete();
-                saveHistory("Suppression de l'extension vêtement pour {$articleSave->title}");
+                saveHistory("Suppression des extensions vêtements pour {$articleSave->title}");
             }
         }
         //Pour les différentes images
