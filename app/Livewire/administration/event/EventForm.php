@@ -19,6 +19,7 @@ class EventForm extends AdminComponent
     public $street;
     public $city;
     public $postal_code;
+    public $primary_image;
     public function render()
     {
         return view('livewire.administration.event.event-form');
@@ -48,6 +49,7 @@ class EventForm extends AdminComponent
         'end_date'=>'required|date',
         'street'=>'nullable|max:255',
         'city'=>'required|max:255',
+        'primary_image'=>'nullable|max:1024',
         'postal_code'=>'required'];
     }
     public function saveForm()
@@ -58,15 +60,16 @@ class EventForm extends AdminComponent
             'city'=>$data['city'],
             'postal_code'=>$data['postal_code'],
         ];
-        $this->address->fill($dataAddress);
-        $this->address->save();
+        $textImage = $this->event->primary_image;
+        if($this->primary_image) 
+            $textImage = $this->primary_image->store('events', 'public');
         $dataEvent=[
             'label'=>$data['label'],
             'description'=>$data['description'],
             'start_date'=>$data['start_date'],
             'end_date'=>$data['end_date'],
-            'address_id'=>$this->address->id,
+            'primary_image'=>$textImage,
         ];
-        $this->save($dataEvent,$this->event,'admin.eventListAdmin');
+        $this->saveBelongsTo($this->event,$dataEvent,$this->address,$dataAddress,'address_id','admin.eventListAdmin');
     }
 }

@@ -13,7 +13,7 @@ class EventListAdmin extends AdminComponent
     {
         return view('livewire.administration.event.event-list-admin',['listEvents'=>$this->query(10),'listSearch'=>$this->querySearch()]);
     }
-     public function mount()
+    public function mount()
     {
         $this->searchWichColumn='label';
         $this->searchAscDescWichColumn = 'label';

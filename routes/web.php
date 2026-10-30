@@ -139,4 +139,6 @@ Route::middleware([
 
     //Panier
     Route::get('/cart/{userId}',CartList::class)->name('cartList');
+
+    
 });

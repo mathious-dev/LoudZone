@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->boolean('is_important')->default(false);
+            $table->string('primary_image')->nullable();
             $table->timestamps();
         });
     }

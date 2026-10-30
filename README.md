@@ -42,15 +42,11 @@ C'est une plateforme e-commerce qui va permettre au groupe de rock LoudZone de p
 
 1. Installer dépendances PHP : composer install
 2. Installer dépendances front-end : npm run build
-3. Configurer l'environnement : Dupliquer le fichier .env.example en .env et y configurer les accès à la base de données
-4. Générer la clé de l'application : php artisan key:generate
-5. Lancer les migrations : php artisan migrate, avec seeder : php artisan migrate:fresh --seed
-6. Démarrer le serveur php: php artisan serv
-7. Démarrer le serveur front-end : npm run dev
-
-
-
-
-
-
+3. Installer MongoDB sur votre PC
+4. Configurer l'environnement : Dupliquer le fichier .env.example en .env et y configurer les accès à la base de données
+5. Générer la clé de l'application : php artisan key:generate
+6. Lancer les migrations : php artisan migrate, avec seeder : php artisan migrate:fresh --seed
+7. Démarrer le serveur php: php artisan serv
+8. Démarrer le serveur front-end : npm run dev
+9. Vérifier que mongodb.exe est bien démarré sur votre PC
 

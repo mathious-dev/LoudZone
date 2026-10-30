@@ -103,34 +103,63 @@
 
                     <!-- Séparateur -->
                     <hr class="border-gray-200 mb-6">
-                    <button wire:click='addArticleToCart({{$article->id }},{{ $quantity }})'>Ajouter au panier</button>
-                    <button wire:click='addRemoveNumberArticle({{ 1 }})'>+</button>
-                    <p>{{ $quantity }}</p>
-                    <button wire:click='addRemoveNumberArticle({{ -1 }})'>-</button>
-                    <!-- Gestion du Stock -->
+
+                    <!-- ========================================== -->
+                    <!-- ZONE D'AJOUT AU PANIER                     -->
+                    <!-- ========================================== -->
+                    @if($article->stock > 0)
+                        <div class="mb-8 p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                            <div class="flex flex-col sm:flex-row items-center gap-4">
+                                
+                                <!-- Sélecteur de quantité avec flèches -->
+                                <div class="flex items-center border border-gray-300 rounded-lg bg-gray-50 overflow-hidden h-12 w-full sm:w-32">
+                                    <button type="button" wire:click='addRemoveNumberArticle(-1)' class="px-4 text-gray-500 hover:text-gray-900 hover:bg-gray-200 transition-colors h-full focus:outline-none" aria-label="Diminuer">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                                    </button>
+                                    
+                                    <div class="flex-1 text-center font-bold text-gray-900 bg-white border-x border-gray-300 h-full flex items-center justify-center">
+                                        {{ $quantity }}
+                                    </div>
+                                    
+                                    <button type="button" wire:click='addRemoveNumberArticle(1)' class="px-4 text-gray-500 hover:text-gray-900 hover:bg-gray-200 transition-colors h-full focus:outline-none" aria-label="Augmenter">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                    </button>
+                                </div>
+
+                                <!-- Bouton Ajouter au Panier -->
+                                <button type="button" wire:click='addArticleToCart({{ $article->id }}, {{ $quantity }})' class="w-full h-12 flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-md transition duration-150 ease-in-out flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                    Ajouter au panier
+                                </button>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Gestion du Stock & Actions Annexes -->
                     <div class="mt-auto">
                         @if($article->stock > 0)
                             <!-- Affichage Vert si en stock -->
                             <div class="flex items-center text-green-700 bg-green-50 p-3 rounded-md border border-green-200 mb-6">
-                                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <svg class="w-6 h-6 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 <span class="font-semibold text-lg">En stock</span>
-                                <span class="ml-2 text-green-600">({{ $article->stock }} unités disponibles)</span>
+                                <span class="ml-2 text-green-600">({{ $article->stock }} disponibles)</span>
                             </div>
                         @else
                             <!-- Affichage Rouge si hors stock -->
-                            <div class="flex items-center text-red-700 bg-red-50 p-3 rounded-md border border-red-200 mb-6">
-                                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <span class="font-semibold text-lg">Rupture de stock</span>
+                            <div class="flex flex-col items-center justify-center text-red-700 bg-red-50 p-6 rounded-lg border border-red-200 mb-6 text-center">
+                                <svg class="w-10 h-10 mb-2 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                <span class="font-black text-xl">Rupture de stock</span>
+                                <span class="text-sm mt-1">Cet article est victime de son succès</span>
                             </div>
                         @endif
 
-                        <!-- Optionnel : Un bouton d'action (Retour ou Modifier) -->
-                        <div class="flex gap-4">
-                            <a href="{{ route('articleListPublic') }}" class="flex-1 bg-white border border-gray-300 rounded-md shadow-sm py-3 px-4 text-center text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                                Retour à la liste
+                        <!-- Bouton Retour -->
+                        <div class="flex">
+                            <a href="{{ route('articleListPublic') }}" class="flex-1 bg-white border border-gray-300 rounded-md shadow-sm py-3 px-4 text-center text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                                Retour à la boutique
                             </a>
                         </div>
-
                     </div>
 
                 </div>

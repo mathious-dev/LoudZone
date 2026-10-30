@@ -8,6 +8,6 @@ class History extends Model
     protected $connection = 'mongodb'; 
     //équivalent de la table, on l'écrit pour éviter les bugs de liaison
     protected $collection = 'histories';
-    //équivalent de fillable sauf qu'ici on n'uatorise n'importe quelle donnée
+    //équivalent de fillable sauf qu'ici on n'autorise n'importe quelle donnée
     protected $guarded = [];
 }

@@ -6,6 +6,7 @@ use App\Livewire\AdminComponent;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\Clothe;
+use App\Models\Promotion;
 use App\Services\ArticleService;
 use App\Traits\CrudTrait;
 use Livewire\WithFileUploads;
@@ -26,8 +27,7 @@ class ArticleFormAdmin extends AdminComponent
     public $article_category_id = '';
     public $primary_image='';
     public $pictures=[];
-    // public $size='';
-    // public $color='';
+    public $promotion_id='';
     public $tabClothes = [
         ['size' => '','color' => '']
     ];
@@ -37,7 +37,8 @@ class ArticleFormAdmin extends AdminComponent
         return view('livewire.administration.article.article-form-admin',
         ['listArticleCategories'=>$this->queryCategories(),
         'listSizes'=> Clothe::getAvailableSizes(),
-        'listColors'=>Clothe::getAvailableColors()]);
+        'listColors'=>Clothe::getAvailableColors(),
+        'listPromotions'=>$this->queryPromotion()]);
     }
     protected function rules()
     {
@@ -53,7 +54,9 @@ class ArticleFormAdmin extends AdminComponent
             //On vérifie que les ID existent VRAIMENT dans la base de données
             'user_id'             => 'required|exists:users,id',//on vérifie dans la BD qu'il y a bien m'utilisateur
             'article_category_id' => 'required|exists:article_categories,id',
-            'pictures'=>'nullable|max:1024'
+            'pictures'   => 'nullable|array',
+            'pictures.*' => 'image|max:1024',
+            'promotion_id'=>'nullable'
         ];
         if($this->isClothe())
         {
@@ -115,5 +118,10 @@ class ArticleFormAdmin extends AdminComponent
 
         //on réorganise le tableau
         $this->tabClothes = array_values($this->tabClothes);
+    }
+    public function queryPromotion()
+    {
+        $query=Promotion::query();
+        return $query->get();
     }
 }

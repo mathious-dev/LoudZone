@@ -45,7 +45,6 @@
                         label-false="Non publié" 
                     />
                 </div>
-                
             </div>
         </div>
     </div>

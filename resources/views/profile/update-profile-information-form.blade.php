@@ -1,5 +1,4 @@
-<div>
-@livewire('navigation-menu')
+
 <x-form-section submit="updateProfileInformation">
     <x-slot name="title">
         {{ __('Profile Information') }}
@@ -100,4 +99,3 @@
         </x-button>
     </x-slot>
 </x-form-section>
-</div>

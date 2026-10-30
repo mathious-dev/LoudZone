@@ -15,6 +15,7 @@ class Event extends BaseEntity
     'start_date',
     'end_date',
     'is_important',
+    'primary_image',
     'address_id'];
     public function address()
     {
@@ -35,5 +36,9 @@ class Event extends BaseEntity
                 saveHistory("événement $event->label est publié");
             }
         });
+    }
+    public function images()
+    {
+        return $this->morphMany(Image::class,'imageable');
     }
 }

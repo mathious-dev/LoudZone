@@ -21,6 +21,13 @@ class ArticleService
         else
             //On supprime l'information du tableau ainsi à la sauvegarde il ne supprime pas l'image qui est déjà là si c'est null
             unset($data['primary_image']);
+
+        //on ne doit pas mettre les images dans l'article
+        unset($data['pictures']);
+
+        //Livewire renvoie du texte vide et non un null
+        if (empty($data['promotion_id'])) 
+            $data['promotion_id'] = null;
         
         //Sauvegarde de l'article
         $articleSave=$this->save($data,$article,"admin.articleListAdmin");

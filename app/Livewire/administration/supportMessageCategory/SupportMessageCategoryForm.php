@@ -36,7 +36,7 @@ class SupportMessageCategoryForm extends AdminComponent
     }
     public function saveForm()
     {
-        $this->save($this->validate(),$this->supportMessageCategory,'admin.supportMessageCategoryList','addInfos',$this->listAddInfosChoice);
+        $this->saveManyToMany($this->supportMessageCategory,$this->validate(),'addInfos',$this->listAddInfosChoice,'admin.supportMessageCategoryList');
     }
     public function rules()
     {
