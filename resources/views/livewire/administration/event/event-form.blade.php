@@ -54,7 +54,8 @@
                         @error('end_date') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
                 </div>
-
+                <h3>Image principale</h3>
+                <input wire:model='primary_image' type="file">
             </div>
         </section>
 

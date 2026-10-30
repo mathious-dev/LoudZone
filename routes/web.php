@@ -30,6 +30,8 @@ use App\Livewire\administration\user\UserList;
 use App\Livewire\public\article\ArticleDetail;
 use App\Livewire\public\article\ArticleListPublic;
 use App\Livewire\public\cart\CartList;
+use App\Livewire\public\event\EventDetail;
+use App\Livewire\public\event\EventListPublic;
 use App\Livewire\public\order\OrderForm;
 use App\Livewire\public\order\OrderListUser;
 use App\Livewire\public\supportMessage\SupportMessageForm;
@@ -97,8 +99,6 @@ Route::middleware([
 
         //Paiement
         Route::get('/payments',PaymentListAdmin::class)->name('paymentListAdmin');
-        Route::get('/payment/create',PaymentFormAdmin::class)->name('paymentFormAdmin.create');
-        Route::get('/payment/edit/{order}',PaymentFormAdmin::class)->name('paymentFormAdmin.edit');
 
         //événement
         Route::get('/events',EventListAdmin::class)->name('eventListAdmin');
@@ -140,5 +140,7 @@ Route::middleware([
     //Panier
     Route::get('/cart/{userId}',CartList::class)->name('cartList');
 
-    
+    //événement
+    Route::get('/events',EventListPublic::class)->name('eventListPublic');
+    Route::get('/event/{event}',EventDetail::class)->name('eventDetail');
 });

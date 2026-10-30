@@ -5,10 +5,16 @@
     <!-- ÉVÉNEMENT À LA UNE (Bannière pleine largeur) -->
     <!-- ========================================== -->
     @if ($importantEvent)
-    <div class="w-full mb-10 bg-[#5D0824] text-[#FAF1E3] rounded-xl shadow-lg p-6 md:p-10 relative overflow-hidden flex flex-col justify-center border border-[#41342D]/20">
+    <div class="w-full mb-10 bg-[#5D0824] bg-cover bg-center text-[#FAF1E3] rounded-xl shadow-lg p-6 md:p-10 relative overflow-hidden flex flex-col justify-center border border-[#41342D]/20"
+         @if($importantEvent->primary_image) style="background-image: url('{{ asset('storage/' . $importantEvent->primary_image) }}');" @endif>
         
+        <!-- Filtre de couleur bordeaux semi-transparent (Overlay) : Activé uniquement si une image existe -->
+        @if($importantEvent->primary_image)
+            <div class="absolute inset-0 bg-[#5D0824] opacity-85"></div>
+        @endif
+
         <!-- Effet de lumière décoratif en arrière-plan -->
-        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white opacity-10 rounded-full blur-3xl pointer-events-none z-0"></div>
 
         <div class="relative z-10">
             <!-- Badge -->
@@ -18,13 +24,13 @@
                 </span>
             </div>
             
-            <!-- Titre -->
-            <h1 class="text-3xl md:text-4xl font-black mb-4 leading-tight">
+            <!-- Titre (avec drop-shadow pour le détacher de l'image) -->
+            <h1 class="text-3xl md:text-4xl font-black mb-4 leading-tight drop-shadow-lg">
                 {{ $importantEvent->label }}
             </h1>
             
             <!-- Description -->
-            <p class="text-base md:text-lg opacity-90 max-w-3xl leading-relaxed">
+            <p class="text-base md:text-lg text-gray-100 opacity-100 max-w-3xl leading-relaxed drop-shadow-md">
                 {{ $importantEvent->description }}
             </p>
         </div>

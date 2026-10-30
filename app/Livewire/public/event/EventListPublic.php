@@ -1,16 +1,15 @@
 <?php
 
 namespace App\Livewire\public\event;
-
-use App\Livewire\AdminComponent;
+use App\Livewire\PublicComponent;
 use App\Models\Event;
 
-class EventListPublic extends AdminComponent
+class EventListPublic extends PublicComponent
 {
     public $model=Event::class;
     public function render()
     {
-        return view('livewire.public.event.event-list-public',$this->query());
+        return view('livewire.public.event.event-list-public',['listEvents'=>$this->query(9)]);
     }
     public function mount()
     {

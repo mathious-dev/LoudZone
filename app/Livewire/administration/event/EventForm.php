@@ -5,9 +5,11 @@ namespace App\Livewire\administration\event;
 use App\Livewire\AdminComponent;
 use App\Models\Address;
 use App\Models\Event;
+use Livewire\WithFileUploads;
 
 class EventForm extends AdminComponent
 {
+    use WithFileUploads;
     public $model=Event::class;
     public $event;
     public $address;
