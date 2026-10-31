@@ -4,6 +4,7 @@ namespace App\Livewire\administration\role;
 
 use App\Livewire\AdminComponent;
 use App\Traits\CrudTrait;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleForm extends AdminComponent
@@ -11,6 +12,8 @@ class RoleForm extends AdminComponent
     use CrudTrait;
     public $role;
     public $name;
+    public $listPermissions=[];
+    public $listPermissionsChoice=[];
     public function render()
     {
         return view('livewire.administration.role.role-form');
@@ -21,6 +24,7 @@ class RoleForm extends AdminComponent
         {
             $this->role=$role;
             $this->fill($role->toArray());
+            $this->listPermissionsChoice=$this->role->permissions->pluck('id')->toArray();
             $this->isEditing=true;
         }
         else
@@ -28,6 +32,7 @@ class RoleForm extends AdminComponent
             $this->role=new Role();
             $this->isEditing=false;
         }
+        $this->listPermissions=Permission::pluck('name','id');
     }
     public function rules()
     {
@@ -37,7 +42,8 @@ class RoleForm extends AdminComponent
     {
         $data=$this->validate();
         $data['guard_name']='web';
-        $this->save($data,$this->role,"admin.roleList");
+        $permissionsIds = array_map('intval', $this->listPermissionsChoice);
+        $this->savePermissionAndRole($this->role,$data,"syncPermissions",$permissionsIds,"admin.roleList");
     }
     
 }

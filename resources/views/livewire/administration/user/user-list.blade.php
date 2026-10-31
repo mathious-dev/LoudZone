@@ -25,12 +25,30 @@
         <div>
             <x-search-boolean label-true="Avec NewsLetter" label-false="Sans NewsLetter"/>
         </div>
-        <select wire:model.live='searchRole'>
-            <option>-</option>
-            @foreach ($listRoles as $role)
-                <option value="{{ $role->id }}">{{$role->name  }}</option>
-            @endforeach
-        </select>
+        <div class="relative w-full md:w-64">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <!-- Icône de filtre/utilisateur -->
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                </svg>
+            </div>
+            
+            <select wire:model.live='searchRole' 
+                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#5D0824] focus:border-[#5D0824] block w-full pl-10 p-2.5 shadow-sm transition-colors cursor-pointer appearance-none">
+                <option value="">Tous les rôles</option>
+                
+                <!-- On utilise bien l'objet $role ici -->
+                @foreach ($listRoles as $role)
+                    <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
+                @endforeach
+                
+            </select>
+
+            <!-- Flèche personnalisée à droite -->
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-500">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+        </div>
     </div>
 
     <!-- ========================================== -->

@@ -74,6 +74,15 @@ trait CrudTrait
         $nameValue = $object->getValueNameColumn();
         saveHistory("La colonne null $column de {$nameObject} {$object->id} avec le nom : {$nameValue} a été mise à jour.");
     }
+    public function savePermissionAndRole($object,$dataTab,$syncMethod,$dataRelation,$route)
+    {
+        $object->fill($dataTab);
+        $object->save();
+
+        $object->$syncMethod($dataRelation);
+        $this->isCreateOrUpdateForLog($object);
+        return $this->redirectRoute($route);
+    }
     public function isCreateOrUpdateForLog($object)
     {
         if($this->isEditing)

@@ -6,6 +6,7 @@ use App\Livewire\AdminComponent;
 use App\Models\User;
 use App\Traits\CrudTrait;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 
 class UserForm extends AdminComponent
@@ -17,6 +18,8 @@ class UserForm extends AdminComponent
     public $email = '';
     public $password = '';
     public $news_letter = false;
+    public $listRoles=[];
+    public $listRolesChoice=[];
     protected function rules()
     {
         return [
@@ -40,6 +43,7 @@ class UserForm extends AdminComponent
             //on remplit toutes les variables directement
             //fill va chercher les informations et comparer aux variables publiques pour voir si ça correspond
             $this->fill($user->toArray());
+            $this->listRolesChoice=$this->user->roles->pluck('id')->toArray();
             $this->isEditing=true;
         }
         else
@@ -47,6 +51,7 @@ class UserForm extends AdminComponent
             $this->user=new User();
             $this->isEditing=false; 
         }
+        $this->listRoles=Role::pluck('name','id');
     }
     public function saveForm()
     {
@@ -56,6 +61,8 @@ class UserForm extends AdminComponent
         else
             //on retire la ligne du tableau pour éviter de vider le mot de passe en édition
             unset($dataTab['password']);
-        $this->save($dataTab,$this->user,"admin.userList");
+        
+        $rolesId=array_map('intval',$this->listRolesChoice);
+        $this->savePermissionAndRole($this->user,$dataTab,"syncRoles",$rolesId,"admin.userList");
     }
 }
