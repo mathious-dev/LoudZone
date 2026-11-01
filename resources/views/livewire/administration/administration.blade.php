@@ -44,6 +44,14 @@
                         <!-- Exemple générique à copier pour chaque lien : 
                              On ajoute whitespace-nowrap sur le <a> et flex-shrink-0 sur l'icône -->
                         <li>
+                            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-4 px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors whitespace-nowrap">
+                                <div class="flex-shrink-0 w-6 flex justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M272 112C272 85.5 293.5 64 320 64C346.5 64 368 85.5 368 112C368 138.5 346.5 160 320 160C293.5 160 272 138.5 272 112zM224 256C224 238.3 238.3 224 256 224L320 224C337.7 224 352 238.3 352 256L352 512L384 512C401.7 512 416 526.3 416 544C416 561.7 401.7 576 384 576L256 576C238.3 576 224 561.7 224 544C224 526.3 238.3 512 256 512L288 512L288 288L256 288C238.3 288 224 273.7 224 256z"/></svg>
+                                </div>
+                                <span x-show="locked || hovered" x-transition.opacity.duration.300ms>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('admin.userList') }}" class="flex items-center gap-4 px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors whitespace-nowrap">
                                 <div class="flex-shrink-0 w-6 flex justify-center">
                                     <svg class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M463 448.2C440.9 409.8 399.4 384 352 384L288 384C240.6 384 199.1 409.8 177 448.2C212.2 487.4 263.2 512 320 512C376.8 512 427.8 487.3 463 448.2zM64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320zM320 336C359.8 336 392 303.8 392 264C392 224.2 359.8 192 320 192C280.2 192 248 224.2 248 264C248 303.8 280.2 336 320 336z"/></svg>

@@ -46,7 +46,7 @@
             
             <!-- Barre de recherche (prend un maximum d'espace) -->
             <div class="flex-grow w-full text-[#0B0A0B]">
-                <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
+                <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn" :showList="$showList" />
             </div>
             
             <!-- Filtre Catégorie (à droite, largeur fixe sur grand écran) -->

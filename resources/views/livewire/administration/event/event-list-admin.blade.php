@@ -15,7 +15,7 @@
     <!-- Zone de Recherche et Filtres -->
     <div class="p-4 bg-gray-50 border-b border-gray-200 flex flex-col md:flex-row gap-4 items-center">
         <div class="w-full md:w-2/3">
-            <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn"/>
+            <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn" :showList="$showList" />
         </div>
         <div class="w-full md:w-1/3 flex justify-end">
             <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>

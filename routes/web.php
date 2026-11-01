@@ -10,11 +10,11 @@ use App\Livewire\administration\articleCategory\ArticleCategoryForm;
 use App\Livewire\administration\ArticleCategory\ArticleCategoryList;
 use App\Livewire\administration\articleOrder\ArticleOrderListAdmin;
 use App\Livewire\administration\cart\CartListAdmin;
+use App\Livewire\administration\dashboard\AdminDashBoard;
 use App\Livewire\administration\event\EventForm;
 use App\Livewire\administration\event\EventListAdmin;
 use App\Livewire\administration\history\HistoryList;
 use App\Livewire\administration\order\OrderListAdmin;
-use App\Livewire\administration\payment\PaymentFormAdmin;
 use App\Livewire\administration\payment\PaymentListAdmin;
 use App\Livewire\administration\permission\PermissionForm;
 use App\Livewire\administration\permission\PermissionList;
@@ -123,6 +123,8 @@ Route::middleware([
         Route::get('/permission/create',PermissionForm::class)->name('permissionForm.create');
         Route::get('/permission/edit/{permission}',PermissionForm::class)->name('permissionForm.edit');
 
+        //Dashboard
+        Route::get('/dashboard',AdminDashBoard::class)->name('dashboard');
     });
 
     //Article

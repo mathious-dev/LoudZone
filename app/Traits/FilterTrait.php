@@ -22,6 +22,7 @@ trait FilterTrait
     public $tabSearchAscDescPossibility=[];
     public $tabSearchCategoryPossibility=[];
 
+    public $showList=false;
     public function searchFunction($query)
     {
         if(!empty($this->search)&& !empty($this->searchWichColumn))
@@ -67,15 +68,23 @@ trait FilterTrait
     public function deleteSearch()
     {
         $this->search='';
+        $this->showList=false;
     }
     public function selectSearch($id)
     {
         $findObject=$this->model::find($id);
         if($findObject)
+        {
             $this->search=$findObject->{$this->searchWichColumn};//{} pour propriété dynamique sinon il ne comprend pas que c'est un $this->
+            $this->showList=false;
+        }
     }
     public function updatedSearch()
     {
+        if (!empty($this->search)) 
+            $this->showList = true;
+        else 
+            $this->showList = false;
         $this->resetPage();
     }
     public function updatedSearchAscDesc()

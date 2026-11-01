@@ -1,4 +1,4 @@
-@props(['options','listSearch' => [],'search'=>'','searchWichColumn'=>'']) 
+@props(['options','listSearch' => [],'search'=>'','searchWichColumn'=>'','showList']) 
 
 <!-- J'ai retiré le mb-8 ici ! -->
 <div class="w-full">
@@ -43,7 +43,7 @@
             <!-- ========================================== -->
             <!-- MENU FLOTTANT DES SUGGESTIONS              -->
             <!-- ========================================== -->
-            @if(!empty($search) && count($listSearch) > 0)
+            @if($showList && count($listSearch) > 0)
             <div class="absolute z-50 left-0 right-0 mt-2 bg-white border border-gray-100 rounded-lg shadow-2xl overflow-hidden">
                 <ul class="divide-y divide-gray-100 max-h-60 overflow-y-auto">
                     @foreach ($listSearch as $resultSearch)

@@ -8,7 +8,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                 @role('admin')
-                    <a href="{{ route('admin.userList') }}">
+                    <a href="{{ route('admin.dashboard') }}">
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
                 @endrole
