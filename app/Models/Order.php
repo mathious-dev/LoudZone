@@ -8,8 +8,8 @@ use App\Models\BaseEntity;
 
 class Order extends BaseEntity
 {
-    protected $nameValueColumn='reference';
-    protected $nameColumn='la commande';
+    protected $nameColumn='reference';
+    protected $nameValueColumn='la commande';
     protected $fillable = [
         'state',
         'total_price',

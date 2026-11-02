@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Article extends BaseEntity
 {
-    protected $nameValueColumn='title';
-    protected $nameColumn="L'article";
+    protected $nameColumn='title';
+    protected $nameValueColumn="L'article";
     protected $fillable=['title',
     'description',
     'price_ht',

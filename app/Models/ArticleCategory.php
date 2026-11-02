@@ -6,8 +6,8 @@ use App\Models\BaseEntity;
 
 class ArticleCategory extends BaseEntity
 {
-    protected $nameValueColumn='label';
-    protected $nameColumn="La catégorie d'article";
+    protected $nameColumn='label';
+    protected $nameValueColumn="La catégorie d'article";
     protected $fillable=['label'];
     public function articles()
     {

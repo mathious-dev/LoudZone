@@ -7,7 +7,7 @@ use App\Models\SupportMessageCategory;
 
 class SupportMessageCategoryList extends AdminComponent
 {
-    public $model=SupportMessageCategory::class;
+    protected $model=SupportMessageCategory::class;
     public function render()
     {
         return view('livewire.administration.supportMessageCategory.support-message-category-list',['listSupportMessageCategories'=>$this->query(10),'listSearch'=>$this->querySearch()]);

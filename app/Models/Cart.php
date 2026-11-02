@@ -5,8 +5,8 @@ namespace App\Models;
 use App\Models\BaseEntity;
 class Cart extends BaseEntity
 {
-    protected $nameValueColumn='id';
-    protected $nameColumn="le panier";
+    protected $nameColumn='id';
+    protected $nameValueColumn="le panier";
     protected $fillable=[
         'is_payed',
         'user_id',

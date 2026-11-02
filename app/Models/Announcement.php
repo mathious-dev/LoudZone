@@ -11,8 +11,8 @@ class Announcement extends BaseEntity
     'is_showing',
     'start_date',
     'end_date',];
-    protected $nameValueColumn='label';
-    protected $nameColumn="L'annonce";
+    protected $nameColumn='label';
+    protected $nameValueColumn="L'annonce";
     protected static function booted()
     {
         static::saving(function(Announcement $announcement)

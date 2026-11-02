@@ -8,8 +8,8 @@ use App\Models\BaseEntity;
 
 class Payment extends BaseEntity
 {
-    protected $nameValueColumn='transaction_id';
-    protected $nameColumn='le paiement';
+    protected $nameColumn='transaction_id';
+    protected $nameValueColumn='le paiement';
     protected $fillable = [
         'amount',
         'state',

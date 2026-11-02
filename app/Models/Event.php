@@ -8,8 +8,8 @@ use App\Models\BaseEntity;
 
 class Event extends BaseEntity
 {
-    protected $nameValueColumn='label';
-    protected $nameColumn="l'événement";
+    protected $nameColumn='label';
+    protected $nameValueColumn="l'événement";
     protected $fillable=['label',
     'description',
     'start_date',

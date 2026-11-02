@@ -87,11 +87,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class);
     }
-    public function getValueNameColumn()
+    public function getNameColumn()
     {
         return $this->name;
     }
-    public function getNameColumn()
+    public function getValueNameColumn()
     {
         return "L'utilisateur";
     }

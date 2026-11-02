@@ -6,8 +6,8 @@ use App\Models\BaseEntity;
 
 class SupportMessage extends BaseEntity
 {
-    protected $nameValueColumn='title';
-    protected $nameColumn='le message support';
+    protected $nameColumn='title';
+    protected $nameValueColumn='le message support';
     protected $fillable=['title',
     'content',
     'user_id',

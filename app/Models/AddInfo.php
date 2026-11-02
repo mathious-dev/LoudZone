@@ -8,8 +8,8 @@ use App\Models\SupportMessage;
 
 class AddInfo extends BaseEntity
 {
-    protected $nameValueColumn='label';
-    protected $nameColumn="L'information suuplémentaire";
+    protected $nameColumn='label';
+    protected $nameValueColumn="L'information suuplémentaire";
     protected $fillable=['label'];
     public function supportMessageCategories()
     {

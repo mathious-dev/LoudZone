@@ -9,16 +9,19 @@ trait CrudTrait
     public function crudLog($object,$action)
     {
         //pour l'affichage dans l'historique si c'est la classe rôle ou permission
-        $nameColumn = method_exists($object, 'getNameColumn') ? $object->getNameColumn() : class_basename($object);
-        $nameValue = method_exists($object, 'getValueNameColumn') ? $object->getValueNameColumn() : $object->name;
-        saveHistory("$action de $nameColumn $nameValue ");
+        $nameValueColumn = method_exists($object, 'getValueNameColumn') ? $object->getValueNameColumn() : class_basename($object);
+        $nameValue = method_exists($object, 'getNameColumn') ? $object->getNameColumn() : $object->name;
+        saveHistory("$action de $nameValueColumn $nameValue ");
     }
+
     public function delete($id)
     {
         $find=$this->model::findOrFail($id);
         $this->crudLog($find,'Suppression');
         $find->delete();
+        $this->flashSuccess("Suppression de {$find->getValueNameColumn()} {$find->getNameColumn()}");
     }
+
     //Méthode de save basique
     public function save($dataTab,$object,$route)
     {
@@ -33,9 +36,10 @@ trait CrudTrait
 
         if($object instanceof Article)
             return $object;
-        
+        $this->flashSuccess("Enregistrement de {$object->getValueNameColumn()} {$object->getNameColumn()}");
         return $this->redirectRoute($route);
     }
+
     //Méthode de save pour les relations manyToMany
     public function saveManyToMany($object,$dataTab,$relationName,$dataTabRelation,$route)
     {
@@ -45,8 +49,10 @@ trait CrudTrait
             $object->$relationName()->sync($dataTabRelation);
 
         $this->isCreateOrUpdateForLog($object);
+        $this->flashSuccess("Enregistrement de {$object->getValueNameColumn()} {$object->getNameColumn()}");
         return $this->redirectRoute($route);
     }
+
     //Méthode de save pour les relations OneToMany mais côté belongsTo si jamais on crée 2 objets de 2 tables différents en même temps. 
     // Exemple : avec événement et adresse
     public function saveBelongsTo($objectMain,$dataTabMain,$objectRelation,$dataTabForRelation=[],$foreignKey,$route)
@@ -61,7 +67,7 @@ trait CrudTrait
         $objectMain->save();
 
         $this->isCreateOrUpdateForLog($objectMain);
-
+        $this->flashSuccess("Enregistrement de {$objectMain->getValueNameColumn()} {$objectMain->getNameColumn()}");
         return $this->redirectRoute($route);
     }
     //Méthode de save pour les infos qui sont en null dans une liste
@@ -70,8 +76,9 @@ trait CrudTrait
         $object->update([
             $column => $data
         ]);
-        $nameObject=$object->getNameColumn();
-        $nameValue = $object->getValueNameColumn();
+        $nameObject=$object->getValueNameColumn();
+        $nameValue = $object->getNameColumn();
+        $this->flashSuccess("Enregistrement de {$this->model} {$object->getNameColumn()}");
         saveHistory("La colonne null $column de {$nameObject} {$object->id} avec le nom : {$nameValue} a été mise à jour.");
     }
     public function savePermissionAndRole($object,$dataTab,$syncMethod,$dataRelation,$route)
@@ -81,13 +88,34 @@ trait CrudTrait
 
         $object->$syncMethod($dataRelation);
         $this->isCreateOrUpdateForLog($object);
+        $this->flashSuccess("Enregistrement de {$object->getValueNameColumn()} {$object->getNameColumn()}");
         return $this->redirectRoute($route);
     }
+
     public function isCreateOrUpdateForLog($object)
     {
         if($this->isEditing)
             $this->crudLog($object,'Modification');
         else
             $this->crudLog($object,'Création');
+    }
+
+    public function flashSuccess($message)
+    {
+        session()->flash('flashMessage', [
+            'type' => 'success',
+            'message' => $message
+        ]);
+        //événement pour pu
+        $this->dispatch('toast', type: 'success', message: $message);
+    }
+
+    public function flashError($message)
+    {
+        session()->flash('flashMessage', [
+            'type' => 'error',
+            'message' => $message
+        ]);
+        $this->dispatch('toast', type: 'success', message: $message);
     }
 }

@@ -42,4 +42,11 @@ if(!function_exists('showAnnouncement'))
         
     }
 }
+if(!function_exists('flashMessage'))
+{
+    function flashMessage()
+    {
+        
+    }
+}
 ?>

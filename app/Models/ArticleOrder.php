@@ -8,8 +8,8 @@ use App\Models\BaseEntity;
 
 class ArticleOrder extends BaseEntity
 {
-    protected $nameValueColumn='id';
-    protected $nameColumn='la commande article';
+    protected $nameColumn='id';
+    protected $nameValueColumn='la commande article';
     protected $fillable = [
         'quantity',
         'unit_price',
