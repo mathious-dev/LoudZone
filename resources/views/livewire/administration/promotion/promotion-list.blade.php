@@ -56,17 +56,10 @@
                                     Modifier
                                 </a>
                                 
-                                <button wire:click="deleteProm({{ $promotion->id }})" wire:confirm="Êtes-vous sûr de vouloir supprimer cette promotion ?" class="text-red-600 hover:text-red-900 font-semibold transition-colors">
+                                <button wire:click="delete({{ $promotion->id }})" wire:confirm="Êtes-vous sûr de vouloir supprimer cette promotion ?" class="text-red-600 hover:text-red-900 font-semibold transition-colors">
                                     Supprimer
                                 </button>
                             </div>
-                            
-                            <!-- Affichage de l'erreur -->
-                            @if(isset($isDeleting) && $isDeleting === false)
-                                <p class="text-xs text-red-600 mt-2">
-                                    Impossible : des articles y sont liés.
-                                </p>
-                            @endif
                         </td>
                     </tr>
                 @endforeach

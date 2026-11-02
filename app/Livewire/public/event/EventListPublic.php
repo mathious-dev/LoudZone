@@ -9,19 +9,21 @@ class EventListPublic extends PublicComponent
     public $model=Event::class;
     public function render()
     {
-        return view('livewire.public.event.event-list-public',['listEvents'=>$this->query(9)]);
+        return view('livewire.public.event.event-list-public',[
+            'listEvents'=>$this->query(9),
+            'listSearch'=>$this->querySearch()]);
     }
     public function mount()
     {
         $this->searchWichColumn='label';
         $this->searchAscDescWichColumn = 'label';
         $this->tabSearchPossibility=[
-            'label'=>'nom',
+            'label'=>'Nom',
         ];
         $this->tabSearchAscDescPossibility=[
-            'label'=>'nom',
-            'start_date'=>'date de début',
-            'end_date'=>'date de fin',
+            'label'=>'Nom',
+            'start_date'=>'Date de début',
+            'end_date'=>'Date de fin',
         ];
     }
 }

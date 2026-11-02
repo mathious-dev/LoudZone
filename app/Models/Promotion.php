@@ -25,4 +25,19 @@ class Promotion extends BaseEntity
     {
         return $this->hasMany(Article::class);
     }
+    public static function  booted()
+    {
+        static::deleting(function (Promotion $promotion)
+        {
+            $listArticles=Article::where('promotion_id',$promotion->id)->get();
+            foreach($listArticles as $article)
+            {
+                //On met manuellement la promotion à null car l'article possède aussi un événement de modèle avec saving
+                $article->promotion_id=null;
+                $article->final_price=$article->priceWithTva();
+                $article->save();
+            }
+        });
+
+    }
 }

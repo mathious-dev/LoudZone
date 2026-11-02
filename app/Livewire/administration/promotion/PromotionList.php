@@ -28,19 +28,4 @@ class PromotionList extends AdminComponent
             'end_date'=>'Date de fin',
         ];
     }
-    public function deleteProm($promotionId)
-    {
-        $promotion=Promotion::find($promotionId);
-        if($promotion)
-        {
-            $areArticlesLink=$promotion->articles()->exists();
-            if(!$areArticlesLink)
-            {
-                $this->isDeleting=true;
-                $this->delete($promotionId);
-            }
-            else
-                $this->isDeleting=false;
-        }
-    }
 }
