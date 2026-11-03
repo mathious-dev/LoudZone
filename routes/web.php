@@ -25,6 +25,7 @@ use App\Livewire\administration\role\RoleList;
 use App\Livewire\administration\supportMessage\SupportMessageList;
 use App\Livewire\administration\SupportMessageCategory\SupportMessageCategoryForm;
 use App\Livewire\administration\SupportMessageCategory\SupportMessageCategoryList;
+use App\Livewire\administration\user\UserDetail;
 use App\Livewire\administration\user\UserForm;
 use App\Livewire\administration\user\UserList;
 use App\Livewire\public\article\ArticleDetail;
@@ -58,6 +59,7 @@ Route::middleware([
         Route::get('/users',UserList::class)->name('userList');
         Route::get('/user/create',UserForm::class)->name('userForm.create');
         Route::get('/user/edit/{user}',UserForm::class)->name('userForm.edit');
+        Route::get('/user/detail/{id}',UserDetail::class)->name('userDetail');
 
         //role 
         Route::get('/roles',RoleList::class)->name('roleList');
@@ -145,4 +147,6 @@ Route::middleware([
     //événement
     Route::get('/events',EventListPublic::class)->name('eventListPublic');
     Route::get('/event/{event}',EventDetail::class)->name('eventDetail');
+
+
 });

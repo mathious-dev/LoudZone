@@ -13,7 +13,7 @@
     </div>
 
     <!-- Composant de recherche réutilisable -->
-    <x-search :options="$tabSearchPossibility"/>
+    <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :searchWichColumn="$searchWichColumn" :search="$search" :showList="$showList"/>
 
     <!-- Conteneur du tableau -->
     <div class="overflow-x-auto shadow-sm rounded-lg border border-gray-200">

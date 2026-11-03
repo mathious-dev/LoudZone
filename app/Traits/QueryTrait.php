@@ -5,9 +5,12 @@ namespace App\Traits;
 trait QueryTrait
 {
     //par défaut on met à 10
-    public function query($pagination=10)
+    public function query($pagination=10,$withRelations = [])
     {
         $query=$this->model::query();
+        if (!empty($withRelations)) 
+            $query = $query->with($withRelations);
+        
         $query=$this->searchFunction($query);
         $query=$this->searchAscDescFunction($query);
         $query=$this->searchCategoryFunction($query);
@@ -23,5 +26,8 @@ trait QueryTrait
         $query=$this->searchFunction($query);
         return $query->take(5)->get();
     }
-
+    public function otherQuery($class)
+    {
+        return $class::all();
+    }
 }

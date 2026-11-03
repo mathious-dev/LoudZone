@@ -30,7 +30,7 @@ class AdminDashBoard extends AdminComponent
     }
     public function getCountUserNewsletter()
     {
-        $this->countUser = User::where('news_letter', true)->count();
+        $this->countUserNewsletter = User::where('news_letter', true)->count();
     }
     public function getAnnouncementPublish()
     {

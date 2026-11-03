@@ -11,7 +11,8 @@ class AddInfoList extends AdminComponent
     protected $model=AddInfo::class;
     public function render()
     {
-        return view('livewire.administration.addInfo.add-info-list',['listAddInfos'=>$this->query(10),'listSearch'=>$this->querySearch()]);
+        return view('livewire.administration.addInfo.add-info-list',['listAddInfos'=>$this->query(10),
+        'listSearch'=>$this->querySearch()]);
     }
     public function mount()
     {

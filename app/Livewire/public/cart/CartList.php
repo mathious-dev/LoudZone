@@ -21,7 +21,7 @@ class CartList extends PublicComponent
     public function mount($userId)
     {
         $this->user=User::find($userId);
-        $this->cart=$this->user->carts()->where('is_payed',false)->first();
+        $this->cart=$this->user->carts()->with(['cartItems.article'])->where('is_payed',false)->first();
     }
     public function deleteItems($cartId)
     {

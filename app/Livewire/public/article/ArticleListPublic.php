@@ -10,13 +10,12 @@ use App\Services\CartService;
 
 class ArticleListPublic extends PublicComponent
 {
-
     protected $model=Article::class;
     public function render()
     {
         return view('livewire.public.article.article-list-public',
-        ['listArticles'=>$this->queryArticle(),
-        'listCategories'=>$this->queryCategory(),
+        ['listArticles'=>$this->queryArticle(['promotion','articleCategory','clothes']),
+        'listCategories'=>$this->otherQuery(ArticleCategory::class),
         'listSearch'=>$this->querySearch(),
         'importantEvent'=>$this->queryEvent()]);
     }
@@ -36,19 +35,16 @@ class ArticleListPublic extends PublicComponent
         ];
         $this->tabSearchCategoryPossibility=ArticleCategory::pluck('label','id');
     }
-    public function queryArticle()
+    public function queryArticle($withRelations=[])
     {
         $query=Article::query();
+        if($withRelations)
+            $query=$query->with($withRelations);
         $query=$query->where('is_published',true);
         $query=$this->searchFunction($query);
         $query=$this->searchAscDescFunction($query);
         $query=$this->searchCategoryFunction($query);
         return $query->paginate(9);
-    }
-    public function queryCategory()
-    {
-        $query=ArticleCategory::query();
-        return $query->get();
     }
     public function queryEvent()
     {

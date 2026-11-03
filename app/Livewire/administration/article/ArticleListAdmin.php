@@ -36,9 +36,9 @@ class ArticleListAdmin extends AdminComponent
     public function render()
     {
         return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->query(10),
-        'listCategories'=>$this->queryCategory(),
-        'listPromotions'=>$this->queryPromotion(),
-        'listSearch'=>$this->querySearch()]);
+        'listSearch'=>$this->querySearch(),
+        'listCategories'=>$this->otherQuery(ArticleCategory::class),
+        'listPromotions'=>$this->otherQuery(Promotion::class)]);
     }
     public function changeStatePublishArticle(Article $article)
     {
@@ -52,16 +52,6 @@ class ArticleListAdmin extends AdminComponent
         //L'emplacement dans le tableau est l'id de l'article et la valeur est l'id de la catégorie exemple : $categoryNullInfoId[5]=12; 5 = l'article et 12 = la catégorie
         $idCategory=$this->categoryNullInfoId[$article->id];
         $this->saveNullInfo($idCategory,$article,'article_category_id');
-    }
-    public function queryCategory()
-    {
-        $query=ArticleCategory::query();
-        return $query->get();
-    }
-    public function queryPromotion()
-    {
-        $query=Promotion::query();
-        return $query->get();
     }
     public function saveFormPromotion(Article $article)
     {

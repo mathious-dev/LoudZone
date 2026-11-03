@@ -10,7 +10,7 @@ class EventListPublic extends PublicComponent
     public function render()
     {
         return view('livewire.public.event.event-list-public',[
-            'listEvents'=>$this->query(9),
+            'listEvents'=>$this->query(9,['address']),
             'listSearch'=>$this->querySearch()]);
     }
     public function mount()
