@@ -35,10 +35,10 @@ class ArticleFormAdmin extends AdminComponent
     public function render()
     {
         return view('livewire.administration.article.article-form-admin',
-        ['listArticleCategories'=>$this->queryCategories(),
+        ['listArticleCategories'=>$this->otherQuery(ArticleCategory::class),
         'listSizes'=> Clothe::getAvailableSizes(),
         'listColors'=>Clothe::getAvailableColors(),
-        'listPromotions'=>$this->queryPromotion()]);
+        'listPromotions'=>$this->otherQuery(Promotion::class)]);
     }
     protected function rules()
     {
@@ -65,11 +65,6 @@ class ArticleFormAdmin extends AdminComponent
             $rules['tabClothes.*.color']='nullable|string';
         }
         return $rules;
-    }
-    public function queryCategories()
-    {
-        $query=ArticleCategory::query();
-        return $query->get();
     }
     public function mount(Article $article=null)
     {
@@ -118,10 +113,5 @@ class ArticleFormAdmin extends AdminComponent
 
         //on réorganise le tableau
         $this->tabClothes = array_values($this->tabClothes);
-    }
-    public function queryPromotion()
-    {
-        $query=Promotion::query();
-        return $query->get();
     }
 }
