@@ -12,7 +12,8 @@ class OrderListAdmin extends AdminComponent
     public $model=Order::class;
     public function render()
     {
-        return view('livewire.administration.order.order-list-admin',['listOrders'=>$this->query(10),'listSearch'=>$this->querySearch()]);
+        return view('livewire.administration.order.order-list-admin',['listOrders'=>$this->query(10,['user']),
+        'listSearch'=>$this->querySearch()]);
     }
     public function mount()
     {

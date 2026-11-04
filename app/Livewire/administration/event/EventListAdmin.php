@@ -11,7 +11,8 @@ class EventListAdmin extends AdminComponent
     public $model=Event::class;
     public function render()
     {
-        return view('livewire.administration.event.event-list-admin',['listEvents'=>$this->query(10),'listSearch'=>$this->querySearch()]);
+        return view('livewire.administration.event.event-list-admin',['listEvents'=>$this->query(10,['address']),
+        'listSearch'=>$this->querySearch()]);
     }
     public function mount()
     {

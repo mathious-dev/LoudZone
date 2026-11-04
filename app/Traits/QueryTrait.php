@@ -24,7 +24,12 @@ trait QueryTrait
             return [];
         $query=$this->model::query();
         $query=$this->searchFunction($query);
-        return $query->take(5)->get();
+        return $query->take(15)
+                     ->get()
+                     ->unique($this->searchWichColumn)
+                     ->take(5)
+                     ->values();
+        //important values car unique garde les clés originales du tableau et values vient remettre tout au propre
     }
     public function otherQuery($class)
     {

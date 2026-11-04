@@ -10,7 +10,7 @@ class ArticleOrderListAdmin extends AdminComponent
     public $model=ArticleOrder::class;
     public function render()
     {
-        return view('livewire.administration.articleOrder.article-order-list-admin',['listArticleOrders'=>$this->query()]);
+        return view('livewire.administration.articleOrder.article-order-list-admin',['listArticleOrders'=>$this->query(10,['order','article'])]);
     }
     public function mount()
     {

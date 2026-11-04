@@ -35,7 +35,7 @@ class ArticleListAdmin extends AdminComponent
     }
     public function render()
     {
-        return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->query(10),
+        return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->query(10,['promotion','articleCategory','clothes']),
         'listSearch'=>$this->querySearch(),
         'listCategories'=>$this->otherQuery(ArticleCategory::class),
         'listPromotions'=>$this->otherQuery(Promotion::class)]);

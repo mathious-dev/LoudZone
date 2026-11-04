@@ -19,7 +19,7 @@ class SupportMessageForm extends PublicComponent
     public $previousUrl;
     public function render()
     {
-        return view('livewire.public.supportMessage.support-message-form',['listCategories'=>$this->querySupportMessageCategory()]);
+        return view('livewire.public.supportMessage.support-message-form',['listCategories'=>$this->otherQuery(SupportMessageCategory::class)]);
     }
     public function mount()
     {
@@ -32,11 +32,6 @@ class SupportMessageForm extends PublicComponent
         'content'=>'required|max:255',
         'support_message_category_id'=>'required',
         'add_info_id' => 'nullable'];
-    }
-    public function querySupportMessageCategory()
-    {
-        $query=SupportMessageCategory::query();
-        return $query->get();
     }
     public function saveForm()
     {

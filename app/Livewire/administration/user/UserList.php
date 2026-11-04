@@ -7,7 +7,6 @@ use Spatie\Permission\Models\Role;
 class UserList extends AdminComponent
 {
     protected $model=User::class;
-    public $tabWithRelations=[];
     public function mount()
     {
         $this->searchWichColumn = 'name';
@@ -25,11 +24,10 @@ class UserList extends AdminComponent
         ];
         if(request()->query('roleId'))
             $this->searchRole=request()->query('roleId');
-        $this->tabWithRelations=['roles'];
     }
     public function render()
     {
-        return view('livewire.administration.user.user-list',['listUsers'=>$this->query(10,$this->tabWithRelations),
+        return view('livewire.administration.user.user-list',['listUsers'=>$this->query(10,['roles']),
         'listSearch'=>$this->querySearch(),
         'listRoles'=>$this->otherQuery(Role::class)]);
     }

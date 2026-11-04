@@ -15,6 +15,7 @@ class SupportMessageList extends AdminComponent
         $this->searchWichColumn='title';
         $this->searchAscDescWichColumn = 'created_at';
         $this->searchCategoryWichColumn='support_message_category_id';
+        $this->searchAscDesc = 'DESC';
         $this->tabSearchPossibility=[
             'title'=>'titre',
         ];
@@ -23,24 +24,13 @@ class SupportMessageList extends AdminComponent
         ];
         $this->tabSearchCategoryPossibility=SupportMessageCategory::pluck('label','id')->toArray();
         if(request()->query('support_message_category_id'))
-        {
             $this->searchCategory=request()->query('support_message_category_id');
-        }
+        
     }
     public function render()
     {
-        return view('livewire.administration.supportMessage.support-message-list',['listSupportMessages'=>$this->querySupportMessage(),'listSearch'=>$this->querySearch()]);
-    }
-    //On utilise pas le trait avec le query car celui-ci est trié par défaut par date
-    public function querySupportMessage()
-    {
-        $query=SupportMessage::query();
-        $query=$this->searchFunction($query);
-        $query=$this->searchAscDescFunction($query);
-        $query=$this->searchCategoryFunction($query);
-        if(empty($this->searchAscDesc))
-            $query->orderByDesc('created_at');
-        return $query->paginate(10);
+        return view('livewire.administration.supportMessage.support-message-list',['listSupportMessages'=>$this->query(10,['supportMessageCategory','user','addInfo']),
+        'listSearch'=>$this->querySearch()]);
     }
     public function messageTreat(SupportMessage $message)
     {

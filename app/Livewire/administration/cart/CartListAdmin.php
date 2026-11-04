@@ -10,7 +10,7 @@ class CartListAdmin extends AdminComponent
     public $model=Cart::class;
     public function render()
     {
-        return view('livewire.administration.cart.cart-list-admin',['listCarts'=>$this->query(10)]);
+        return view('livewire.administration.cart.cart-list-admin',['listCarts'=>$this->query(10,['user','cartItems'])]);
     }
     public function mount()
     {
