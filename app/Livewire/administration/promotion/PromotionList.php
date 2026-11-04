@@ -11,7 +11,8 @@ class PromotionList extends AdminComponent
     public $model=Promotion::class;
     public function render()
     {
-        return view('livewire.administration.promotion.promotion-list',['listPromotions'=>$this->query(10)]);
+        return view('livewire.administration.promotion.promotion-list',['listPromotions'=>$this->query(10),
+        'listSearch'=>$this->querySearch()]);
     }
     public function mount()
     {

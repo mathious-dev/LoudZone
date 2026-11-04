@@ -1,60 +1,105 @@
-<div class="p-6 bg-white rounded-lg shadow-md max-w-5xl mx-auto mt-8">
+<div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
     
     <!-- En-tête avec titre et bouton d'ajout -->
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">Catégories d'articles</h2>
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+        <div>
+            <h1 class="text-2xl font-black text-[#0B0A0B]">Catégories d'articles</h1>
+            <p class="text-sm text-[#84796F] mt-1">Gestion des familles de produits pour la boutique.</p>
+        </div>
         <a href="{{ route('admin.articleCategory.create') }}" 
-           class="bg-[rgb(72,6,28)] text-white px-4 py-2 rounded-md font-semibold text-sm shadow-sm hover:bg-opacity-90 transition-colors">
-            + Ajouter une catégorie
+           class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#5D0824] text-[#FAF1E3] text-sm font-bold rounded-lg hover:bg-[#0B0A0B] transition-colors shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            Ajouter une catégorie
         </a>
     </div>
-    <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn" :showList="$showList" />
-    <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
+
+    <!-- Espace de recherche et filtres -->
+    <div class="flex flex-col sm:flex-row gap-4 mb-6">
+        <div class="w-full sm:w-2/3">
+            <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn" :showList="$showList" />
+        </div>
+        <div class="w-full sm:w-1/3">
+            <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
+        </div>
+    </div>
+
     <!-- Tableau -->
-    <div class="overflow-x-auto shadow-sm rounded-lg border border-gray-200">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom de la catégorie</th>
-                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre d'articles</th>
-                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @foreach ($listArticleCategories as $category)
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            {{ $category->label }}
-                        </td>
-                        
-                        
-                        <td class="px-6 py-4 whitespace-nowrap text-center">
-                            <!-- Badge pour le nombre d'articles -->
-                            <a href="{{route('admin.articleListAdmin',['article_category_id'=>$category->id])}}">
-                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-blue-100 text-blue-800">
-                                {{ $category->articles?->count() ?? 0 }}
-                            </span></a>
-                        </td>
-                        
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
-                            <a href="{{ route('admin.articleCategory.edit', $category) }}" class="text-indigo-600 hover:text-indigo-900 transition-colors">
-                                Modifier
-                            </a>
-                            <button wire:click="delete({{ $category->id }})" wire:confirm="Êtes-vous sûr de vouloir supprimer cette catégorie ?" class="text-red-600 hover:text-red-900 transition-colors">
-                                Supprimer
-                            </button>
-                        </td>
-                        
+    <div class="bg-white rounded-2xl shadow-sm border border-[#84796F]/20 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-[#84796F]/20">
+                <thead class="bg-[#FAF1E3]/40">
+                    <tr>
+                        <th scope="col" class="px-6 py-4 text-left text-xs font-black text-[#41342D] uppercase tracking-wider">
+                            Nom de la catégorie
+                        </th>
+                        <th scope="col" class="px-6 py-4 text-center text-xs font-black text-[#41342D] uppercase tracking-wider">
+                            Nombre d'articles
+                        </th>
+                        <th scope="col" class="px-6 py-4 text-right text-xs font-black text-[#41342D] uppercase tracking-wider w-32">
+                            Actions
+                        </th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="divide-y divide-[#84796F]/10 bg-white">
+                    @forelse ($listArticleCategories as $category)
+                        <tr class="hover:bg-[#FAF1E3]/20 transition-colors">
+                            
+                            <!-- Nom de la catégorie -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#0B0A0B]">
+                                {{ $category->label }}
+                            </td>
+                            
+                            <!-- Badge Nombre d'articles -->
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                <a href="{{ route('admin.articleListAdmin', ['article_category_id' => $category->id]) }}" class="group">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#5D0824]/10 text-[#5D0824] border border-[#5D0824]/20 group-hover:bg-[#5D0824] group-hover:text-[#FAF1E3] transition-colors">
+                                        {{ $category->articles?->count() ?? 0 }} articles
+                                    </span>
+                                </a>
+                            </td>
+                            
+                            <!-- Actions -->
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex items-center justify-end gap-3">
+                                    <!-- Bouton Modifier -->
+                                    <a href="{{ route('admin.articleCategory.edit', $category) }}" 
+                                       class="text-[#84796F] hover:text-[#0B0A0B] transition-colors" title="Modifier">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                        </svg>
+                                    </a>
+                                    
+                                    <!-- Bouton Supprimer -->
+                                    <button wire:click="delete({{ $category->id }})" 
+                                            wire:confirm="Êtes-vous sûr de vouloir supprimer cette catégorie ?" 
+                                            class="text-[#84796F] hover:text-red-600 transition-colors" title="Supprimer">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="px-6 py-12 text-center text-[#84796F] italic">
+                                Aucune catégorie d'article n'a été créée.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
     
     <!-- Pagination -->
-    <div class="mt-4">
-        {{ $listArticleCategories->links() }}
-    </div>
+    @if (method_exists($listArticleCategories, 'hasPages') && $listArticleCategories->hasPages())
+        <div class="mt-6">
+            {{ $listArticleCategories->links() }}
+        </div>
+    @endif
     
 </div>
