@@ -11,6 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -34,7 +35,8 @@ class User extends Authenticatable
         'first_name',
         'email',
         'password',
-        'news_letter'
+        'news_letter',
+        'google_id'
     ];
 
     /**
@@ -94,5 +96,17 @@ class User extends Authenticatable
     public function getValueNameColumn()
     {
         return "L'utilisateur";
+    }
+    public static function findOrCreateGoogleUser($googleUser)
+    {
+        $googleData=$googleUser->user;
+        //Premier tableau pour la recherche, si il ne trouve rien il fait le 2eme tableau
+        return self::firstOrCreate(['email' => $googleData['email']],
+        ['google_id'=>$googleData['sub'],
+        'name' => $googleData['family_name'],
+        'email' => $googleData['email'],
+        'first_name'=>$googleData['given_name'],
+        'password' => bcrypt(Str::random(16)),
+        'email_verified_at' => now()]);
     }
 }

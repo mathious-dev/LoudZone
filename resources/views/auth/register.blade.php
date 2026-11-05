@@ -94,6 +94,7 @@
                     </button>
                 </div>
             </form>
+            <a href="{{ route('auth.google') }}">S'inscrire avec google</a>
         </div>
     </div>
 </x-guest-layout>

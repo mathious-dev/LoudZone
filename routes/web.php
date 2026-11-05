@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GoogleController;
 use App\Livewire\administration\addInfo\AddInfoForm;
 use App\Livewire\administration\addInfo\AddInfoList;
 use App\Livewire\administration\announcement\AnnouncementForm;
@@ -128,11 +129,6 @@ Route::middleware([
         //Dashboard
         Route::get('/dashboard',AdminDashBoard::class)->name('dashboard');
     });
-
-    //Article
-    Route::get('/articles',ArticleListPublic::class)->name('articleListPublic');
-    Route::get('/article/{article}',ArticleDetail::class)->name('articleDetail');
-
     //Message Support
     Route::get('/supportMessage/create',SupportMessageForm::class)->name('supportMessage.create');
 
@@ -144,9 +140,18 @@ Route::middleware([
     //Panier
     Route::get('/cart/{userId}',CartList::class)->name('cartList');
 
-    //événement
-    Route::get('/events',EventListPublic::class)->name('eventListPublic');
-    Route::get('/event/{event}',EventDetail::class)->name('eventDetail');
-
-
 });
+
+//Article
+Route::get('/articles',ArticleListPublic::class)->name('articleListPublic');
+Route::get('/article/{article}',ArticleDetail::class)->name('articleDetail');
+
+//événement
+Route::get('/events',EventListPublic::class)->name('eventListPublic');
+Route::get('/event/{event}',EventDetail::class)->name('eventDetail');
+
+//Google 
+//allez
+Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+//retour
+Route::get('/auth/google/callback', [GoogleController::class, 'returnFromGoogle']);

@@ -65,7 +65,7 @@
                     </button>
                 </div>
             </form>
-
+            <a href="{{ route('auth.google') }}">Se connecter avec google</a>
             <!-- Lien vers l'inscription -->
             <div class="mt-8 pt-6 border-t border-gray-200 text-center">
                 <p class="text-sm text-gray-600">
