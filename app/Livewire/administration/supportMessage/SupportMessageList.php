@@ -3,8 +3,8 @@
 namespace App\Livewire\administration\supportMessage;
 
 use App\Livewire\AdminComponent;
+use App\Models\Category;
 use App\Models\SupportMessage;
-use App\Models\SupportMessageCategory;
 
 class SupportMessageList extends AdminComponent
 {
@@ -22,7 +22,7 @@ class SupportMessageList extends AdminComponent
         $this->tabSearchAscDescPossibility=[
             'created_at'=>'date'
         ];
-        $this->tabSearchCategoryPossibility=SupportMessageCategory::pluck('label','id')->toArray();
+        $this->tabSearchCategoryPossibility=Category::pluck('label','id')->toArray();
         if(request()->query('support_message_category_id'))
             $this->searchCategory=request()->query('support_message_category_id');
         

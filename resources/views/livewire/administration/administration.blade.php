@@ -98,26 +98,16 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('admin.supportMessageCategoryList') }}" class="flex items-center gap-4 px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors whitespace-nowrap">
+                            <a href="{{ route('admin.categoryList') }}" class="flex items-center gap-4 px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors whitespace-nowrap">
                                 <!-- On passe à w-8 et -ml-1 pour garder le texte aligné avec les autres -->
                                 <div class="flex-shrink-0 w-8 flex items-center justify-center gap-0.5 -ml-1">
                                     <svg class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M64 416L64 192C64 139 107 96 160 96L480 96C533 96 576 139 576 192L576 416C576 469 533 512 480 512L360 512C354.8 512 349.8 513.7 345.6 516.8L230.4 603.2C226.2 606.3 221.2 608 216 608C202.7 608 192 597.3 192 584L192 512L160 512C107 512 64 469 64 416z"/></svg>
                                     <svg class="w-4 h-4 fill-current opacity-80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M192 112L304 112L304 200C304 239.8 336.2 272 376 272L464 272L464 512C464 520.8 456.8 528 448 528L192 528C183.2 528 176 520.8 176 512L176 128C176 119.2 183.2 112 192 112zM352 131.9L444.1 224L376 224C362.7 224 352 213.3 352 200L352 131.9zM192 64C156.7 64 128 92.7 128 128L128 512C128 547.3 156.7 576 192 576L448 576C483.3 576 512 547.3 512 512L512 250.5C512 233.5 505.3 217.2 493.3 205.2L370.7 82.7C358.7 70.7 342.5 64 325.5 64L192 64z"/></svg>
                                 </div>
-                                <span x-show="locked || hovered" x-transition.opacity.duration.300ms>Catégorie message support</span>
+                                <span x-show="locked || hovered" x-transition.opacity.duration.300ms>Catégorie</span>
                             </a>
                         </li>
 
-                        <!-- ICÔNE DOUBLE (Catégorie Article) -->
-                        <li>
-                            <a href="{{ route('admin.articleCategoryList') }}" class="flex items-center gap-4 px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors whitespace-nowrap">
-                                <div class="flex-shrink-0 w-8 flex items-center justify-center gap-0.5 -ml-1">
-                                    <svg class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M256 144C256 108.7 284.7 80 320 80C355.3 80 384 108.7 384 144L384 192L256 192L256 144zM208 192L144 192C117.5 192 96 213.5 96 240L96 448C96 501 139 544 192 544L448 544C501 544 544 501 544 448L544 240C544 213.5 522.5 192 496 192L432 192L432 144C432 82.1 381.9 32 320 32C258.1 32 208 82.1 208 144L208 192zM232 240C245.3 240 256 250.7 256 264C256 277.3 245.3 288 232 288C218.7 288 208 277.3 208 264C208 250.7 218.7 240 232 240zM384 264C384 250.7 394.7 240 408 240C421.3 240 432 250.7 432 264C432 277.3 421.3 288 408 288C394.7 288 384 277.3 384 264z"/></svg>
-                                    <svg class="w-4 h-4 fill-current opacity-80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M192 112L304 112L304 200C304 239.8 336.2 272 376 272L464 272L464 512C464 520.8 456.8 528 448 528L192 528C183.2 528 176 520.8 176 512L176 128C176 119.2 183.2 112 192 112zM352 131.9L444.1 224L376 224C362.7 224 352 213.3 352 200L352 131.9zM192 64C156.7 64 128 92.7 128 128L128 512C128 547.3 156.7 576 192 576L448 576C483.3 576 512 547.3 512 512L512 250.5C512 233.5 505.3 217.2 493.3 205.2L370.7 82.7C358.7 70.7 342.5 64 325.5 64L192 64z"/></svg>
-                                </div>
-                                <span x-show="locked || hovered" x-transition.opacity.duration.300ms>Catégorie d'article</span>
-                            </a>
-                        </li>
                         <li>
                             <a href="{{ route('admin.addInfoList') }}" class="flex items-center gap-4 px-3 py-2 rounded-md text-gray-700 font-semibold hover:bg-indigo-50 hover:text-indigo-600 transition-colors whitespace-nowrap">
                                 <div class="flex-shrink-0 w-6 flex justify-center">

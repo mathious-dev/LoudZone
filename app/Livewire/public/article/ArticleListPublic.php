@@ -4,7 +4,6 @@ namespace App\Livewire\public\article;
 
 use App\Livewire\PublicComponent;
 use App\Models\Article;
-use App\Models\ArticleCategory;
 use App\Models\Category;
 use App\Models\Event;
 use App\Services\CartService;
@@ -15,7 +14,7 @@ class ArticleListPublic extends PublicComponent
     public function render()
     {
         return view('livewire.public.article.article-list-public',
-        ['listArticles'=>$this->queryArticle(['promotion','articleCategory','clothes']),
+        ['listArticles'=>$this->queryArticle(['promotion','category','clothes']),
         'listCategories'=>$this->otherQuery(Category::class),
         'listSearch'=>$this->querySearch(),
         'importantEvent'=>$this->queryEvent()]);

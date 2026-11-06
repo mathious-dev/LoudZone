@@ -141,8 +141,8 @@
 
                     <!-- Catégorie -->
                     <td class="px-3 py-3 whitespace-nowrap text-sm text-indigo-600 font-medium">
-                        @if($article->articleCategory)
-                            {{ $article->articleCategory->label }}
+                        @if($article->category)
+                            {{ $article->category->label }}
                         @else
                             <form wire:submit.prevent="saveFormCategory({{ $article->id }})" class="flex items-center gap-1">
                                 <select wire:model='categoryNullInfoId.{{ $article->id }}' class="block w-28 rounded border-gray-300 py-1 pl-2 pr-6 text-[11px] text-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">

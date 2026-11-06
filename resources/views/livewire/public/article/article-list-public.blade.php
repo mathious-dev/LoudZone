@@ -101,10 +101,10 @@
                     </h3>
                 </a>
                 <div class="mb-4">
-                    @if($article->articleCategory)
+                    @if($article->category)
                         <!-- Badge Catégorie : Fond Moka (Color 5), texte Crème (Color 3) -->
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#41342D] text-[#FAF1E3]">
-                            {{ $article->articleCategory->label }}
+                            {{ $article->category->label }}
                         </span>
                     @else
                         <!-- Badge "Pas de catégorie" en Taupe -->
