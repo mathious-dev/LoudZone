@@ -26,6 +26,8 @@ class EventListAdmin extends AdminComponent
             'start_date'=>'date de début',
             'end_date'=>'date de fin',
         ];
+        if(request()->query('eventPublishLabel'))
+            $this->search=request()->query('eventPublishLabel');
     }
     public function changePublish(Event $event)
     {

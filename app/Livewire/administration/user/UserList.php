@@ -24,6 +24,8 @@ class UserList extends AdminComponent
         ];
         if(request()->query('roleId'))
             $this->searchRole=request()->query('roleId');
+        if(request()->query('newsLetter'))
+            $this->searchBoolean=request()->query('newsLetter');
     }
     public function render()
     {

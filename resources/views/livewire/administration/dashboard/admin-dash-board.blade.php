@@ -22,7 +22,7 @@
             </a>
 
             <!-- Carte 2 : Abonnés Newsletter -->
-            <a href="{{ route('admin.userList') }}" class="group bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col items-center text-center hover:shadow-lg hover:border-indigo-300 hover:bg-indigo-50 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+            <a href="{{ route('admin.userList',['newsLetter'=>true]) }}" class="group bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col items-center text-center hover:shadow-lg hover:border-indigo-300 hover:bg-indigo-50 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
                 <h2 class="text-sm font-bold text-gray-500 group-hover:text-indigo-600 uppercase tracking-wider mb-2">Abonnés Newsletter</h2>
                 <span class="text-3xl font-black text-gray-900 group-hover:text-indigo-700">{{ $countUserNewsletter }}</span>
                 <span class="mt-4 text-xs font-bold text-indigo-500 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -48,7 +48,7 @@
 
             <!-- Carte 4 : Événement important -->
             @if($eventPublish)
-            <a href="{{ route('admin.eventListAdmin') }}" class="group bg-indigo-50 rounded-xl border border-indigo-200 p-6 flex flex-col items-center text-center hover:shadow-lg hover:border-indigo-400 hover:bg-indigo-100 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+            <a href="{{ route('admin.eventListAdmin',['eventPublishLabel'=> $eventPublish->label]) }}" class="group bg-indigo-50 rounded-xl border border-indigo-200 p-6 flex flex-col items-center text-center hover:shadow-lg hover:border-indigo-400 hover:bg-indigo-100 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
                 <h2 class="text-sm font-bold text-indigo-700 uppercase tracking-wider mb-3">À la une</h2>
                 <span class="text-lg font-black text-indigo-900">{{ $eventPublish->label}}</span>
                 <span class="mt-4 text-xs font-bold text-indigo-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

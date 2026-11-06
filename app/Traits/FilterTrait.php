@@ -51,7 +51,7 @@ trait FilterTrait
     
     public function searchBooleanFunction($query)
     {
-        if (!empty($this->searchBoolean))
+        if ($this->searchBoolean!=='')
             return $query->where($this->searchBooleanWichColumn,$this->searchBoolean);
         return $query;
     }
