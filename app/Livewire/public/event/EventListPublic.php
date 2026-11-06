@@ -17,6 +17,7 @@ class EventListPublic extends PublicComponent
     {
         $this->searchWichColumn='label';
         $this->searchAscDescWichColumn = 'label';
+        $this->searchBooleanWichColumn='is_important';
         $this->tabSearchPossibility=[
             'label'=>'Nom',
         ];

@@ -19,12 +19,12 @@ class EventListAdmin extends AdminComponent
         $this->searchWichColumn='label';
         $this->searchAscDescWichColumn = 'label';
         $this->tabSearchPossibility=[
-            'label'=>'nom',
+            'label'=>'Nom',
         ];
         $this->tabSearchAscDescPossibility=[
-            'label'=>'nom',
-            'start_date'=>'date de début',
-            'end_date'=>'date de fin',
+            'label'=>'Nom',
+            'start_date'=>'Date de début',
+            'end_date'=>'Date de fin',
         ];
         if(request()->query('eventPublishLabel'))
             $this->search=request()->query('eventPublishLabel');

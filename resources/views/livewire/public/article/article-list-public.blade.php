@@ -5,6 +5,7 @@
     <!-- ÉVÉNEMENT À LA UNE (Bannière pleine largeur) -->
     <!-- ========================================== -->
     @if ($importantEvent)
+    <a href="{{ route('eventDetail',$importantEvent) }}">
     <div class="w-full mb-10 bg-[#5D0824] bg-cover bg-center text-[#FAF1E3] rounded-xl shadow-lg p-6 md:p-10 relative overflow-hidden flex flex-col justify-center border border-[#41342D]/20"
          @if($importantEvent->primary_image) style="background-image: url('{{ asset('storage/' . $importantEvent->primary_image) }}');" @endif>
         
@@ -35,6 +36,7 @@
             </p>
         </div>
     </div>  
+    </a>
     @endif
     
     <!-- ========================================== -->
