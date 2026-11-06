@@ -35,7 +35,7 @@ class AnnouncementForm extends AdminComponent
     }
     public function rules()
     {
-        return ['label'=>'required|max:255','content'=>'required','start_date'=>'date|nullable','end_date'=>'date|nullable','is_showing'=>'boolean'];
+        return ['label'=>'required|max:255|unique','content'=>'required','start_date'=>'date|nullable','end_date'=>'date|nullable','is_showing'=>'boolean'];
     }
     public function saveForm()
     {

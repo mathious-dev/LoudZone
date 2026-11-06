@@ -36,6 +36,6 @@ class ArticleCategoryForm extends AdminComponent
     }
     public function rules()
     {
-        return ['label'=>'required|max:255'];
+        return ['label'=>'required|max:255|unique'];
     }
 }

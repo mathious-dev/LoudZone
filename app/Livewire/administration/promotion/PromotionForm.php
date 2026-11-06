@@ -38,7 +38,7 @@ class PromotionForm extends AdminComponent
     }
     public function rules()
     {
-        return ['label'=>'nullable|max:255',
+        return ['label'=>'nullable|max:255|unique',
         'amount'=>'required|max:100',
         'start_date'=>'required',
         'end_date'=>'nullable'];

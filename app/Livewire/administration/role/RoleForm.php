@@ -36,7 +36,7 @@ class RoleForm extends AdminComponent
     }
     public function rules()
     {
-        return ['name'=>'required|string|max:255'];
+        return ['name'=>'required|string|max:255|unique'];
     }
     public function saveForm()
     {

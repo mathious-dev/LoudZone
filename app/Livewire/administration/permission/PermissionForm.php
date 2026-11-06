@@ -36,6 +36,6 @@ class PermissionForm extends AdminComponent
     }
     public function rules()
     {
-        return ['name'=>'max:255|required'];
+        return ['name'=>'max:255|required|unique'];
     }
 }

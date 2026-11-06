@@ -45,7 +45,7 @@ class EventForm extends AdminComponent
     }
     public function rules()
     {
-        return['label'=>'required|max:255',
+        return['label'=>'required|max:255|unique',
         'description'=>'nullable',
         'start_date'=>'required|date',
         'end_date'=>'required|date',

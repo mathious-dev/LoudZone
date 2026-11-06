@@ -43,7 +43,7 @@ class ArticleFormAdmin extends AdminComponent
     protected function rules()
     {
         $rules= [
-            'title'=> 'required|string|max:255',
+            'title'=> 'required|string|max:255|unique',
             'description'=> 'nullable|string',
             'price_ht'=> 'required|numeric|min:0', 
             'slug' => 'required|string|max:255',

@@ -25,7 +25,7 @@ class UserForm extends AdminComponent
         return [
             'name'        => 'required|string|max:255|min:2',
             'first_name'  => 'required|string|max:255|min:2',
-            'email'       => 'required|string|max:255|min:5',
+            'email'       => 'required|string|max:255|min:5|unique',
             'news_letter' => 'boolean',
             // Le mot de passe est OBLIGATOIRE à la création, mais FACULTATIF à la modification
             'password'    => $this->isEditing ? 'nullable|string|min:8|max:255' : 'required|string|min:8|max:255',
