@@ -3,6 +3,7 @@ namespace App\Livewire\administration\article;
 use App\Livewire\AdminComponent;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Category;
 use App\Models\Promotion;
 
 
@@ -29,7 +30,7 @@ class ArticleListAdmin extends AdminComponent
             'slug'=>'Lien',
             'final_price'=>'Prix final'
         ];
-        $this->tabSearchCategoryPossibility=ArticleCategory::pluck('label','id');
+        $this->tabSearchCategoryPossibility=Category::pluck('label','id');
         if(request()->query('article_category_id'))
             $this->searchCategory=request()->query('article_category_id');
     }
@@ -37,7 +38,7 @@ class ArticleListAdmin extends AdminComponent
     {
         return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->query(10,['promotion','articleCategory','clothes']),
         'listSearch'=>$this->querySearch(),
-        'listCategories'=>$this->otherQuery(ArticleCategory::class),
+        'listCategories'=>$this->otherQuery(Category::class),
         'listPromotions'=>$this->otherQuery(Promotion::class)]);
     }
     public function changeStatePublishArticle(Article $article)
@@ -59,5 +60,4 @@ class ArticleListAdmin extends AdminComponent
         $idPromotion=$this->promotionNullInfoId[$article->id];
         $this->saveNullInfo($idPromotion,$article,'promotion_id');
     }
-    
 }

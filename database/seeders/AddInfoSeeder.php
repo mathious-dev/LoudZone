@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\AddInfo;
-use App\Models\SupportMessageCategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class AddInfoSeeder extends Seeder
@@ -15,8 +14,8 @@ class AddInfoSeeder extends Seeder
     public function run(): void
     {
         // 1. On récupère les catégories (Adapte 'label' avec le vrai nom de ta colonne)
-        $catInfo = SupportMessageCategory::where('label', 'Information')->first();
-        $catSignalement = SupportMessageCategory::where('label', 'Signalement')->first();
+        $catInfo = Category::where('label', 'Information')->first();
+        $catSignalement = Category::where('label', 'Signalement')->first();
 
         // 2. AddInfo pour la catégorie 'Information'
         $site = AddInfo::create(['label' => 'Site']);

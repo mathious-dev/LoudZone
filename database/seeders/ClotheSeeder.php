@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
-use App\Models\ArticleCategory;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class ClotheSeeder extends Seeder
@@ -13,7 +13,7 @@ class ClotheSeeder extends Seeder
      */
     public function run(): void
     {
-        $categoryVetement = ArticleCategory::firstOrCreate(['label' => 'Vêtement']);
+        $categoryVetement = Category::firstOrCreate(['label' => 'Vêtement']);
         $articles = Article::inRandomOrder()->take(10)->get();
         $tailles = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
         $colors = ['Rouge', 'Gris', 'Vert'];
@@ -23,7 +23,7 @@ class ClotheSeeder extends Seeder
         foreach ($articles as $article) 
         {
             $article->update([
-                'article_category_id' => $categoryVetement->id 
+                'category_id' => $categoryVetement->id 
             ]);
             $nombreDeVariantes = rand(1, 3);
 

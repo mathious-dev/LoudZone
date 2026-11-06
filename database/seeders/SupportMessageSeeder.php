@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Enum\CategoryEnum;
+use App\Models\Category;
 use App\Models\SupportMessage;
-use App\Models\SupportMessageCategory;
 use App\Models\User;
 use Faker\Factory as Faker;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SupportMessageSeeder extends Seeder
@@ -18,7 +18,7 @@ class SupportMessageSeeder extends Seeder
     {
         // On initialise Faker en français pour des données réalistes
         $faker = Faker::create('fr_FR');
-        $categories = SupportMessageCategory::all();
+        $categories = Category::where('type',CategoryEnum::SUPPORT)->get();
         $users = User::all();
         for ($i = 0; $i < 15; $i++) {
             SupportMessage::create([
@@ -26,9 +26,7 @@ class SupportMessageSeeder extends Seeder
                 'content' => $faker->paragraphs(3, true), // Un texte de 3 paragraphes
                 'user_id' => $users->random()->id, 
                 'state' => $faker->boolean(30), 
-                
-
-                'support_message_category_id' => $categories->random()->id,
+                'category_id' => $categories->random()->id,
             ]);
         }
     }

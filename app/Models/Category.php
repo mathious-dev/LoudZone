@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\CategoryEnum;
+use App\Enum\CategoryEnum;
 use App\Models\Announcement;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,7 +21,7 @@ class Category extends Model
     }
     public function addInfos()
     {
-        return $this->belongsToMany(AddInfo::class,'add_info_by_categories','support_message_category_id','add_info_id');
+        return $this->belongsToMany(AddInfo::class,'add_info_by_categories','category_id','add_info_id');
     }
     public function supportMessages()
     {
@@ -30,6 +30,10 @@ class Category extends Model
     public function announcements()
     {
         return $this->hasMany(Announcement::class);
+    }
+    public static function giveListTypeCategory()
+    {
+        return CategoryEnum::cases();
     }
     // public static function isClotheCategory($id)
     // {

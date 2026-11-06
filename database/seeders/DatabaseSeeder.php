@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 use Database\Seeders\AnnouncementSeeder;
-use Database\Seeders\ArticleCategorySeeder;
+use Database\Seeders\CategorySeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\PromotionSeeder;
-use Database\Seeders\SupportMessageCategorySeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,11 +22,10 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             PromotionSeeder::class,
-            ArticleCategorySeeder::class,
+            CategorySeeder::class,
             ArticleSeeder::class,
             ClotheSeeder::class,
             CartSeeder::class,
-            SupportMessageCategorySeeder::class,
             AddInfoSeeder::class,
             SupportMessageSeeder::class,
             OrderSeeder::class,

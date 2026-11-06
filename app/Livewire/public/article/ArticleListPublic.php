@@ -5,6 +5,7 @@ namespace App\Livewire\public\article;
 use App\Livewire\PublicComponent;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\Category;
 use App\Models\Event;
 use App\Services\CartService;
 
@@ -15,7 +16,7 @@ class ArticleListPublic extends PublicComponent
     {
         return view('livewire.public.article.article-list-public',
         ['listArticles'=>$this->queryArticle(['promotion','articleCategory','clothes']),
-        'listCategories'=>$this->otherQuery(ArticleCategory::class),
+        'listCategories'=>$this->otherQuery(Category::class),
         'listSearch'=>$this->querySearch(),
         'importantEvent'=>$this->queryEvent()]);
     }
@@ -33,7 +34,7 @@ class ArticleListPublic extends PublicComponent
             'title'=>'Titre',
             'final_price'=>'Prix'
         ];
-        $this->tabSearchCategoryPossibility=ArticleCategory::pluck('label','id');
+        $this->tabSearchCategoryPossibility=Category::pluck('label','id');
     }
     public function queryArticle($withRelations=[])
     {
