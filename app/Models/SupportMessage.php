@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\BaseEntity;
+use App\Models\Category;
 
 class SupportMessage extends BaseEntity
 {
@@ -12,7 +13,7 @@ class SupportMessage extends BaseEntity
     'content',
     'user_id',
     'state',
-    'support_message_category_id',
+    'category_id',
     'add_info_id'];
     //par défaut le message sera en attente
     protected $attributes = [
@@ -22,9 +23,9 @@ class SupportMessage extends BaseEntity
     {
         return $this->belongsTo(User::class);
     }
-    public function supportMessageCategory()
+    public function category()
     {
-        return $this->belongsTo(SupportMessageCategory::class);
+        return $this->belongsTo(Category::class);
     }
     public function addInfo()
     {

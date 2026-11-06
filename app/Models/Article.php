@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\BaseEntity;
+use App\Models\Category;
 use App\Models\Promotion;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
@@ -19,7 +20,7 @@ class Article extends BaseEntity
     'is_published',
     'tva',
     'user_id',
-    'article_category_id',
+    'category_id',
     'primary_image',
     'promotion_id',
     'final_price'
@@ -29,9 +30,9 @@ class Article extends BaseEntity
         return $this->belongsTo(User::class);
     }
 
-    public function articleCategory()
+    public function category()
     {
-        return $this->belongsTo(ArticleCategory::class);
+        return $this->belongsTo(Category::class);
     }
     public function article_orders()
     {

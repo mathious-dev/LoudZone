@@ -14,21 +14,21 @@ return new class extends Migration
        // Table articles
         Schema::table('articles', function (Blueprint $table) {
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->change();
-            $table->foreignId('article_category_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete()->change();
             $table->foreignId('promotion_id')->nullable()->constrained()->nullOnDelete()->change();
         });
 
         // Table add_info_by_categories (Ici ce sont des cascades, donc pas de nullable, c'est bon)
         Schema::table('add_info_by_categories', function (Blueprint $table) {
             $table->foreignId('add_info_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('support_message_category_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
         });
 
         // Table support_messages
         Schema::table('support_messages', function (Blueprint $table) {
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->change();
             $table->foreignId('add_info_id')->nullable()->constrained()->change();
-            $table->foreignId('support_message_category_id')->constrained();
+            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete()->change();
         });
 
         // Table orders
@@ -67,6 +67,11 @@ return new class extends Migration
         Schema::table('clothes', function (Blueprint $table) {
             $table->foreignId('article_id')->constrained()->cascadeOnDelete()->change();
         });
+
+        // Table announcements
+        Schema::table('announcements', function (Blueprint $table) {
+            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete()->change();
+        });
     }   
 
 
@@ -94,20 +99,20 @@ return new class extends Migration
 
         // Table support_messages
         Schema::table('support_messages', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('support_message_category_id');
+            $table->dropConstrainedForeignId('category_id');
             $table->dropConstrainedForeignId('add_info_id');
             $table->dropConstrainedForeignId('user_id');
         });
 
         // Table add_info_by_categories
         Schema::table('add_info_by_categories', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('support_message_category_id');
+            $table->dropConstrainedForeignId('category_id');
             $table->dropConstrainedForeignId('add_info_id');
         });
 
         // Table articles
         Schema::table('articles', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('article_category_id');
+            $table->dropConstrainedForeignId('category_id');
             $table->dropConstrainedForeignId('user_id');
         });
 
@@ -130,6 +135,11 @@ return new class extends Migration
         // Table clothes
         Schema::table('clothes', function (Blueprint $table) {
             $table->dropConstrainedForeignId('article_id');
+        });
+
+        // Table announcements
+        Schema::table('announcements', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('category_id');
         });
     }
 };

@@ -10,7 +10,8 @@ class Announcement extends BaseEntity
     'content',
     'is_showing',
     'start_date',
-    'end_date',];
+    'end_date',
+    'category_id'];
     protected $nameColumn='label';
     protected $nameValueColumn="L'annonce";
     //sécurité pour pouvoir comparer en type de date
@@ -18,6 +19,10 @@ class Announcement extends BaseEntity
     'start_date' => 'datetime',
     'end_date' => 'datetime',
     ] ;
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
     protected static function booted()
     {
         static::saving(function(Announcement $announcement)
@@ -27,7 +32,6 @@ class Announcement extends BaseEntity
                 Announcement::where('is_showing', true)->update(['is_showing' => false]);
                 saveHistory("Annonce $announcement->label publiée");
             }
-                
         });
     }
     public function IsDateCorrect($start,$end)
@@ -46,4 +50,5 @@ class Announcement extends BaseEntity
         saveHistory("Dépublication de l'annonce : {$this->label}");
         $this->save();
     }
+    
 }

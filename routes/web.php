@@ -7,10 +7,10 @@ use App\Livewire\administration\announcement\AnnouncementForm;
 use App\Livewire\administration\announcement\AnnouncementList;
 use App\Livewire\administration\article\ArticleFormAdmin;
 use App\Livewire\administration\article\ArticleListAdmin;
-use App\Livewire\administration\articleCategory\ArticleCategoryForm;
-use App\Livewire\administration\ArticleCategory\ArticleCategoryList;
 use App\Livewire\administration\articleOrder\ArticleOrderListAdmin;
 use App\Livewire\administration\cart\CartListAdmin;
+use App\Livewire\administration\category\CategoryForm;
+use App\Livewire\administration\category\CategoryList;
 use App\Livewire\administration\dashboard\AdminDashBoard;
 use App\Livewire\administration\event\EventForm;
 use App\Livewire\administration\event\EventListAdmin;
@@ -24,8 +24,6 @@ use App\Livewire\administration\promotion\PromotionList;
 use App\Livewire\administration\role\RoleForm;
 use App\Livewire\administration\role\RoleList;
 use App\Livewire\administration\supportMessage\SupportMessageList;
-use App\Livewire\administration\SupportMessageCategory\SupportMessageCategoryForm;
-use App\Livewire\administration\SupportMessageCategory\SupportMessageCategoryList;
 use App\Livewire\administration\user\UserDetail;
 use App\Livewire\administration\user\UserForm;
 use App\Livewire\administration\user\UserList;
@@ -78,26 +76,20 @@ Route::middleware([
         //Message support
         Route::get('/supportMessages',SupportMessageList::class)->name('supportMessageList');
 
-        //Catégorie d'articles
-        Route::get('/articleCategories',ArticleCategoryList::class)->name('articleCategoryList');
-        Route::get('/articleCategory/create',ArticleCategoryForm::class)->name('articleCategory.create');
-        Route::get('/articleCategory/edit/{articleCategory}',ArticleCategoryForm::class)->name('articleCategory.edit');
-
         //Infos supplémentaires
         Route::get('/addInfos',AddInfoList::class)->name('addInfoList');
         Route::get('/addInfo/create',AddInfoForm::class)->name('addInfo.create');
         Route::get('/addInfo/edit/{addInfo}',AddInfoForm::class)->name('addInfo.edit');
 
-        //Catégorie de message support
-        Route::get('/supportMessageCategories',SupportMessageCategoryList::class)->name('supportMessageCategoryList');
-        Route::get('/supportMessageCategory/create',SupportMessageCategoryForm::class)->name('supportMessageCategory.create');
-        Route::get('/supportMessageCategory/edit/{supportMessageCategory}',SupportMessageCategoryForm::class)->name('supportMessageCategory.edit');
-
         //Commande
         Route::get('/orders',OrderListAdmin::class)->name('orderListAdmin');
-        
 
-         //Commande d'articles
+        //Catégorie
+        Route::get('/categories',CategoryList::class)->name('categoryList');
+        Route::get('/category/create',CategoryForm::class)->name('categoryForm.create');
+        Route::get('/category/edit/{category}',CategoryForm::class)->name('categoryForm.edit');
+
+        //Commande d'articles
         Route::get('/articleOrders',ArticleOrderListAdmin::class)->name('articleOrderListAdmin');
 
         //Paiement
