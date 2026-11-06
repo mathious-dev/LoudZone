@@ -13,46 +13,55 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             <!-- Carte 1 : Total Utilisateurs -->
-            <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200">
-                <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Utilisateurs inscrits</h2>
-                <p class="text-4xl font-extrabold text-[#5D0824]">{{ $countUser }}</p>
-            </div>
+            <a href="{{ route('admin.userList') }}" class="group bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col items-center text-center hover:shadow-lg hover:border-indigo-300 hover:bg-indigo-50 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+                <h2 class="text-sm font-bold text-gray-500 group-hover:text-indigo-600 uppercase tracking-wider mb-2">Utilisateurs inscrits</h2>
+                <span class="text-3xl font-black text-gray-900 group-hover:text-indigo-700">{{ $countUser }}</span>
+                <span class="mt-4 text-xs font-bold text-indigo-500 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Voir les détails <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </span>
+            </a>
 
             <!-- Carte 2 : Abonnés Newsletter -->
-            <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200">
-                <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Abonnés Newsletter</h2>
-                <div class="flex items-center space-x-3">
-                    <p class="text-4xl font-extrabold text-[#5D0824]">{{ $countUserNewsletter }}</p>
-                    @if($countUser > 0)
-                        <!-- Pourcentage -->
-                        <span class="text-sm font-bold text-green-700 bg-green-100 px-2.5 py-1 rounded-full shadow-sm">
-                            {{ round(($countUserNewsletter / $countUser) * 100) }}%
-                        </span>
-                    @endif
-                </div>
-            </div>
+            <a href="{{ route('admin.userList') }}" class="group bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col items-center text-center hover:shadow-lg hover:border-indigo-300 hover:bg-indigo-50 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+                <h2 class="text-sm font-bold text-gray-500 group-hover:text-indigo-600 uppercase tracking-wider mb-2">Abonnés Newsletter</h2>
+                <span class="text-3xl font-black text-gray-900 group-hover:text-indigo-700">{{ $countUserNewsletter }}</span>
+                <span class="mt-4 text-xs font-bold text-indigo-500 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Voir les détails <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </span>
+            </a>
 
             <!-- Carte 3 : Annonce en cours -->
-            <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200">
-                <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Annonce publiée</h2>
-                @if($announcementPublish)
-                    <p class="text-base font-bold text-gray-900 line-clamp-3">{{ $announcementPublish->label }}</p>
-                @else
-                    <p class="text-sm font-medium text-gray-400 italic">Aucune annonce en cours</p>
-                @endif
+            @if($announcementPublish)
+            <a href="{{ route('admin.announcementList') }}" class="group bg-green-50 rounded-xl border border-green-200 p-6 flex flex-col items-center text-center hover:shadow-lg hover:border-green-400 hover:bg-green-100 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+                <h2 class="text-sm font-bold text-green-700 uppercase tracking-wider mb-3">Annonce publiée</h2>
+                <span class="text-lg font-black text-green-900">{{ $announcementPublish->label}}</span>
+                <span class="mt-4 text-xs font-bold text-green-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Gérer l'annonce <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </span>
+            </a>
+            @else
+            <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col items-center text-center">
+                <h2 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Annonce publiée</h2>
+                <p class="text-sm font-medium text-gray-400 italic">Aucune annonce en cours</p>
             </div>
+            @endif
 
             <!-- Carte 4 : Événement important -->
-            <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-200">
-                <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">À la une</h2>
-                @if($eventPublish)
-                    <p class="text-base font-bold text-gray-900 line-clamp-3">{{ $eventPublish->label }}</p>
-                @else
-                    <p class="text-sm font-medium text-gray-400 italic">Aucun événement important</p>
-                @endif
+            @if($eventPublish)
+            <a href="{{ route('admin.eventListAdmin') }}" class="group bg-indigo-50 rounded-xl border border-indigo-200 p-6 flex flex-col items-center text-center hover:shadow-lg hover:border-indigo-400 hover:bg-indigo-100 hover:-translate-y-1 transition-all duration-200 cursor-pointer">
+                <h2 class="text-sm font-bold text-indigo-700 uppercase tracking-wider mb-3">À la une</h2>
+                <span class="text-lg font-black text-indigo-900">{{ $eventPublish->label}}</span>
+                <span class="mt-4 text-xs font-bold text-indigo-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Voir l'événement <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </span>
+            </a>
+            @else
+            <div class="bg-gray-50 rounded-xl border border-gray-200 p-6 flex flex-col items-center text-center">
+                <h2 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">À la une</h2>
+                <p class="text-sm font-medium text-gray-400 italic">Aucun événement important</p>
             </div>
+            @endif
 
         </div>
-
     </div>
 </div>

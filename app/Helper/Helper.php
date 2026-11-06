@@ -33,20 +33,13 @@ if(!function_exists('showAnnouncement'))
         $listAnnouncement=Announcement::all();
         foreach($listAnnouncement as $announcement)
         {
-            if($announcement->start_date&&$announcement->start_date>=now()&&$announcement->is_showing)
+            if($announcement->start_date&&$announcement->is_showing&&$announcement->start_date<=now())
             {
                 saveHistory("Affichage de l'annonce {$announcement->label} jusqu'à " . ($announcement->end_date ?? 'date indéterminée'));
                 return $announcement;
             }
         }
-        
-    }
-}
-if(!function_exists('flashMessage'))
-{
-    function flashMessage()
-    {
-        
+        return null;
     }
 }
 ?>

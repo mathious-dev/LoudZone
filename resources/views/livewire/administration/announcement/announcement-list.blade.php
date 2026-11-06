@@ -82,47 +82,56 @@
                                 <div class="flex justify-end items-center gap-3">
                                     
                                     <!-- ========================================== -->
-                                    <!-- MENU PUBLIER (POPOVER ALPINE)              -->
+                                    <!-- MENU PUBLIER (MODALE ALPINE CENTRÉE)       -->
                                     <!-- ========================================== -->
-                                    <div x-data="{ open: false }" class="relative flex items-center">
-                                        <button @click="open = !open" 
+                                    <div x-data="{ open: false }">
+                                        <button @click="open = true" 
                                                 class="font-black text-xs uppercase tracking-wide transition-colors {{ $announcement->is_showing ? 'text-green-600 hover:text-green-800' : 'text-[#84796F] hover:text-[#5D0824]' }}">
-                                            {{ $announcement->is_showing ? 'Dépublier' : 'Publier' }}
+                                            {{ $announcement->is_showing ? 'Modifier dates' : 'Publier' }}
                                         </button>
                                         
-                                        <!-- Le Popover (Reste inchangé dans sa logique) -->
-                                        <div x-cloak x-show="open" 
-                                            x-transition:enter="transition ease-out duration-200"
-                                            x-transition:enter-start="opacity-0 translate-x-4"
-                                            x-transition:enter-end="opacity-100 translate-x-0"
-                                            x-transition:leave="transition ease-in duration-150"
-                                            x-transition:leave-start="opacity-100 translate-x-0"
-                                            x-transition:leave-end="opacity-0 translate-x-4"
-                                            @click.away="open = false"
-                                            class="absolute right-[120%] top-1/2 -translate-y-1/2 w-72 p-5 bg-white border border-[#84796F]/20 rounded-xl shadow-xl z-50 text-left">
+                                        <!-- Le fond assombri et la Modale (Fixed) -->
+                                        <div x-cloak x-show="open" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm">
                                             
-                                            <!-- Petite flèche décorative -->
-                                            <div class="absolute top-1/2 -right-2 -translate-y-1/2 w-4 h-4 bg-white border-t border-r border-[#84796F]/20 transform rotate-45 z-0"></div>
-
-                                            <div class="relative z-10">
-                                                <h4 class="font-black text-[#0B0A0B] mb-4 text-sm border-b border-[#84796F]/10 pb-2">Période de publication</h4>
+                                            <!-- La boîte de dialogue -->
+                                            <div @click.away="open = false" 
+                                                x-transition:enter="transition ease-out duration-200"
+                                                x-transition:enter-start="opacity-0 scale-95"
+                                                x-transition:enter-end="opacity-100 scale-100"
+                                                x-transition:leave="transition ease-in duration-150"
+                                                x-transition:leave-start="opacity-100 scale-100"
+                                                x-transition:leave-end="opacity-0 scale-95"
+                                                class="bg-white border border-[#84796F]/20 rounded-2xl shadow-2xl p-6 w-[90%] max-w-md text-left relative">
                                                 
-                                                <div class="space-y-4">
+                                                <!-- Bouton fermer (X) -->
+                                                <button @click="open = false" class="absolute top-4 right-4 text-[#84796F] hover:text-[#0B0A0B]">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                                </button>
+
+                                                <h4 class="font-black text-xl text-[#0B0A0B] mb-2">Période de publication</h4>
+                                                <p class="text-sm text-[#84796F] mb-6 border-b border-[#84796F]/10 pb-4">Définissez quand l'annonce "{{ $announcement->label }}" doit être visible.</p>
+                                                
+                                                <div class="space-y-5">
                                                     <div>
-                                                        <label class="block text-xs font-bold text-[#41342D] mb-1">Date de début</label>
+                                                        <label class="block text-sm font-bold text-[#41342D] mb-2">Date de début</label>
+                                                        <!-- L'input calendrier aura toute la place pour s'ouvrir vers le bas ou le haut -->
                                                         <input type="datetime-local" wire:model="start_date" 
-                                                            class="block w-full text-sm rounded-lg border-[#84796F]/30 shadow-sm focus:border-[#5D0824] focus:ring-[#5D0824] bg-[#FAF1E3]/20">
+                                                            class="block w-full text-base p-3 rounded-lg border-[#84796F]/30 shadow-sm focus:border-[#5D0824] focus:ring-[#5D0824] bg-[#FAF1E3]/20 cursor-pointer">
                                                     </div>
                                                     
                                                     <div>
-                                                        <label class="block text-xs font-bold text-[#41342D] mb-1">Date de fin (Optionnelle)</label>
+                                                        <label class="block text-sm font-bold text-[#41342D] mb-2">Date de fin (Optionnelle)</label>
                                                         <input type="datetime-local" wire:model="end_date" 
-                                                            class="block w-full text-sm rounded-lg border-[#84796F]/30 shadow-sm focus:border-[#5D0824] focus:ring-[#5D0824] bg-[#FAF1E3]/20">
+                                                            class="block w-full text-base p-3 rounded-lg border-[#84796F]/30 shadow-sm focus:border-[#5D0824] focus:ring-[#5D0824] bg-[#FAF1E3]/20 cursor-pointer">
                                                     </div>
                                                     
-                                                    <div class="pt-2">
+                                                    <div class="pt-4 flex gap-3">
+                                                        <button @click="open = false" type="button"
+                                                                class="flex-1 py-3 px-4 rounded-lg shadow-sm text-sm font-bold text-[#41342D] bg-gray-100 hover:bg-gray-200 transition-colors">
+                                                            Annuler
+                                                        </button>
                                                         <button wire:click="publishing({{ $announcement }})" @click="open = false"
-                                                                class="w-full flex justify-center items-center py-2 px-4 rounded-lg shadow-sm text-sm font-bold text-[#FAF1E3] bg-[#5D0824] hover:bg-[#0B0A0B] focus:outline-none transition-colors">
+                                                                class="flex-1 py-3 px-4 rounded-lg shadow-sm text-sm font-bold text-[#FAF1E3] bg-[#5D0824] hover:bg-[#0B0A0B] transition-colors">
                                                             Confirmer
                                                         </button>
                                                     </div>
@@ -132,9 +141,13 @@
                                     </div>
                                     <!-- Fin Menu Publier -->
 
+                                    @if($announcement->is_showing)
+                                    <button wire:click='removePublish({{ $announcement }})' class="text-xs font-bold text-red-600 hover:text-red-800 uppercase">Dépublier</button>
+                                    @endif
+
                                     <!-- Bouton Modifier (SVG) -->
                                     <a href="{{ route('admin.announcementForm.edit', $announcement) }}" 
-                                       class="text-[#84796F] hover:text-[#0B0A0B] transition-colors" title="Modifier">
+                                    class="text-[#84796F] hover:text-[#0B0A0B] transition-colors ml-2" title="Modifier">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                                         </svg>

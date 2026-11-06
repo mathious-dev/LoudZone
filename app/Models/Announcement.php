@@ -13,6 +13,11 @@ class Announcement extends BaseEntity
     'end_date',];
     protected $nameColumn='label';
     protected $nameValueColumn="L'annonce";
+    //sécurité pour pouvoir comparer en type de date
+    protected $casts = [
+    'start_date' => 'datetime',
+    'end_date' => 'datetime',
+    ] ;
     protected static function booted()
     {
         static::saving(function(Announcement $announcement)
@@ -34,6 +39,11 @@ class Announcement extends BaseEntity
             return false;
         }
         return true;
-        
+    }
+    public function removePublishModel()
+    {
+        $this->is_showing=false;
+        saveHistory("Dépublication de l'annonce : {$this->label}");
+        $this->save();
     }
 }
