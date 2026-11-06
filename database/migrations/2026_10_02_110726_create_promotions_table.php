@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
-            $table->string('label')->nullable();
+            $table->string('label')->unique()->nullable();
             $table->decimal('amount',5,2);
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();

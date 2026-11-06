@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
-            $table->string('label');
+            $table->string('label')->unique();
             $table->text('content');
             $table->boolean('is_showing')->default(false);
             $table->dateTime('start_date')->nullable();
