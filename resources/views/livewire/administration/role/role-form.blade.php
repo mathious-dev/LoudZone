@@ -1,4 +1,8 @@
-<div class="min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 bg-gray-50 py-10">
+<div class="relative min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 bg-gray-50 py-10">
+    <div class="absolute top-4 left-4 sm:top-8 sm:left-8 md:top-12 md:left-12">
+        <x-return-button-form route="admin.roleList"/>
+    </div>
+    
     <div class="w-full max-w-2xl bg-white p-8 rounded-xl shadow-lg border border-gray-100">
         
         <!-- En-tête -->

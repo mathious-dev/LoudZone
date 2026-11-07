@@ -1,6 +1,11 @@
-<!-- Conteneur centré -->
-<div class="min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 bg-gray-50">
+<!-- Conteneur centré (ajout de "relative" pour servir de repère au bouton) -->
+<div class="min-h-[80vh] relative flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 bg-gray-50">
     
+    <!-- Bouton de retour (absolu : en haut à gauche) -->
+    <div class="absolute top-4 left-4 sm:top-8 sm:left-8">
+        <x-return-button-form route="admin.addInfoList"/>
+    </div>
+
     <!-- La carte (cadre blanc) -->
     <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg border border-gray-100">
         

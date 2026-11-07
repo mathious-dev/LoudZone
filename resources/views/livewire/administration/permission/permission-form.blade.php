@@ -1,4 +1,8 @@
-<div class="max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+<div class="relative max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <div class="absolute top-8 left-4 sm:-left-4 md:-left-12">
+        <x-return-button-form route="admin.permissionList"/>
+    </div>
+    
     <div class="bg-white shadow-sm border border-[#84796F]/20 rounded-2xl p-6 sm:p-8">
         
         <!-- En-tête du formulaire -->

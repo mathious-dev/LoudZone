@@ -1,6 +1,14 @@
-<!-- Conteneur principal : prend la hauteur de l'écran et centre le contenu -->
-<div class="min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 bg-gray-50">
+<div class="relative min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 bg-gray-50">
     
+    <!-- Bouton de retour en absolu via ton $previousUrl (car pas de route nommée pour ça) -->
+    <div class="absolute top-4 left-4 sm:top-8 sm:left-8 md:top-12 md:left-12">
+        <a href="{{ $previousUrl ?? url('/') }}" title="Retour" class="group inline-flex items-center justify-center w-12 h-12 bg-white border border-[#84796F]/20 rounded-full shadow-sm text-[#41342D] hover:bg-[#5D0824] hover:text-[#FAF1E3] hover:border-[#5D0824] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5D0824]">
+            <svg class="w-6 h-6 transform group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+        </a>
+    </div>
+
     <!-- Le cadre du formulaire (La "carte") -->
     <div class="w-full max-w-lg bg-white p-8 rounded-xl shadow-lg border border-gray-100">
         

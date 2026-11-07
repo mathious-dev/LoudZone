@@ -1,4 +1,7 @@
-<div class="max-w-2xl mx-auto px-4 py-12">
+<div class="relative max-w-2xl mx-auto px-4 py-12">
+    <div class="absolute top-12 left-4 sm:-left-4 md:-left-12">
+        <x-return-button-form route="admin.categoryList"/>
+    </div>
     
     <div class="bg-white rounded-2xl shadow-sm border border-[#84796F]/20 p-6 sm:p-8">
         

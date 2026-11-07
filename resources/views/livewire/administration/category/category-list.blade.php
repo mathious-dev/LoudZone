@@ -46,16 +46,27 @@
                                 {{ $category->type->name ?? $category->type }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-right space-x-3"> 
-                            <a href="{{ route('admin.categoryForm.edit', $category) }}" 
-                               class="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
-                                Modifier
-                            </a>
-                            <button wire:click="delete({{ $category->id }})" 
-                                    class="text-sm font-semibold text-red-600 hover:text-red-800 transition-colors"
-                                    onclick="confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?') || event.stopImmediatePropagation()">
-                                Supprimer
-                            </button>
+                        <td class="px-6 py-4 text-right"> 
+                            <div class="flex items-center justify-end space-x-3">
+                                <!-- Bouton Modifier (Icône Crayon) -->
+                                <a href="{{ route('admin.categoryForm.edit', $category) }}" 
+                                title="Modifier"
+                                class="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                    </svg>
+                                </a>
+
+                                <!-- Bouton Supprimer (Icône Poubelle) -->
+                                <button wire:click="delete({{ $category->id }})" 
+                                        title="Supprimer"
+                                        class="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                                        onclick="confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?') || event.stopImmediatePropagation()">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

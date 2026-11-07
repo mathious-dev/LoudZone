@@ -1,4 +1,12 @@
-<div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+<!-- Conteneur principal avec position "relative" -->
+<div class="relative max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    
+    <!-- Bouton de retour en absolu (décalé à gauche sur les grands écrans) -->
+    <div class="absolute top-10 left-4 sm:-left-4 md:-left-12">
+        <x-return-button-form route="admin.announcementList"/>
+    </div>
+
+    <!-- Le cadre blanc de l'annonce -->
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border-t-4 border-[#48041B]">
         
         <!-- En-tête du formulaire -->
@@ -20,7 +28,7 @@
                 @error('label') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
             </div>
 
-            <!-- Contenu (Remplacé par un textarea) -->
+            <!-- Contenu (Textarea) -->
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Contenu</label>
                 <textarea wire:model="content" rows="4" 
@@ -57,6 +65,8 @@
                     <p class="text-xs text-gray-500">Si décoché, l'annonce sera sauvegardée comme brouillon.</p>
                 </div>
             </div>
+            
+            <!-- Catégorie de l'annonce -->
             <div>
                 <label class="block text-sm font-bold text-[#41342D] mb-1">Catégorie de l'annonce</label>
                 <select wire:model="category_id" 
@@ -72,6 +82,7 @@
                     <span class="text-xs text-red-600 font-bold mt-1 block">{{ $message }}</span> 
                 @enderror
             </div>
+            
             <!-- Actions du formulaire -->
             <div class="pt-6 mt-6 border-t border-gray-100 flex items-center justify-end gap-4">
                 <a href="{{ route('admin.announcementList') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium">
