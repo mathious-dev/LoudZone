@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\CategoryEnum;
 use App\Models\BaseEntity;
 use App\Models\Category;
 
@@ -35,5 +36,9 @@ class SupportMessage extends BaseEntity
     {
         $this->state=true;//La demande est traitée
         $this->save();
+    }
+    public static function getCategoryForSupportMessage()
+    {
+        return Category::where('type',CategoryEnum::SUPPORT)->get();
     }
 }

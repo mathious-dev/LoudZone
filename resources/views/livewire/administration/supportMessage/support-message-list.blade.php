@@ -62,7 +62,7 @@
                         
                         <!-- Catégorie -->
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#5D0824]">
-                            {{ $supportMessage->supportMessageCategory?->label ?? 'Catégorie supprimée' }}
+                            {{ $supportMessage->category?->label ?? 'Catégorie supprimée' }}
                         </td>
                         
                         <!-- Précision (Badge) -->

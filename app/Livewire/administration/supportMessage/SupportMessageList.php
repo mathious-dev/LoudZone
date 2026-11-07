@@ -3,7 +3,6 @@
 namespace App\Livewire\administration\supportMessage;
 
 use App\Livewire\AdminComponent;
-use App\Models\Category;
 use App\Models\SupportMessage;
 
 class SupportMessageList extends AdminComponent
@@ -14,7 +13,7 @@ class SupportMessageList extends AdminComponent
     {
         $this->searchWichColumn='title';
         $this->searchAscDescWichColumn = 'created_at';
-        $this->searchCategoryWichColumn='support_message_category_id';
+        $this->searchCategoryWichColumn='category_id';
         $this->searchAscDesc = 'DESC';
         $this->tabSearchPossibility=[
             'title'=>'titre',
@@ -22,14 +21,14 @@ class SupportMessageList extends AdminComponent
         $this->tabSearchAscDescPossibility=[
             'created_at'=>'date'
         ];
-        $this->tabSearchCategoryPossibility=Category::pluck('label','id')->toArray();
-        if(request()->query('support_message_category_id'))
-            $this->searchCategory=request()->query('support_message_category_id');
+        $this->tabSearchCategoryPossibility=SupportMessage::getCategoryForSupportMessage();
+        if(request()->query('category_id'))
+            $this->searchCategory=request()->query('category_id');
         
     }
     public function render()
     {
-        return view('livewire.administration.supportMessage.support-message-list',['listSupportMessages'=>$this->query(10,['supportMessageCategory','user','addInfo']),
+        return view('livewire.administration.supportMessage.support-message-list',['listSupportMessages'=>$this->query(10,['category','user','addInfo']),
         'listSearch'=>$this->querySearch()]);
     }
     public function messageTreat(SupportMessage $message)

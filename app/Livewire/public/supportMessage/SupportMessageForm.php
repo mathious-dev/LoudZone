@@ -3,8 +3,8 @@
 namespace App\Livewire\public\supportMessage;
 
 use App\Livewire\PublicComponent;
+use App\Models\Category;
 use App\Models\SupportMessage;
-use App\Models\SupportMessageCategory;
 use App\Traits\CrudTrait;
 
 class SupportMessageForm extends PublicComponent
@@ -13,13 +13,13 @@ class SupportMessageForm extends PublicComponent
     public $supportMessage;
     public $title;
     public $content;
-    public $support_message_category_id;
+    public $category_id;
     public $add_info_id;
     public $listAddInfos=[];
     public $previousUrl;
     public function render()
     {
-        return view('livewire.public.supportMessage.support-message-form',['listCategories'=>$this->otherQuery(SupportMessageCategory::class)]);
+        return view('livewire.public.supportMessage.support-message-form',['listCategories'=>SupportMessage::getCategoryForSupportMessage()]);
     }
     public function mount()
     {
@@ -30,7 +30,7 @@ class SupportMessageForm extends PublicComponent
     {
         return['title'=>'max:255',
         'content'=>'required|max:255',
-        'support_message_category_id'=>'required',
+        'category_id'=>'required',
         'add_info_id' => 'nullable'];
     }
     public function saveForm()
@@ -42,8 +42,8 @@ class SupportMessageForm extends PublicComponent
     public function updatedSupportMessageCategoryId()
     {
         $this->add_info_id = null;
-        if (!empty($this->support_message_category_id)) 
-            $this->listAddInfos = SupportMessageCategory::find($this->support_message_category_id)->addInfos;
+        if (!empty($this->category_id)) 
+            $this->listAddInfos = Category::find($this->category_id)->addInfos;
         else 
             $this->listAddInfos = [];
     }

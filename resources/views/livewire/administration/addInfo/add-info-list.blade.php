@@ -54,7 +54,7 @@
                             <!-- Compteur (Badge neutre) -->
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#84796F]/10 text-[#41342D] border border-[#84796F]/20">
-                                    {{ $addInfo->supportMessageCategories?->count() ?? 0 }} catégories
+                                    {{ $addInfo->categories?->count() ?? 0 }} catégories
                                 </span>
                             </td>
                             
