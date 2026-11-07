@@ -27,6 +27,7 @@
                         <th scope="col" class="px-6 py-4 text-center text-xs font-black text-[#41342D] uppercase tracking-wider">Statut</th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-black text-[#41342D] uppercase tracking-wider">Début</th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-black text-[#41342D] uppercase tracking-wider">Fin</th>
+                        <th scope="col" class="px-6 py-4 text-left text-xs font-black text-[#41342D] uppercase tracking-wider">Catégorie</th>
                         <th scope="col" class="px-6 py-4 text-right text-xs font-black text-[#41342D] uppercase tracking-wider w-32">Actions</th>
                     </tr>
                 </thead>
@@ -76,7 +77,13 @@
                                     <span class="text-[#84796F]/60 italic text-xs">Non définie</span>
                                 @endif
                             </td>
-                            
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-[#41342D] font-medium">
+                                @if($announcement->category)
+                                    {{ $announcement->category->label }}
+                                @else
+                                    <span class="text-[#84796F]/60 italic text-xs">Aucune catégorie</span>
+                                @endif
+                            </td>
                             <!-- Actions -->
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end items-center gap-3">

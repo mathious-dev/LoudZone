@@ -57,10 +57,24 @@
                     <p class="text-xs text-gray-500">Si décoché, l'annonce sera sauvegardée comme brouillon.</p>
                 </div>
             </div>
-
+            <div>
+                <label class="block text-sm font-bold text-[#41342D] mb-1">Catégorie de l'annonce</label>
+                <select wire:model="category_id" 
+                        class="w-full rounded-lg border-[#84796F]/30 shadow-sm focus:border-[#5D0824] focus:ring focus:ring-[#5D0824]/20 transition-colors">
+                    <option value="">-- Sélectionnez une catégorie --</option>
+                    
+                    @foreach ($listCategories as $category)
+                        <option value="{{ $category->id }}">{{ $category->label }}</option>
+                    @endforeach
+                </select>
+                
+                @error('category_id') 
+                    <span class="text-xs text-red-600 font-bold mt-1 block">{{ $message }}</span> 
+                @enderror
+            </div>
             <!-- Actions du formulaire -->
             <div class="pt-6 mt-6 border-t border-gray-100 flex items-center justify-end gap-4">
-                <a href="{{ route('admin.announcementForm.create') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium">
+                <a href="{{ route('admin.announcementList') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium">
                     Annuler
                 </a>
                 <button type="submit" 

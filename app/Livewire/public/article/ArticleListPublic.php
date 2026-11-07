@@ -4,7 +4,6 @@ namespace App\Livewire\public\article;
 
 use App\Livewire\PublicComponent;
 use App\Models\Article;
-use App\Models\Category;
 use App\Models\Event;
 use App\Services\CartService;
 

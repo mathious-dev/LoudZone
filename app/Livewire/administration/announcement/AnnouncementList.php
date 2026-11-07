@@ -13,7 +13,8 @@ class AnnouncementList extends AdminComponent
     public $end_date;
     public function render()
     {
-        return view('livewire.administration.announcement.announcement-list',['listAnnouncements'=>$this->query(10)]);
+        return view('livewire.administration.announcement.announcement-list',['listAnnouncements'=>$this->query(10)
+        ]);
     }
     public function publishing(Announcement $announcement)
     {

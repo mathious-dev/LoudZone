@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\CategoryEnum;
 use App\Models\BaseEntity;
 
 class Announcement extends BaseEntity
@@ -50,5 +51,8 @@ class Announcement extends BaseEntity
         saveHistory("Dépublication de l'annonce : {$this->label}");
         $this->save();
     }
-    
+    public static function getCategoryForAnnouncement()
+    {
+        return Category::where('type',CategoryEnum::ANNOUNCE)->get();
+    }
 }

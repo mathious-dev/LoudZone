@@ -15,9 +15,10 @@ class AnnouncementForm extends AdminComponent
     public $start_date;
     public $end_date;
     public $is_showing=false;
+    public $category_id;
     public function render()
     {
-        return view('livewire.administration.announcement.announcement-form');
+        return view('livewire.administration.announcement.announcement-form',['listCategories'=>Announcement::getCategoryForAnnouncement()]);
     }
     public function mount(Announcement $announcement=null)
     {
@@ -39,7 +40,8 @@ class AnnouncementForm extends AdminComponent
         'content'=>'required',
         'start_date'=>'date|nullable',
         'end_date'=>'date|nullable',
-        'is_showing'=>'boolean'];
+        'is_showing'=>'boolean',
+        'category_id'=>'nullable'];
     }
     public function saveForm()
     {
