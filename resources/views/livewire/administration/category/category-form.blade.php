@@ -25,7 +25,7 @@
                         class="w-full rounded-lg border-[#84796F]/30 shadow-sm focus:border-[#5D0824] focus:ring focus:ring-[#5D0824]/20 transition-colors">
                     <option value="">Sélectionnez un type...</option>
                     @foreach($listTypeCategories as $category)
-                        <option value="{{ $category->id }}">{{ $category->label }}</option>
+                        <option value="{{ $category->value}}">{{ $category->name }}</option>
                     @endforeach
                 </select>
                 @error('type') <span class="text-xs text-red-600 font-bold mt-1 block">{{ $message }}</span> @enderror

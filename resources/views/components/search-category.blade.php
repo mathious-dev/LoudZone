@@ -7,8 +7,8 @@
     >
         <option value="">Toutes les catégories</option>
         
-        @foreach ($options as $possibility => $label)
-            <option value="{{ $possibility }}">{{ $label }}</option>
+        @foreach ($options as $category)
+            <option value="{{ $category->id }}">{{ $category->label }}</option>
         @endforeach
     </select>
 </div>

@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 use App\Models\Article;
-use App\Models\ArticleCategory;
+use App\Models\Category;
 use App\Traits\CrudTrait;
 
 class ArticleService 
@@ -33,7 +33,7 @@ class ArticleService
         $articleSave=$this->save($data,$article,"admin.articleListAdmin");
 
         //Si c'est un vêtement
-        if(ArticleCategory::isClotheCategory($articleSave->article_category_id))
+        if(Category::isClotheCategory($articleSave->category_id))
         {
             $tabClothes = $data['tabClothes'] ?? [];
             foreach ($tabClothes as $clothe) 

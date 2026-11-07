@@ -4,11 +4,12 @@ namespace App\Livewire\administration\article;
 
 use App\Livewire\AdminComponent;
 use App\Models\Article;
-use App\Models\ArticleCategory;
+use App\Models\Category;
 use App\Models\Clothe;
 use App\Models\Promotion;
 use App\Services\ArticleService;
 use App\Traits\CrudTrait;
+use Illuminate\Validation\Rule;
 use Livewire\WithFileUploads;
 
 class ArticleFormAdmin extends AdminComponent
@@ -24,7 +25,7 @@ class ArticleFormAdmin extends AdminComponent
     public $is_published = false; 
     public $tva = '';
     public $user_id = '';
-    public $article_category_id = '';
+    public $category_id = '';
     public $primary_image='';
     public $pictures=[];
     public $promotion_id='';
@@ -35,7 +36,7 @@ class ArticleFormAdmin extends AdminComponent
     public function render()
     {
         return view('livewire.administration.article.article-form-admin',
-        ['listArticleCategories'=>$this->otherQuery(ArticleCategory::class),
+        ['listCategories'=>Article::getCategoryForArticle(),
         'listSizes'=> Clothe::getAvailableSizes(),
         'listColors'=>Clothe::getAvailableColors(),
         'listPromotions'=>$this->otherQuery(Promotion::class)]);
@@ -43,7 +44,7 @@ class ArticleFormAdmin extends AdminComponent
     protected function rules()
     {
         $rules= [
-            'title'=> 'required|string|max:255|unique',
+            'title' => ['required','string','max:255',Rule::unique('articles', 'title')->ignore($this->article->id)],
             'description'=> 'nullable|string',
             'price_ht'=> 'required|numeric|min:0', 
             'slug' => 'required|string|max:255',
@@ -53,7 +54,7 @@ class ArticleFormAdmin extends AdminComponent
             'primary_image' => 'nullable|image|max:1024',
             //On vérifie que les ID existent VRAIMENT dans la base de données
             'user_id'             => 'required|exists:users,id',//on vérifie dans la BD qu'il y a bien m'utilisateur
-            'article_category_id' => 'required|exists:article_categories,id',
+            'category_id' => 'required|exists:categories,id',
             'pictures'   => 'nullable|array',
             'pictures.*' => 'image|max:1024',
             'promotion_id'=>'nullable'
@@ -95,7 +96,7 @@ class ArticleFormAdmin extends AdminComponent
     }
     public function isClothe()
     {
-        return ArticleCategory::isClotheCategory($this->article_category_id);
+        return Category::isClotheCategory($this->category_id);
     }
     public function saveForm(ArticleService $articleService)
     {

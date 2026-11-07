@@ -5,7 +5,7 @@ namespace App\Livewire\administration\addInfo;
 use App\Livewire\AdminComponent;
 use App\Models\AddInfo;
 use App\Traits\CrudTrait;
-
+use Illuminate\Validation\Rule;
 class AddInfoForm extends AdminComponent
 {
     use CrudTrait;
@@ -35,6 +35,6 @@ class AddInfoForm extends AdminComponent
     }
     public function rules()
     {
-        return ['label'=>'required|max:255|unique'];
+        return ['label' => ['required', 'max:255', Rule::unique('add_infos', 'label')->ignore($this->addInfo->id)]];
     }
 }

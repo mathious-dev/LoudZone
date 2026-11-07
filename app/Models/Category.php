@@ -4,9 +4,8 @@ namespace App\Models;
 
 use App\Enum\CategoryEnum;
 use App\Models\Announcement;
-use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Category extends BaseEntity
 {
     protected $fillable=['label','type'];
     protected $nameValueColumn="La catégorie";
@@ -35,14 +34,14 @@ class Category extends Model
     {
         return CategoryEnum::cases();
     }
-    // public static function isClotheCategory($id)
-    // {
-    //     if (!$id) 
-    //         return false;
-    //     $category=ArticleCategory::find($id);
-    //     if ($category) 
-    //         return $category->label === 'Vêtement';
-    //     return false;
-    // }
+    public static function isClotheCategory($id)
+    {
+        if (!$id) 
+            return false;
+        $category=Category::find($id);
+        if ($category) 
+            return $category->type === 'Vêtement';
+        return false;
+    }
 }
 

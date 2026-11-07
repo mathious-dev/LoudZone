@@ -4,6 +4,7 @@ namespace App\Livewire\administration\category;
 
 use App\Livewire\AdminComponent;
 use App\Models\Category;
+use Illuminate\Validation\Rule;
 
 class CategoryForm extends AdminComponent
 {
@@ -12,7 +13,7 @@ class CategoryForm extends AdminComponent
     public $label;
     public function render()
     {
-        return view('livewire.administration.category.category-form');
+        return view('livewire.administration.category.category-form',['listTypeCategories'=>Category::giveListTypeCategory()]);
     }
     public function mount(Category $category=null)
     {
@@ -34,7 +35,9 @@ class CategoryForm extends AdminComponent
     }
     public function rules()
     {
-        return ['label'=>'required|max:255|unique',
-        'type'=>'required|max:255|unique'];
+        //Pour l'unique on doit préciser la table et aussi dire qu'il faut ignore l'id de l'objet 
+        // qu'on est en train de modifier sinon il va détecter l'objet comme un doublon alors qu'on le modifie
+        return ['label' => ['required',Rule::unique('categories')->ignore($this->category->id)],
+        'type'=>'nullable|max:255'];
     }
 }

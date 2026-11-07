@@ -106,8 +106,8 @@ trait CrudTrait
             'type' => 'success',
             'message' => $message
         ]);
-        //événement pour pu
-        $this->dispatch('toast', type: 'success', message: $message);
+        //événement pour montrer le message flash quand on supprime
+        $this->dispatch('flashMessage', type: 'success', message: $message);
     }
 
     public function flashError($message)

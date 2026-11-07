@@ -65,10 +65,9 @@
     </div>
 
     <!-- Pagination -->
-    @if($listCategories->hasPages())
         <div class="mt-6">
             {{ $listCategories->links() }}
         </div>
-    @endif
+
 
 </div>

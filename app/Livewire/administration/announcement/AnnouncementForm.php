@@ -5,7 +5,7 @@ namespace App\Livewire\administration\announcement;
 use App\Livewire\AdminComponent;
 use App\Models\Announcement;
 use Carbon\Carbon;
-
+use Illuminate\Validation\Rule;
 
 class AnnouncementForm extends AdminComponent
 {
@@ -35,7 +35,11 @@ class AnnouncementForm extends AdminComponent
     }
     public function rules()
     {
-        return ['label'=>'required|max:255|unique','content'=>'required','start_date'=>'date|nullable','end_date'=>'date|nullable','is_showing'=>'boolean'];
+        return ['label' => ['required', 'max:255', Rule::unique('announcements', 'label')->ignore($this->announcement->id)],
+        'content'=>'required',
+        'start_date'=>'date|nullable',
+        'end_date'=>'date|nullable',
+        'is_showing'=>'boolean'];
     }
     public function saveForm()
     {

@@ -6,7 +6,7 @@ use App\Livewire\AdminComponent;
 use App\Traits\CrudTrait;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-
+use Illuminate\Validation\Rule;
 class RoleForm extends AdminComponent
 {
     use CrudTrait;
@@ -36,7 +36,7 @@ class RoleForm extends AdminComponent
     }
     public function rules()
     {
-        return ['name'=>'required|string|max:255|unique'];
+        return ['name' => ['required', 'max:255', Rule::unique('roles', 'name')->ignore($this->role->id)]];
     }
     public function saveForm()
     {

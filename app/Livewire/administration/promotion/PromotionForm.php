@@ -4,6 +4,7 @@ namespace App\Livewire\administration\promotion;
 
 use App\Livewire\AdminComponent;
 use App\Models\Promotion;
+use Illuminate\Validation\Rule;
 
 
 class PromotionForm extends AdminComponent
@@ -38,7 +39,7 @@ class PromotionForm extends AdminComponent
     }
     public function rules()
     {
-        return ['label'=>'nullable|max:255|unique',
+        return ['label' => ['required', 'max:255', Rule::unique('promotions', 'label')->ignore($this->promotion->id)],
         'amount'=>'required|max:100',
         'start_date'=>'required',
         'end_date'=>'nullable'];

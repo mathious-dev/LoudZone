@@ -77,15 +77,15 @@
             <!-- Catégorie -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Catégorie</label>
-                <select wire:model.live='article_category_id' class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <select wire:model.live='category_id' class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     <option value="">-- Sélectionnez une catégorie --</option>
-                    @if($listArticleCategories)
-                        @foreach ($listArticleCategories as $categories)
-                            <option value="{{$categories->id}}">{{ $categories->label }}</option>
+                    @if($listCategories)
+                        @foreach ($listCategories as $category)
+                            <option value="{{$category->id}}">{{ $category->label }}</option>
                         @endforeach
                     @endif
                 </select>
-                @error('article_category_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                @error('category_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
 
             <!-- ========================================== -->

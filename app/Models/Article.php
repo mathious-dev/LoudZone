@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\CategoryEnum;
 use App\Models\BaseEntity;
 use App\Models\Category;
 use App\Models\Promotion;
@@ -77,5 +78,9 @@ class Article extends BaseEntity
             else
                 $article->final_price=$article->price_with_tva;
         });
+    }
+    public static function getCategoryForArticle()
+    {
+        return Category::where('type',CategoryEnum::ARTICLE)->get();
     }
 }

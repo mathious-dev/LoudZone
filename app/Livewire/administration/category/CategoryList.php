@@ -11,8 +11,7 @@ class CategoryList extends AdminComponent
     public function render()
     {
         return view('livewire.administration.category.category-list',['listCategories'=>$this->query(),
-        'listSearch'=>$this->querySearch(),
-        'listTypeCategories'=>Category::giveListTypeCategory()]);
+        'listSearch'=>$this->querySearch()]);
     }
     public function mount()
     {

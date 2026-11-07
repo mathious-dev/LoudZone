@@ -5,6 +5,7 @@ namespace App\Livewire\administration\event;
 use App\Livewire\AdminComponent;
 use App\Models\Address;
 use App\Models\Event;
+use Illuminate\Validation\Rule;
 use Livewire\WithFileUploads;
 
 class EventForm extends AdminComponent
@@ -45,7 +46,7 @@ class EventForm extends AdminComponent
     }
     public function rules()
     {
-        return['label'=>'required|max:255|unique',
+        return['label' => ['required', 'max:255', Rule::unique('events', 'label')->ignore($this->event->id)],
         'description'=>'nullable',
         'start_date'=>'required|date',
         'end_date'=>'required|date',

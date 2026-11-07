@@ -4,7 +4,7 @@ namespace App\Livewire\administration\permission;
 
 use App\Livewire\AdminComponent;
 use Spatie\Permission\Models\Permission;
-
+use Illuminate\Validation\Rule;
 class PermissionForm extends AdminComponent
 {
     public $name;
@@ -36,6 +36,6 @@ class PermissionForm extends AdminComponent
     }
     public function rules()
     {
-        return ['name'=>'max:255|required|unique'];
+        return ['name' => ['required', 'max:255', Rule::unique('permissions', 'name')->ignore($this->permission->id)]];
     }
 }

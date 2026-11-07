@@ -15,7 +15,7 @@ class ArticleListPublic extends PublicComponent
     {
         return view('livewire.public.article.article-list-public',
         ['listArticles'=>$this->queryArticle(['promotion','category','clothes']),
-        'listCategories'=>$this->otherQuery(Category::class),
+        'listCategories'=>Article::getCategoryForArticle(),
         'listSearch'=>$this->querySearch(),
         'importantEvent'=>$this->queryEvent()]);
     }
@@ -33,7 +33,7 @@ class ArticleListPublic extends PublicComponent
             'title'=>'Titre',
             'final_price'=>'Prix'
         ];
-        $this->tabSearchCategoryPossibility=Category::pluck('label','id');
+        $this->tabSearchCategoryPossibility=Article::getCategoryForArticle();
     }
     public function queryArticle($withRelations=[])
     {

@@ -2,8 +2,6 @@
 namespace App\Livewire\administration\article;
 use App\Livewire\AdminComponent;
 use App\Models\Article;
-use App\Models\ArticleCategory;
-use App\Models\Category;
 use App\Models\Promotion;
 
 
@@ -19,7 +17,7 @@ class ArticleListAdmin extends AdminComponent
     {
         $this->searchWichColumn='title';
         $this->searchAscDescWichColumn = 'title';
-        $this->searchCategoryWichColumn='article_category_id';
+        $this->searchCategoryWichColumn='category_id';
         $this->searchBooleanWichColumn='is_published';
         $this->tabSearchPossibility=[
             'title'=>'Titre',
@@ -30,15 +28,15 @@ class ArticleListAdmin extends AdminComponent
             'slug'=>'Lien',
             'final_price'=>'Prix final'
         ];
-        $this->tabSearchCategoryPossibility=Category::pluck('label','id');
-        if(request()->query('article_category_id'))
-            $this->searchCategory=request()->query('article_category_id');
+        $this->tabSearchCategoryPossibility=Article::getCategoryForArticle();
+        if(request()->query('category_id'))
+            $this->searchCategory=request()->query('category_id');
     }
     public function render()
     {
         return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->query(10,['promotion','category','clothes']),
         'listSearch'=>$this->querySearch(),
-        'listCategories'=>$this->otherQuery(Category::class),
+        'listCategories'=>Article::getCategoryForArticle(),
         'listPromotions'=>$this->otherQuery(Promotion::class)]);
     }
     public function changeStatePublishArticle(Article $article)
@@ -52,7 +50,7 @@ class ArticleListAdmin extends AdminComponent
         $this->validate(["categoryNullInfoId.{$article->id}" => 'required']);
         //L'emplacement dans le tableau est l'id de l'article et la valeur est l'id de la catégorie exemple : $categoryNullInfoId[5]=12; 5 = l'article et 12 = la catégorie
         $idCategory=$this->categoryNullInfoId[$article->id];
-        $this->saveNullInfo($idCategory,$article,'article_category_id');
+        $this->saveNullInfo($idCategory,$article,'category_id');
     }
     public function saveFormPromotion(Article $article)
     {
