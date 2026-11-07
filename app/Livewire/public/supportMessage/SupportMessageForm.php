@@ -39,7 +39,7 @@ class SupportMessageForm extends PublicComponent
         $data['user_id']=auth()->id();
         $this->save($data,$this->supportMessage,$this->previousUrl);
     }
-    public function updatedSupportMessageCategoryId()
+    public function updatedCategoryId()
     {
         $this->add_info_id = null;
         if (!empty($this->category_id)) 

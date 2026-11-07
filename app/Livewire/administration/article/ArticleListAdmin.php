@@ -11,7 +11,6 @@ class ArticleListAdmin extends AdminComponent
     public $categoryNullInfoId=[];
     public $promotionNullInfoId=[];
     // public $userNullInfoId=[];
-    public $listArticleCategories;
     protected $model=Article::class;
     public function mount()
     {

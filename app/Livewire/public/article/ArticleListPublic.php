@@ -27,7 +27,7 @@ class ArticleListPublic extends PublicComponent
     {
         $this->searchWichColumn='title';
         $this->searchAscDescWichColumn = 'title';
-        $this->searchCategoryWichColumn='article_category_id';
+        $this->searchCategoryWichColumn='category_id';
         $this->tabSearchPossibility=['title'=>'Titre'];
         $this->tabSearchAscDescPossibility=[
             'title'=>'Titre',

@@ -18,7 +18,7 @@ class ArticleSeeder extends Seeder
     public function run(): void
     {
         $listUser=User::all();
-        $listArticleCategory=Category::where('type',CategoryEnum::ARTICLE)->get();
+        $listCategories=Category::where('type',CategoryEnum::ARTICLE)->get();
         $listPromotion=Promotion::all();
         for ($i = 0; $i < 50; $i++) {
             $title = fake()->sentence(4); 
@@ -31,7 +31,7 @@ class ArticleSeeder extends Seeder
                 'is_published' => fake()->boolean(80), 
                 'tva'=> fake()->randomElement([6, 12, 21]), 
                 'user_id'=> $listUser->random()->id,
-                'category_id' => $listArticleCategory->random()->id,
+                'category_id' => $listCategories->random()->id,
                 'promotion_id' => fake()->boolean(30) ? $listPromotion->random()->id : null
             ]);
         }

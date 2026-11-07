@@ -18,7 +18,6 @@ class PermissionSeeder extends Seeder
         Permission::Create(['name'=>'announcementCrud']);
         Permission::Create(['name'=>'eventCrud']);
         Permission::Create(['name'=>'articleCrud']);
-        Permission::Create(['name'=>'articleCategoryCrud']);
         Permission::Create(['name'=>'articleOrderCrud']);
         Permission::Create(['name'=>'cartCrud']);
         Permission::Create(['name'=>'historyCrud']);
@@ -28,6 +27,6 @@ class PermissionSeeder extends Seeder
         Permission::Create(['name'=>'promotionCrud']);
         Permission::Create(['name'=>'roleCrud']);
         Permission::Create(['name'=>'supportMessageCrud']);
-        Permission::Create(['name'=>'supportMessageCategoryCrud']);
+        Permission::Create(['name'=>'CategoryCrud']);
     }
 }
