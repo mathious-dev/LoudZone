@@ -5,6 +5,7 @@ namespace App\Livewire\public\article;
 use App\Livewire\PublicComponent;
 use App\Models\Article;
 use App\Models\Event;
+use App\Models\PriceFilter;
 use App\Services\CartService;
 
 class ArticleListPublic extends PublicComponent
@@ -16,7 +17,8 @@ class ArticleListPublic extends PublicComponent
         ['listArticles'=>$this->queryArticle(['promotion','category','clothes']),
         'listCategories'=>Article::getCategoryForArticle(),
         'listSearch'=>$this->querySearch(),
-        'importantEvent'=>$this->queryEvent()]);
+        'importantEvent'=>$this->queryEvent(),
+        'listPriceFilters'=>PriceFilter::where('is_active',true)->get()]);
     }
     public function addArticleToCart(CartService $CartService,$articleId,$quantity=1)
     {
