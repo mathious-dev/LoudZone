@@ -8,8 +8,8 @@ use App\Models\BaseEntity;
 
 class Promotion extends BaseEntity
 {
-    protected $nameColumn='id';
-    protected $nameValueColumn="l'Id";
+    protected $nameColumn='label';
+    protected $nameValueColumn="La promotion";
     protected $fillable = [
         'label',
         'amount',

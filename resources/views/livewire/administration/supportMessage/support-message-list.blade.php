@@ -83,7 +83,7 @@
                                     Fini
                                 </span>
                             @else
-                                <button wire:click="messageTreat({{ $supportMessage->id }})" 
+                                <button wire:click="messageTreat({{ $supportMessage->id }})" wire:confirm="êtes-vous d'avoir bien traiter l'information ?"
                                         class="px-3 py-1 inline-flex text-xs font-bold rounded-full bg-[#5D0824]/10 text-[#5D0824] border border-[#5D0824]/20 hover:bg-[#5D0824] hover:text-[#FAF1E3] transition-colors focus:outline-none">
                                     En attente
                                 </button>

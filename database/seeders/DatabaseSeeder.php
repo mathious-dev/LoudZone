@@ -4,6 +4,7 @@ namespace Database\Seeders;
 use Database\Seeders\AnnouncementSeeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\PermissionSeeder;
+use Database\Seeders\PriceFilterSeeder;
 use Database\Seeders\PromotionSeeder;
 use Illuminate\Database\Seeder;
 
@@ -33,7 +34,8 @@ class DatabaseSeeder extends Seeder
             PaymentSeeder::class,
             AddressSeeder::class,
             EventSeeder::class,
-            AnnouncementSeeder::class
+            AnnouncementSeeder::class,
+            PriceFilterSeeder::class
         ]);
         
     }

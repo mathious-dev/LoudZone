@@ -52,7 +52,7 @@ class CategoryForm extends AdminComponent
     {
         //Pour l'unique on doit préciser la table et aussi dire qu'il faut ignore l'id de l'objet 
         // qu'on est en train de modifier sinon il va détecter l'objet comme un doublon alors qu'on le modifie
-        return ['label' => ['required',Rule::unique('categories')->ignore($this->category->id)],
+        return ['label' => ['required','max:255',Rule::unique('categories')->ignore($this->category->id)],
         'type'=>'nullable|max:255'];
     }
 }

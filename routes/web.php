@@ -19,6 +19,8 @@ use App\Livewire\administration\order\OrderListAdmin;
 use App\Livewire\administration\payment\PaymentListAdmin;
 use App\Livewire\administration\permission\PermissionForm;
 use App\Livewire\administration\permission\PermissionList;
+use App\Livewire\administration\priceFilter\PriceFilterForm;
+use App\Livewire\administration\priceFilter\PriceFilterList;
 use App\Livewire\administration\promotion\PromotionForm;
 use App\Livewire\administration\promotion\PromotionList;
 use App\Livewire\administration\role\RoleForm;
@@ -120,6 +122,11 @@ Route::middleware([
 
         //Dashboard
         Route::get('/dashboard',AdminDashBoard::class)->name('dashboard');
+        
+        //Filtre de prix
+        Route::get('/priceFilters',PriceFilterList::class)->name('priceFilterList');
+        Route::get('/priceFilter/create',PriceFilterForm::class)->name('priceFilterForm.create');
+        Route::get('/priceFilter/edit/{priceFilter}',PriceFilterForm::class)->name('priceFilterForm.edit');
     });
     //Message Support
     Route::get('/supportMessage/create',SupportMessageForm::class)->name('supportMessage.create');
@@ -132,6 +139,7 @@ Route::middleware([
     //Panier
     Route::get('/cart/{userId}',CartList::class)->name('cartList');
 
+    
 });
 
 //Article
