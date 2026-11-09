@@ -16,7 +16,7 @@ trait QueryTrait
         $query=$this->searchCategoryFunction($query);
         $query=$this->searchBooleanFunction($query);
         $query=$this->searchRoleFunction($query);
-        $query=$this->searchsearchPriceFilterFunction($query);
+        $query=$this->searchPriceFilterFunction($query);
         return $query->paginate($pagination);
     }
     public function querySearch()

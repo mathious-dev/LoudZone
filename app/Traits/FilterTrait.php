@@ -12,6 +12,7 @@ trait FilterTrait
     public $searchCategory='';
     public $searchBoolean='';
     public $searchRole='';
+    public $tabListPriceFilterId=[];
 
     //La variable de la colonne de recherche
     public $searchWichColumn='';
