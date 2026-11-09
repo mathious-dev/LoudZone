@@ -9,7 +9,7 @@
                 @foreach ($listPriceFilters as $priceFilter)
                     <label class="cursor-pointer">
                         <input type="checkbox"
-                               wire:model.live="tabPriceFilterId"
+                               wire:model.live="tabListPriceFilterId"
                                value="{{ $priceFilter->id }}"
                                class="peer sr-only">
 

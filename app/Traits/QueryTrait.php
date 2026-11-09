@@ -8,19 +8,20 @@ trait QueryTrait
     public function query($pagination=10,$withRelations = [])
     {
         $query=$this->model::query();
-        if (!empty($withRelations)) 
+        if (!empty($withRelations))
             $query = $query->with($withRelations);
-        
+
         $query=$this->searchFunction($query);
         $query=$this->searchAscDescFunction($query);
         $query=$this->searchCategoryFunction($query);
         $query=$this->searchBooleanFunction($query);
         $query=$this->searchRoleFunction($query);
+        $query=$this->searchsearchPriceFilterFunction($query);
         return $query->paginate($pagination);
     }
     public function querySearch()
     {
-        if (empty($this->search)) 
+        if (empty($this->search))
             return [];
         $query=$this->model::query();
         $query=$this->searchFunction($query);

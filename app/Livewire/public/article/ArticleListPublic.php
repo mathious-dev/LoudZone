@@ -30,6 +30,7 @@ class ArticleListPublic extends PublicComponent
         $this->searchWichColumn='title';
         $this->searchAscDescWichColumn = 'title';
         $this->searchCategoryWichColumn='category_id';
+        $this->searchPriceWichColumn='final_price';
         $this->tabSearchPossibility=['title'=>'Titre'];
         $this->tabSearchAscDescPossibility=[
             'title'=>'Titre',
@@ -46,6 +47,7 @@ class ArticleListPublic extends PublicComponent
         $query=$this->searchFunction($query);
         $query=$this->searchAscDescFunction($query);
         $query=$this->searchCategoryFunction($query);
+        $query=$this->searchPriceFilterFunction($query);
         return $query->paginate(9);
     }
     public function queryEvent()
