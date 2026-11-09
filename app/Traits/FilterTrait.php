@@ -2,9 +2,11 @@
 
 namespace App\Traits;
 
+use App\Models\PriceFilter;
+
 trait FilterTrait
 {
-    //La variable de recherche 
+    //La variable de recherche
     public $search='';
     public $searchAscDesc='';
     public $searchCategory='';
@@ -16,6 +18,7 @@ trait FilterTrait
     public $searchAscDescWichColumn='';
     public $searchCategoryWichColumn='';
     public $searchBooleanWichColumn='';
+    public $searchPriceWichColumn='';
 
     //Le tableau de colonne de recherche possible
     public $tabSearchPossibility=[];
@@ -48,7 +51,7 @@ trait FilterTrait
             return $query->where($this->searchCategoryWichColumn,$this->searchCategory);
         return $query;
     }
-    
+
     public function searchBooleanFunction($query)
     {
         if ($this->searchBoolean!=='')
@@ -57,11 +60,25 @@ trait FilterTrait
     }
     public function searchRoleFunction($query)
     {
-        if (!empty($this->searchRole)) 
+        if (!empty($this->searchRole))
         {
             return $query->whereHas('roles', function($q) {
                 $q->where('id', $this->searchRole);
             });
+        }
+        return $query;
+    }
+    public function searchPriceFilterFunction($query)
+    {
+        $listPriceFilter=null;
+        if($this->tabListPriceFilterId)
+        {
+            $listPriceFilter=PriceFilter::whereIn('id',$this->tabListPriceFilterId)->get();
+            [$max,$min]=PriceFilter::takeRealMaxAndMin($listPriceFilter);
+            if (!is_null($min))
+                $query->where($this->searchPriceWichColumn, '>=', $min);
+            if (!is_null($max))
+                $query->where($this->searchPriceWichColumn, '<=', $max);
         }
         return $query;
     }
@@ -81,9 +98,9 @@ trait FilterTrait
     }
     public function updatedSearch()
     {
-        if (!empty($this->search)) 
+        if (!empty($this->search))
             $this->showList = true;
-        else 
+        else
             $this->showList = false;
         $this->resetPage();
     }

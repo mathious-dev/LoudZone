@@ -10,6 +10,7 @@ use App\Services\CartService;
 
 class ArticleListPublic extends PublicComponent
 {
+    public $tabListPriceFilterId=[];
     protected $model=Article::class;
     public function render()
     {

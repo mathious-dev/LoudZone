@@ -11,4 +11,17 @@ class PriceFilter extends BaseEntity
     'max_price',
     'min_price',
     'is_active'];
+    public static function takeRealMaxAndMin($tabPriceFilter)
+    {
+        $max=null;
+        $min=null;
+        foreach($tabPriceFilter as $priceFilter)
+        {
+            if($priceFilter->max_price>$max)
+                $max=$priceFilter->max_price;
+            if($priceFilter->min_price<$min)
+                $min=$priceFilter->min_price;
+        }
+        return [$max,$min];
+    }
 }
