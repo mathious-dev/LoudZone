@@ -75,11 +75,23 @@ trait FilterTrait
         if($this->tabListPriceFilterId)
         {
             $listPriceFilter=PriceFilter::whereIn('id',$this->tabListPriceFilterId)->get();
-            [$max,$min]=PriceFilter::takeRealMaxAndMin($listPriceFilter);
-            if (!is_null($min))
-                $query->where($this->searchPriceWichColumn, '>=', $min);
-            if (!is_null($max))
-                $query->where($this->searchPriceWichColumn, '<=', $max);
+            $query->where(function ($subQuery) use ($listPriceFilter)
+            {
+                //On va appliquer la boucle dans le function afin de construire une requête complexe
+                foreach ($listPriceFilter as $filter)
+                {
+                    //Si on est au premier tour Laravel transforme le orWhere en where classique
+                    //Si c'est le 2eme tour il va appliquer le orWhere plutôt qu'un simple where
+                    $subQuery->orWhere(function ($q) use ($filter)
+                    {
+                        if (!is_null($filter->min_price))
+                            $q->where($this->searchPriceWichColumn, '>=', $filter->min_price);
+
+                        if (!is_null($filter->max_price))
+                            $q->where($this->searchPriceWichColumn, '<=', $filter->max_price);
+                    });
+                }
+            });
         }
         return $query;
     }
@@ -120,5 +132,9 @@ trait FilterTrait
     public function updatedSearchRole()
     {
         $this->resetPage();
+    }
+    public function updatedTabListPriceFilterId()
+    {
+        $this->resetPage(); 
     }
 }

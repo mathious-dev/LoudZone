@@ -2,6 +2,7 @@
 namespace App\Livewire\administration\article;
 use App\Livewire\AdminComponent;
 use App\Models\Article;
+use App\Models\PriceFilter;
 use App\Models\Promotion;
 
 
@@ -18,6 +19,7 @@ class ArticleListAdmin extends AdminComponent
         $this->searchAscDescWichColumn = 'title';
         $this->searchCategoryWichColumn='category_id';
         $this->searchBooleanWichColumn='is_published';
+        $this->searchPriceWichColumn='final_price';
         $this->tabSearchPossibility=[
             'title'=>'Titre',
             'slug'=>'Lien'
@@ -36,7 +38,8 @@ class ArticleListAdmin extends AdminComponent
         return view('livewire.administration.article.article-list-admin',['listArticles'=>$this->query(10,['promotion','category','clothes']),
         'listSearch'=>$this->querySearch(),
         'listCategories'=>Article::getCategoryForArticle(),
-        'listPromotions'=>$this->otherQuery(Promotion::class)]);
+        'listPromotions'=>$this->otherQuery(Promotion::class),
+        'listPriceFilters'=>$this->otherQuery(PriceFilter::class)]);
     }
     public function changeStatePublishArticle(Article $article)
     {

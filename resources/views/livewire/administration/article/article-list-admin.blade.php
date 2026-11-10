@@ -17,33 +17,36 @@
     <!-- BARRE D'OUTILS (Recherche + Filtres + Tri) -->
     <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm mb-6">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            
+
             <!-- Barre de recherche (Prend tout l'espace libre) -->
             <div class="flex-1 w-full">
                 <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn" :showList="$showList" />
             </div>
-            
+
             <!-- Séparateur vertical (Visible sur écran large) -->
             <div class="hidden lg:block w-px h-10 bg-gray-200"></div>
-            
+
             <!-- Zone des 3 filtres (Souple, ne s'écrase plus) -->
             <div class="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap gap-4 w-full lg:w-auto">
-                
+
                 <!-- sm:flex-1 permet au filtre de s'adapter, lg:w-56 assure une bonne largeur sur PC (224px minimum) -->
                 <div class="w-full sm:flex-1 lg:w-56">
                     <x-search-category :options="$tabSearchCategoryPossibility"/>
                 </div>
-                
+
                 <div class="w-full sm:flex-1 lg:w-56">
                     <x-search-asc-desc :options="$tabSearchAscDescPossibility"/>
                 </div>
-                
+
                 <div class="w-full sm:flex-1 lg:w-56">
-                    <x-search-boolean 
-                        wire:model.live="searchBoolean" 
-                        label-true="Publié" 
-                        label-false="Non publié" 
+                    <x-search-boolean
+                        wire:model.live="searchBoolean"
+                        label-true="Publié"
+                        label-false="Non publié"
                     />
+                </div>
+                <div>
+                    <x-search-price-filter :listPriceFilters="$listPriceFilters"/>
                 </div>
             </div>
         </div>
@@ -74,7 +77,7 @@
 
                 <!-- 1. LA LIGNE PRINCIPALE -->
                 <tr class="hover:bg-gray-50 transition-colors duration-200">
-                    
+
                     <!-- Bouton Dérouler -->
                     <td class="px-2 py-3 whitespace-nowrap text-center cursor-pointer" @click="expanded = !expanded">
                         <button class="text-gray-400 hover:text-indigo-600 focus:outline-none transition-colors">
@@ -88,13 +91,13 @@
                     <td class="px-3 py-3 whitespace-nowrap text-sm font-bold text-gray-900 truncate max-w-[200px]" title="{{ $article->title }}">
                         {{ $article->title }}
                     </td>
-                    
+
                     <!-- Prix de base (HT et TTC regroupés) -->
                     <td class="px-3 py-3 whitespace-nowrap">
                         <div class="text-sm font-medium text-gray-900">{{ number_format($article->price_ht, 2, ',', ' ') }} € <span class="text-[10px] text-gray-500 font-normal">HT</span></div>
                         <div class="text-xs text-gray-500">{{ number_format($article->price_with_tva, 2, ',', ' ') }} € <span class="text-[10px]">TTC (TVA {{ $article->tva }}%)</span></div>
                     </td>
-                    
+
                     <!-- Promotion -->
                     <td class="px-3 py-3 whitespace-nowrap text-center">
                         @if($article->promotion)
@@ -115,13 +118,13 @@
                                         OK
                                     </button>
                                 </div>
-                                @error("promotionNullInfoId.{$article->id}") 
-                                    <span class="text-red-500 text-[9px] mt-0.5 font-medium">{{ $message }}</span> 
+                                @error("promotionNullInfoId.{$article->id}")
+                                    <span class="text-red-500 text-[9px] mt-0.5 font-medium">{{ $message }}</span>
                                 @enderror
                             </form>
                         @endif
                     </td>
-                    
+
                     <!-- Prix Final -->
                     <td class="px-3 py-3 whitespace-nowrap text-sm font-bold text-indigo-600">
                         {{ number_format($article->final_price, 2, ',', ' ') }} €
@@ -168,7 +171,7 @@
                                 <button wire:click="changeStatePublishArticle({{ $article->id }})" class="text-[11px] text-emerald-700 hover:text-emerald-900 font-semibold transition-colors border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded shadow-sm">Publier</button>
                             @endif
                         </div>
-                        
+
                         <!-- Éditer / Supprimer -->
                         <div class="flex items-center space-x-1 border-l border-gray-200 pl-2">
                             <a href="{{ route('admin.articleForm.edit', $article) }}" class="text-indigo-500 hover:text-indigo-900 transition-colors p-1 hover:bg-indigo-50 rounded" title="Modifier">
@@ -203,29 +206,29 @@
                                     <svg class="w-4 h-4 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     Description complète
                                 </h4>
-                                
+
                                 <div class="p-4 bg-white rounded-lg border border-gray-200 text-sm text-gray-600 leading-relaxed mb-5 shadow-sm">
                                     {{ $article->description ?: 'Aucune description fournie pour cet article.' }}
                                 </div>
-                                
+
                                 <!-- Grille des caractéristiques -->
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                                    
+
                                     <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Créateur</span>
                                         <span class="font-medium text-gray-800">{{ $article->user ? $article->user->first_name . ' ' . $article->user->name : 'Aucun utilisateur' }}</span>
                                     </div>
-                                    
+
                                     <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Slug (URL)</span>
                                         <span class="font-medium text-gray-800 truncate block" title="{{ $article->slug }}">{{ $article->slug }}</span>
                                     </div>
-                                    
+
                                     <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Taux TVA</span>
                                         <span class="font-medium text-gray-800">{{ $article->tva }} %</span>
                                     </div>
-                                    
+
                                     <div class="bg-white p-3.5 rounded-lg border border-gray-200 shadow-sm">
                                         <span class="block text-gray-400 text-[10px] font-bold uppercase mb-1">Dernière modif.</span>
                                         <span class="font-medium text-gray-800">{{ $article->updated_at ? $article->updated_at->format('d/m/Y') : '-' }}</span>
@@ -235,19 +238,19 @@
                                         <!-- Ce bloc entier ne s'affichera que si l'article possède des vêtements -->
                                         <div class="col-span-2 md:col-span-4 bg-white p-4 rounded-lg border border-gray-200 shadow-sm mt-2">
                                             <span class="block text-gray-400 text-[10px] font-bold uppercase mb-3">Vêtements (Tailles & Couleurs)</span>
-                                            
+
                                             <div class="flex flex-wrap gap-2">
                                                 @foreach ($article->clothes as $clothe)
                                                     <span class="inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100 shadow-sm">
-                                                        {{ $clothe->size ?? 'Unique' }} 
-                                                        <span class="mx-2 text-indigo-300">|</span> 
+                                                        {{ $clothe->size ?? 'Unique' }}
+                                                        <span class="mx-2 text-indigo-300">|</span>
                                                         {{ $clothe->color ?? 'Standard' }}
                                                     </span>
                                                 @endforeach
                                             </div>
                                         </div>
                                     @endif
-                                    
+
                                 </div>
                             </div>
                         </div>

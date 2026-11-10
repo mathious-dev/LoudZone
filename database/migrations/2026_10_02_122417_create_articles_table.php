@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
-            $table->text('description')->nullable();  
-            $table->decimal('price_ht', 5, 2);   
-            $table->string('slug')->unique();   
-            $table->integer('stock')->default(0);   
-            $table->boolean('is_published')->default(false);   
+            $table->text('description')->nullable();
+            $table->decimal('price_ht', 5, 2);
+            $table->string('slug')->unique();
+            $table->integer('stock')->default(0);
+            $table->boolean('is_published')->default(false);
             $table->decimal('tva', 5, 2)->default(21.00);
             $table->string('primary_image')->nullable();
             $table->decimal('final_price');
