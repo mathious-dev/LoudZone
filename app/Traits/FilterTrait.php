@@ -82,8 +82,10 @@ trait FilterTrait
                 {
                     //Si on est au premier tour Laravel transforme le orWhere en where classique
                     //Si c'est le 2eme tour il va appliquer le orWhere plutôt qu'un simple where
+                    //Chaque function est comme une parenthèse en SQL chaque condition sera dans sa parenthèse avec un OR entre eux
                     $subQuery->orWhere(function ($q) use ($filter)
                     {
+                        //le q c'est le builder et le filter vient de la liste qu'on a récupéré avec les données
                         if (!is_null($filter->min_price))
                             $q->where($this->searchPriceWichColumn, '>=', $filter->min_price);
 
@@ -135,6 +137,6 @@ trait FilterTrait
     }
     public function updatedTabListPriceFilterId()
     {
-        $this->resetPage(); 
+        $this->resetPage();
     }
 }
