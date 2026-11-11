@@ -82,7 +82,7 @@ trait FilterTrait
                 {
                     //Si on est au premier tour Laravel transforme le orWhere en where classique
                     //Si c'est le 2eme tour il va appliquer le orWhere plutôt qu'un simple where
-                    //Chaque function est comme une parenthèse en SQL chaque condition sera dans sa parenthèse avec un OR entre eux
+                    //Chaque function est comme une parenthèse en SQL chaque condition sera dans sa parenthèse avec un OR entre les parenthèses
                     $subQuery->orWhere(function ($q) use ($filter)
                     {
                         //le q c'est le builder et le filter vient de la liste qu'on a récupéré avec les données

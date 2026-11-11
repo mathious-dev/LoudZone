@@ -18,9 +18,9 @@ class CartList extends PublicComponent
     {
         return view('livewire.public.cart.cart-list',['cart'=>$this->cart]);
     }
-    public function mount($userId)
+    public function mount()
     {
-        $this->user=User::find($userId);
+        $this->user=User::find(auth()->id());
         $this->cart=$this->user->carts()->with(['cartItems.article'])->where('is_payed',false)->first();
     }
     public function deleteItems($cartId)

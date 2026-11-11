@@ -6,10 +6,17 @@
         <title>Bienvenue sur LoudZone</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    
+
     <!-- On modifie le body pour qu'il gère le fond vidéo et le conteneur principal -->
     <body class="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-gray-900 text-white antialiased font-sans">
-        
+
+        <!-- ========================================== -->
+        <!-- LA NAVIGATION (Fixée tout en haut)         -->
+        <!-- ========================================== -->
+        <div class="absolute top-0 left-0 w-full z-50">
+            @livewire('navigation-menu')
+        </div>
+
         <!-- ========================================== -->
         <!-- L'ARRIÈRE-PLAN VIDÉO                       -->
         <!-- ========================================== -->
@@ -23,8 +30,8 @@
         <!-- ========================================== -->
         <!-- LE CONTENU CENTRAL (La carte de bienvenue) -->
         <!-- ========================================== -->
-        <div class="relative z-10 w-full max-w-2xl px-8 py-12 bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl border-t-4 border-[#48041B] text-center mx-4">
-            
+        <div class="relative z-10 w-full max-w-2xl px-8 py-12 bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl border-t-4 border-[#48041B] text-center mx-4 mt-16">
+
             <!-- Le Logo (Optionnel, mais ça rend bien sur l'accueil) -->
             <div class="flex justify-center mb-8">
                  <!-- Utilise ton composant logo ici, ou une simple balise img -->
@@ -36,8 +43,8 @@
             <!-- Titre principal -->
             <h1 class="text-4xl md:text-5xl font-extrabold text-[#48041B] mb-6 tracking-tight">
                 Bienvenue sur LoudZone
-            </h1>   
-            
+            </h1>
+
             <!-- Petit texte d'accroche (Optionnel) -->
             <p class="text-gray-600 mb-10 text-lg">
                 Connectez-vous pour accéder à votre espace ou rejoignez-nous dès maintenant !
@@ -69,6 +76,6 @@
             @endif
 
         </div>
-        
+
     </body>
 </html>

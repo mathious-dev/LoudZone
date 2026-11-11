@@ -62,7 +62,7 @@ Route::middleware([
         Route::get('/user/edit/{user}',UserForm::class)->name('userForm.edit');
         Route::get('/user/detail/{id}',UserDetail::class)->name('userDetail');
 
-        //role 
+        //role
         Route::get('/roles',RoleList::class)->name('roleList');
         Route::get('/role/create',RoleForm::class)->name('roleForm.create');
         Route::get('/role/edit/{role}',RoleForm::class)->name('roleForm.edit');
@@ -122,7 +122,7 @@ Route::middleware([
 
         //Dashboard
         Route::get('/dashboard',AdminDashBoard::class)->name('dashboard');
-        
+
         //Filtre de prix
         Route::get('/priceFilters',PriceFilterList::class)->name('priceFilterList');
         Route::get('/priceFilter/create',PriceFilterForm::class)->name('priceFilterForm.create');
@@ -137,9 +137,9 @@ Route::middleware([
     Route::get('/order/edit/{order}',OrderForm::class)->name('orderForm.edit');
 
     //Panier
-    Route::get('/cart/{userId}',CartList::class)->name('cartList');
+    Route::get('/cart',CartList::class)->name('cartList');
 
-    
+
 });
 
 //Article
@@ -150,7 +150,7 @@ Route::get('/article/{article}',ArticleDetail::class)->name('articleDetail');
 Route::get('/events',EventListPublic::class)->name('eventListPublic');
 Route::get('/event/{event}',EventDetail::class)->name('eventDetail');
 
-//Google 
+//Google
 //allez
 Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
 //retour
