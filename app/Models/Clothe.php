@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use App\Models\BaseEntity;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 
 class Clothe extends BaseEntity
 {
-    //On dit bien à laravel que c'est plus id mais article_id
-    protected $primaryKey = 'article_id';
-    //On ne doit plus incrémenter comme son id est l'id de l'article
-    public $incrementing = false;
+    use HasUlids;
     protected $fillable=[
         'article_id',
         'size',

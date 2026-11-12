@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('support_messages', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable();   
+            $table->ulid('id')->primary();
+            $table->string('title')->nullable();
             $table->text('content');
             $table->boolean('state')->default(false);
             $table->timestamps();

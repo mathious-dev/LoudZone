@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('add_info_by_categories', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('add_info_id');
+            $table->ulid('category_id');
+            $table->primary(['add_info_id', 'category_id']);
             $table->timestamps();
         });
     }

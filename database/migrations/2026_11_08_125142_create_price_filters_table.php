@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('price_filters', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string('label');
             $table->decimal('max_price',10,2)->nullable();
             $table->decimal('min_price',10,2)->nullable();

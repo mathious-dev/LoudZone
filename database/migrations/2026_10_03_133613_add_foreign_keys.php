@@ -13,74 +13,76 @@ return new class extends Migration
     {
        // Table articles
         Schema::table('articles', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->change();
-            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete()->change();
-            $table->foreignId('promotion_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('category_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('promotion_id')->nullable()->constrained()->nullOnDelete()->change();
         });
 
-        // Table add_info_by_categories (Ici ce sont des cascades, donc pas de nullable, c'est bon)
+        // Table add_info_by_categories
         Schema::table('add_info_by_categories', function (Blueprint $table) {
-            $table->foreignId('add_info_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            //le references et le on veut dire : cette colonne doit correspondre à un ID qui existe déjà dans la table qui est dans le on
+            $table->foreign('add_info_id')->references('id')->on('add_infos')->cascadeOnDelete();
+            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });
 
         // Table support_messages
         Schema::table('support_messages', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->change();
-            $table->foreignId('add_info_id')->nullable()->constrained()->change();
-            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('add_info_id')->nullable()->constrained()->change();
+            $table->foreignUlid('category_id')->nullable()->constrained()->nullOnDelete()->change();
         });
 
         // Table orders
         Schema::table('orders', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete()->change();
         });
 
         // Table article_orders
         Schema::table('article_orders', function (Blueprint $table) {
-            $table->foreignId('article_id')->nullable()->constrained()->nullOnDelete()->change();
-            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('article_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('order_id')->constrained()->cascadeOnDelete();
         });
 
         // Table payment
         Schema::table('payments', function (Blueprint $table) {
-            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('order_id')->constrained()->cascadeOnDelete();
         });
 
         // Table event
         Schema::table('events', function(Blueprint $table) {
-            $table->foreignId('address_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('address_id')->nullable()->constrained()->nullOnDelete()->change();
         });
-        
+
         // Table carts
         Schema::table('carts', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete()->change();
         });
 
         // Table cart_items
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->foreignId('article_id')->constrained()->cascadeOnDelete()->change();
-            $table->foreignId('cart_id')->constrained()->cascadeOnDelete()->change();
+            $table->foreignUlid('article_id')->constrained()->cascadeOnDelete()->change();
+            $table->foreignUlid('cart_id')->constrained()->cascadeOnDelete()->change();
         });
 
         // Table clothes
         Schema::table('clothes', function (Blueprint $table) {
-            $table->foreignId('article_id')->constrained()->cascadeOnDelete()->change();
+            $table->foreignUlid('article_id')->constrained()->cascadeOnDelete()->change();
         });
 
         // Table announcements
         Schema::table('announcements', function (Blueprint $table) {
-            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('category_id')->nullable()->constrained()->nullOnDelete()->change();
         });
-    }   
-
-
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        // La méthode dropConstrainedForeignId fonctionne aussi bien pour
+        // les IDs classiques que pour les ULIDs car elle se base sur le nom de la colonne.
+
         // Table payment
         Schema::table('payments', function (Blueprint $table) {
             $table->dropConstrainedForeignId('order_id');

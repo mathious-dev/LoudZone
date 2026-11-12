@@ -42,7 +42,7 @@
 
                 <!-- Prénom -->
                 <div class="mt-4">
-                    <x-label for="first_name" value="{{ __('First_Name') }}" class="text-[#48041B] font-bold" />
+                    <x-label for="first_name" value="{{ __('FirstName') }}" class="text-[#48041B] font-bold" />
                     <x-input id="first_name" class="block mt-1 w-full border-gray-300 focus:border-[#48041B] focus:ring-[#48041B] rounded-md shadow-sm" type="text" name="first_name" :value="old('first_name')" required autocomplete="given-name" />
                 </div>
 

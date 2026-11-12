@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string('url');
             //méthode de laravel native qui va transformer en imageable_id et imageable_type
             $table->morphs('imageable');

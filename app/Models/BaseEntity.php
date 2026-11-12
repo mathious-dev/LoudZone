@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseEntity extends Model
 {
+    use HasUlids;
     protected $nameColumn='name';
     protected $nameValueColumn='base';
     //Cette méthode va permettre d'afficher le nom,label ou autre dans un message de suppression du trait

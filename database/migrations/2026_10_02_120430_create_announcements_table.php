@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('announcements', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string('label')->unique();
             $table->text('content');
             $table->boolean('is_showing')->default(false);

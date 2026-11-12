@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('article_orders', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->integer('quantity');
             $table->decimal('unit_price', 5, 2);
             $table->timestamps();
