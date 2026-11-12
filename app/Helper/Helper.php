@@ -6,6 +6,9 @@ if(!function_exists('saveHistory'))
 {
     function saveHistory($action)
     {
+        if (!auth()->check()) 
+            return;
+
         History::create([
             'user_id'=>auth()->id(),
             'user_name'=>auth()->user()->name,

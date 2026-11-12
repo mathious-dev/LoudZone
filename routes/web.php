@@ -136,11 +136,10 @@ Route::middleware([
     Route::get('/order/create',OrderForm::class)->name('orderForm.create');
     Route::get('/order/edit/{order}',OrderForm::class)->name('orderForm.edit');
 
-    //Panier
-    Route::get('/cart',CartList::class)->name('cartList');
-
-
 });
+
+//Panier
+Route::get('/cart',CartList::class)->name('cartList');
 
 //Article
 Route::get('/articles',ArticleListPublic::class)->name('articleListPublic');

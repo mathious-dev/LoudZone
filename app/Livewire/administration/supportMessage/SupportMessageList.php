@@ -24,12 +24,12 @@ class SupportMessageList extends AdminComponent
         $this->tabSearchCategoryPossibility=SupportMessage::getCategoryForSupportMessage();
         if(request()->query('category_id'))
             $this->searchCategory=request()->query('category_id');
-        
+
     }
     public function render()
     {
-        return view('livewire.administration.supportMessage.support-message-list',['listSupportMessages'=>$this->query(10,['category','user','addInfo']),
-        'listSearch'=>$this->querySearch()]);
+        return view('livewire.administration.supportMessage.support-message-list',['listSupportMessages'=>$this->query(withRelations:['category','user','addInfo'],orderByColumn:'created_at'),
+        'listSearch'=>$this->querySearch(),]);
     }
     public function messageTreat(SupportMessage $message)
     {

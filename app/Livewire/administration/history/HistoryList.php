@@ -14,7 +14,7 @@ class HistoryList extends AdminComponent
     protected $model=History::class;
     public function render()
     {
-        return view('livewire.administration.history.history-list',['listHistories'=>$this->query(),'listSearch'=>$this->querySearch()]);
+        return view('livewire.administration.history.history-list',['listHistories'=>$this->query(orderByColumn:'created_at'),'listSearch'=>$this->querySearch()]);
     }
     public function delete($id)
     {

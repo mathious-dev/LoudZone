@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -27,12 +28,16 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        return User::create([
+        $userCreate=User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'first_name'=>$input['first_name'],
             'news_letter' => isset($input['news_letter']) ? true : false,
             'password' => Hash::make($input['password']),
         ])->assignRole('user');
+        $guestCart=Cart::where('session_id',session()->getId())->first();
+        if($guestCart)
+            $guestCart->update(['user_id'=>$userCreate->id,'session_id'=>null]);
+        return $userCreate;
     }
 }

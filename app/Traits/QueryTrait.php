@@ -5,7 +5,7 @@ namespace App\Traits;
 trait QueryTrait
 {
     //par défaut on met à 10
-    public function query($pagination=10,$withRelations = [])
+    public function query($pagination=10,$withRelations = [], $orderByColumn = null, $orderDirection = 'desc')
     {
         $query=$this->model::query();
         if (!empty($withRelations))
@@ -17,6 +17,9 @@ trait QueryTrait
         $query=$this->searchBooleanFunction($query);
         $query=$this->searchRoleFunction($query);
         $query=$this->searchPriceFilterFunction($query);
+        //Pour les listes de messages support et historique, ils doivent être trier du plus récent au plus ancien
+        if($orderByColumn)
+             return $query->orderBy($orderByColumn,$orderDirection)->paginate($pagination);
         return $query->paginate($pagination);
     }
     public function querySearch()

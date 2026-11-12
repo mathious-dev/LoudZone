@@ -1,4 +1,13 @@
 <x-guest-layout>
+    <!-- BOUTON RETOUR SVG -->
+    <div class="absolute top-6 left-6 z-50">
+        <a href="{{ url()->previous() }}" class="group flex items-center justify-center w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full border border-white/20 text-white transition-all duration-300 hover:-translate-x-1" title="Retour">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+        </a>
+    </div>
+
     <!-- Conteneur principal -->
     <div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900 py-16">
 
@@ -11,14 +20,10 @@
         <div class="absolute z-0 inset-0 bg-[#48041B]/40 mix-blend-multiply"></div>
 
         <!-- LA CARTE DU FORMULAIRE -->
-        <!-- pt-16 crée l'espace à l'intérieur pour le logo, mt-16 crée l'espace à l'extérieur -->
         <div class="relative z-10 w-full sm:max-w-md px-8 pb-10 pt-16 mt-16 bg-white/95 backdrop-blur-sm shadow-2xl sm:rounded-3xl border-t-4 border-[#48041B]">
-            
-            <!-- ========================================== -->
-            <!-- LE LOGO BRUT : Mi-dedans, mi-dehors        -->
-            <!-- ========================================== -->
+
+            <!-- LE LOGO -->
             <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <!-- Agrandissement simple x1.5 sans AUCUN fond ni cercle -->
                 <div class="scale-[3] origin-center">
                     <x-authentication-card-logo />
                 </div>
@@ -52,7 +57,7 @@
                     <x-label for="password" value="{{ __('Password') }}" class="text-[#48041B] font-bold" />
                     <x-input id="password" class="block mt-1 w-full border-gray-300 focus:border-[#48041B] focus:ring-[#48041B] rounded-md shadow-sm" type="password" name="password" required autocomplete="new-password" />
                 </div>
-                
+
                 <!-- Confirmation Mot de passe -->
                 <div class="mt-4">
                     <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" class="text-[#48041B] font-bold" />
@@ -64,14 +69,13 @@
                     <x-input id="news_letter" class="rounded border-gray-300 text-[#48041B] shadow-sm focus:ring-[#48041B] w-5 h-5" type="checkbox" name="news_letter" />
                     <x-label for="news_letter" value="{{ __('News letter') }}" class="ml-3 text-gray-700 font-medium cursor-pointer" />
                 </div>
-                
+
                 <!-- CGV -->
                 @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                     <div class="mt-4">
                         <x-label for="terms">
                             <div class="flex items-start">
                                 <x-checkbox name="terms" id="terms" required class="mt-1 text-[#48041B] focus:ring-[#48041B]" />
-
                                 <div class="ms-3">
                                     {!! __('I agree to the :terms_of_service and :privacy_policy', [
                                             'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="font-semibold underline text-sm text-[#48041B] hover:text-[#300211] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#48041B]">'.__('Terms of Service').'</a>',
@@ -94,7 +98,10 @@
                     </button>
                 </div>
             </form>
-            <a href="{{ route('auth.google') }}">S'inscrire avec google</a>
+
+            <div class="mt-6 text-center">
+                <a href="{{ route('auth.google') }}" class="inline-block text-sm font-bold text-[#48041B] hover:underline">S'inscrire avec Google</a>
+            </div>
         </div>
     </div>
 </x-guest-layout>

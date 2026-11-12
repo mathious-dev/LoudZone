@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\User;
 use App\Services\CartService;
+use Illuminate\Support\Facades\Auth;
 
 class CartList extends PublicComponent
 {
@@ -20,8 +21,14 @@ class CartList extends PublicComponent
     }
     public function mount()
     {
-        $this->user=User::find(auth()->id());
-        $this->cart=$this->user->carts()->with(['cartItems.article'])->where('is_payed',false)->first();
+        if(Auth::check())
+        {
+            $this->user=User::find(auth()->id());
+            $this->cart=$this->user->carts()->with(['cartItems.article'])->where('is_payed',false)->first();
+        }
+        else
+            $this->cart = Cart::with(['cartItems.article'])->where('session_id',session()->getId())->where('is_payed',false)->first();
+
     }
     public function deleteItems($cartId)
     {
@@ -29,7 +36,7 @@ class CartList extends PublicComponent
         if($cart)
         {
             $cart->cartItems()->delete();
-            saveHistory("Suppression de tous les articles dans le panier $cartId de {$cart->user->name}");
+            saveHistory("Suppression de tous les articles dans le panier $cartId ");
         }
     }
     public function deleteItem($cartItemId)

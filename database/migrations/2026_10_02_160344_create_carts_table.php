@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_payed')->default(false);
-            $table->integer('session_id')->nullable();
+            $table->string('session_id')->nullable();
             $table->timestamps();
         });
     }

@@ -36,23 +36,23 @@
                         {{ __('Boutique') }}
                     </x-nav-link>
 
-                    <!-- Le lien événements corrigé avec le composant x-nav-link -->
                     <x-nav-link href="{{ route('eventListPublic') }}" :active="request()->routeIs('eventListPublic')">
                         {{ __('Événements') }}
                     </x-nav-link>
                 </div>
             </div>
 
-            <!-- PARTIE DROITE (Commandes + Profil) -->
+            <!-- PARTIE DROITE (Commandes + Panier + Profil/Connexion) -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
-                <!-- Lien Vos Commandes (Sécurisé pour ne pas planter) -->
+                <!-- Lien Vos Commandes (Uniquement pour les connectés) -->
                 @auth
                 <a href="{{ route('orderListUser') }}" class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out mr-4">
                     Commandes
                 </a>
                 @endauth
 
+                <!-- Panier (Visible pour tout le monde) -->
                 <a href="{{ route('cartList')}}"
                 class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-200"
                 title="Voir mon panier">
@@ -61,7 +61,7 @@
                     </svg>
                 </a>
 
-                <!-- Settings Dropdown (Caché pour le guest car Auth::user plante) -->
+                <!-- Profil si connecté, ou Connexion/Inscription si visiteur -->
                 @auth
                 <div class="ms-3 relative">
                     <x-dropdown align="right" width="48">
@@ -108,6 +108,18 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
+                @else
+                <!-- Liens de connexion discrets pour la navigation PC -->
+                <div class="ms-4 flex space-x-4">
+                    <a href="{{ route('login') }}" class="text-sm font-medium text-gray-500 hover:text-gray-700 transition">
+                        Se connecter
+                    </a>
+                    @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="text-sm font-medium text-gray-500 hover:text-gray-700 transition">
+                        S'inscrire
+                    </a>
+                    @endif
+                </div>
                 @endauth
             </div>
 
@@ -130,7 +142,6 @@
                 {{ __('Articles') }}
             </x-responsive-nav-link>
 
-            <!-- Lien événement ajouté pour le menu mobile -->
             <x-responsive-nav-link href="{{ route('eventListPublic') }}" :active="request()->routeIs('eventListPublic')">
                 {{ __('Événements') }}
             </x-responsive-nav-link>
@@ -143,37 +154,47 @@
         </div>
 
         <!-- Responsive Settings Options -->
-        @auth
         <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="flex items-center px-4">
-                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                    <div class="shrink-0 me-3">
-                        <img class="size-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+            @auth
+                <div class="flex items-center px-4">
+                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                        <div class="shrink-0 me-3">
+                            <img class="size-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                        </div>
+                    @endif
+
+                    <div>
+                        <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                     </div>
-                @endif
-
-                <div>
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
-            </div>
 
-            <div class="mt-3 space-y-1">
-                <!-- Account Management -->
-                <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}" x-data>
-                    @csrf
-                    <x-responsive-nav-link href="{{ route('logout') }}"
-                                   @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
+                <div class="mt-3 space-y-1">
+                    <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                        {{ __('Profile') }}
                     </x-responsive-nav-link>
-                </form>
-            </div>
+
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <x-responsive-nav-link href="{{ route('logout') }}"
+                                       @click.prevent="$root.submit();">
+                            {{ __('Log Out') }}
+                        </x-responsive-nav-link>
+                    </form>
+                </div>
+            @else
+                <!-- Liens de connexion pour la version Mobile -->
+                <div class="mt-3 space-y-1">
+                    <x-responsive-nav-link href="{{ route('login') }}">
+                        Se connecter
+                    </x-responsive-nav-link>
+                    @if (Route::has('register'))
+                    <x-responsive-nav-link href="{{ route('register') }}">
+                        S'inscrire
+                    </x-responsive-nav-link>
+                    @endif
+                </div>
+            @endauth
         </div>
-        @endauth
     </div>
 </nav>
