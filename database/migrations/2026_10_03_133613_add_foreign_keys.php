@@ -13,33 +13,33 @@ return new class extends Migration
     {
        // Table articles
         Schema::table('articles', function (Blueprint $table) {
-            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete()->change();
-            $table->foreignUlid('category_id')->nullable()->constrained()->nullOnDelete()->change();
-            $table->foreignUlid('promotion_id')->nullable()->constrained()->nullOnDelete()->change();
+            // J'ai enlevé les ->change()
+            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignUlid('category_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignUlid('promotion_id')->nullable()->constrained()->nullOnDelete();
         });
 
-        // Table add_info_by_categories
+        // Table add_info_by_categories (Reste inchangée car on a vu que c'était spécifique)
         Schema::table('add_info_by_categories', function (Blueprint $table) {
-            //le references et le on veut dire : cette colonne doit correspondre à un ID qui existe déjà dans la table qui est dans le on
             $table->foreign('add_info_id')->references('id')->on('add_infos')->cascadeOnDelete();
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
         });
 
         // Table support_messages
         Schema::table('support_messages', function (Blueprint $table) {
-            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete()->change();
-            $table->foreignUlid('add_info_id')->nullable()->constrained()->change();
-            $table->foreignUlid('category_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignUlid('add_info_id')->nullable()->constrained();
+            $table->foreignUlid('category_id')->nullable()->constrained()->nullOnDelete();
         });
 
         // Table orders
         Schema::table('orders', function (Blueprint $table) {
-            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete();
         });
 
         // Table article_orders
         Schema::table('article_orders', function (Blueprint $table) {
-            $table->foreignUlid('article_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('article_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignUlid('order_id')->constrained()->cascadeOnDelete();
         });
 
@@ -50,28 +50,28 @@ return new class extends Migration
 
         // Table event
         Schema::table('events', function(Blueprint $table) {
-            $table->foreignUlid('address_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('address_id')->nullable()->constrained()->nullOnDelete();
         });
 
         // Table carts
         Schema::table('carts', function (Blueprint $table) {
-            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete();
         });
 
         // Table cart_items
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->foreignUlid('article_id')->constrained()->cascadeOnDelete()->change();
-            $table->foreignUlid('cart_id')->constrained()->cascadeOnDelete()->change();
+            $table->foreignUlid('article_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('cart_id')->constrained()->cascadeOnDelete();
         });
 
         // Table clothes
         Schema::table('clothes', function (Blueprint $table) {
-            $table->foreignUlid('article_id')->constrained()->cascadeOnDelete()->change();
+            $table->foreignUlid('article_id')->constrained()->cascadeOnDelete();
         });
 
         // Table announcements
         Schema::table('announcements', function (Blueprint $table) {
-            $table->foreignUlid('category_id')->nullable()->constrained()->nullOnDelete()->change();
+            $table->foreignUlid('category_id')->nullable()->constrained()->nullOnDelete();
         });
     }
 

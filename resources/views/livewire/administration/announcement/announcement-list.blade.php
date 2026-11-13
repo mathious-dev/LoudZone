@@ -1,12 +1,12 @@
 <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    
+
     <!-- En-tête avec le Titre et le Bouton d'ajout -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
             <h1 class="text-2xl font-black text-[#0B0A0B]">Gestion des Annonces</h1>
             <p class="text-sm text-[#84796F] mt-1">Gérez les bandeaux et messages d'information du site.</p>
         </div>
-        <a href="{{ route('admin.announcementForm.create') }}" 
+        <a href="{{ route('admin.announcementForm.create') }}"
            class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#5D0824] text-[#FAF1E3] text-sm font-bold rounded-lg hover:bg-[#0B0A0B] transition-colors shadow-md">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -34,17 +34,17 @@
                 <tbody class="divide-y divide-[#84796F]/10 bg-white">
                     @forelse ($listAnnouncements as $announcement)
                         <tr class="hover:bg-[#FAF1E3]/20 transition-colors">
-                            
+
                             <!-- Titre -->
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#0B0A0B]">
                                 {{ $announcement->label }}
                             </td>
-                            
+
                             <!-- Contenu -->
                             <td class="px-6 py-4 text-sm text-[#41342D] max-w-[200px] truncate" title="{{ $announcement->content }}">
                                 {{ $announcement->content }}
                             </td>
-                            
+
                             <!-- Statut (Badge) -->
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
                                 @if($announcement->is_showing)
@@ -57,7 +57,7 @@
                                     </span>
                                 @endif
                             </td>
-                            
+
                             <!-- Date de début -->
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-[#41342D] font-medium">
                                 @if($announcement->start_date)
@@ -87,21 +87,21 @@
                             <!-- Actions -->
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end items-center gap-3">
-                                    
+
                                     <!-- ========================================== -->
                                     <!-- MENU PUBLIER (MODALE ALPINE CENTRÉE)       -->
                                     <!-- ========================================== -->
                                     <div x-data="{ open: false }">
-                                        <button @click="open = true" 
+                                        <button @click="open = true"
                                                 class="font-black text-xs uppercase tracking-wide transition-colors {{ $announcement->is_showing ? 'text-green-600 hover:text-green-800' : 'text-[#84796F] hover:text-[#5D0824]' }}">
                                             {{ $announcement->is_showing ? 'Modifier dates' : 'Publier' }}
                                         </button>
-                                        
+
                                         <!-- Le fond assombri et la Modale (Fixed) -->
                                         <div x-cloak x-show="open" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm">
-                                            
+
                                             <!-- La boîte de dialogue -->
-                                            <div @click.away="open = false" 
+                                            <div @click.away="open = false"
                                                 x-transition:enter="transition ease-out duration-200"
                                                 x-transition:enter-start="opacity-0 scale-95"
                                                 x-transition:enter-end="opacity-100 scale-100"
@@ -109,7 +109,7 @@
                                                 x-transition:leave-start="opacity-100 scale-100"
                                                 x-transition:leave-end="opacity-0 scale-95"
                                                 class="bg-white border border-[#84796F]/20 rounded-2xl shadow-2xl p-6 w-[90%] max-w-md text-left relative">
-                                                
+
                                                 <!-- Bouton fermer (X) -->
                                                 <button @click="open = false" class="absolute top-4 right-4 text-[#84796F] hover:text-[#0B0A0B]">
                                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -117,27 +117,27 @@
 
                                                 <h4 class="font-black text-xl text-[#0B0A0B] mb-2">Période de publication</h4>
                                                 <p class="text-sm text-[#84796F] mb-6 border-b border-[#84796F]/10 pb-4">Définissez quand l'annonce "{{ $announcement->label }}" doit être visible.</p>
-                                                
+
                                                 <div class="space-y-5">
                                                     <div>
                                                         <label class="block text-sm font-bold text-[#41342D] mb-2">Date de début</label>
                                                         <!-- L'input calendrier aura toute la place pour s'ouvrir vers le bas ou le haut -->
-                                                        <input type="datetime-local" wire:model="start_date" 
+                                                        <input type="datetime-local" wire:model="start_date"
                                                             class="block w-full text-base p-3 rounded-lg border-[#84796F]/30 shadow-sm focus:border-[#5D0824] focus:ring-[#5D0824] bg-[#FAF1E3]/20 cursor-pointer">
                                                     </div>
-                                                    
+
                                                     <div>
                                                         <label class="block text-sm font-bold text-[#41342D] mb-2">Date de fin (Optionnelle)</label>
-                                                        <input type="datetime-local" wire:model="end_date" 
+                                                        <input type="datetime-local" wire:model="end_date"
                                                             class="block w-full text-base p-3 rounded-lg border-[#84796F]/30 shadow-sm focus:border-[#5D0824] focus:ring-[#5D0824] bg-[#FAF1E3]/20 cursor-pointer">
                                                     </div>
-                                                    
+
                                                     <div class="pt-4 flex gap-3">
                                                         <button @click="open = false" type="button"
                                                                 class="flex-1 py-3 px-4 rounded-lg shadow-sm text-sm font-bold text-[#41342D] bg-gray-100 hover:bg-gray-200 transition-colors">
                                                             Annuler
                                                         </button>
-                                                        <button wire:click="publishing({{ $announcement }})" @click="open = false"
+                                                        <button wire:click="publishing('{{ $announcement->id }}')" @click="open = false"
                                                                 class="flex-1 py-3 px-4 rounded-lg shadow-sm text-sm font-bold text-[#FAF1E3] bg-[#5D0824] hover:bg-[#0B0A0B] transition-colors">
                                                             Confirmer
                                                         </button>
@@ -153,16 +153,16 @@
                                     @endif
 
                                     <!-- Bouton Modifier (SVG) -->
-                                    <a href="{{ route('admin.announcementForm.edit', $announcement) }}" 
+                                    <a href="{{ route('admin.announcementForm.edit', $announcement) }}"
                                     class="text-[#84796F] hover:text-[#0B0A0B] transition-colors ml-2" title="Modifier">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                                         </svg>
                                     </a>
-                                    
+
                                     <!-- Bouton Supprimer (SVG) -->
-                                    <button wire:click="delete({{ $announcement->id }})" 
-                                            wire:confirm="Êtes-vous sûr de vouloir supprimer cette annonce ?" 
+                                    <button wire:click="delete('{{ $announcement->id }}')"
+                                            wire:confirm="Êtes-vous sûr de vouloir supprimer cette annonce ?"
                                             class="text-[#84796F] hover:text-red-600 transition-colors" title="Supprimer">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
@@ -182,7 +182,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <!-- Pagination -->
         @if (method_exists($listAnnouncements, 'hasPages') && $listAnnouncements->hasPages())
             <div class="px-6 py-4 border-t border-[#84796F]/10 bg-white">

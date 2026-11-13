@@ -1,13 +1,13 @@
 <div class="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    
+
     <!-- En-tête du panier -->
     <div class="flex justify-between items-end mb-8 border-b border-gray-200 pb-4">
         <h1 class="text-3xl font-black text-[#0B0A0B]">Mon Panier</h1>
-        
+
         @if($cart && $cart->cartItems->isNotEmpty())
             <!-- Bouton Vider le panier -->
-            <button wire:confirm="Êtes-vous sûr de vouloir vider l'intégralité de votre panier ?" 
-                    wire:click='deleteItems({{ $cart->id }})' 
+            <button wire:confirm="Êtes-vous sûr de vouloir vider l'intégralité de votre panier ?"
+                    wire:click="deleteItems('{{ $cart->id }}')"
                     class="text-sm font-medium text-[#84796F] hover:text-[#5D0824] transition-colors flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                 Vider le panier
@@ -18,19 +18,19 @@
     <!-- Contenu du panier -->
     @if($cart && $cart->cartItems->isNotEmpty())
         <div class="space-y-6">
-            
+
             @foreach ($cart->cartItems as $item)
                 <!-- Carte Détaillée d'un article -->
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 bg-white rounded-2xl shadow-sm border border-[#84796F]/20 gap-6 transition-all hover:shadow-md">
-                    
+
                     <!-- BLOC GAUCHE : Image + Textes -->
                     <div class="flex flex-col sm:flex-row items-start gap-5 flex-grow w-full">
-                        
+
                         <!-- Image de l'article -->
                         <div class="flex-shrink-0 w-24 h-24 sm:w-32 sm:h-32 bg-[#FAF1E3]/50 rounded-xl overflow-hidden border border-[#84796F]/10">
                             @if($item->article->primary_image)
-                                <img src="{{ asset('storage/' . $item->article->primary_image) }}" 
-                                     alt="{{ $item->article->title }}" 
+                                <img src="{{ asset('storage/' . $item->article->primary_image) }}"
+                                     alt="{{ $item->article->title }}"
                                      class="w-full h-full object-cover">
                             @else
                                 <div class="flex items-center justify-center w-full h-full text-[#84796F]/50">
@@ -45,15 +45,15 @@
                             <a href="{{ route('articleDetail', $item->article->id) }}" class="text-xl font-bold text-[#0B0A0B] hover:text-[#5D0824] transition-colors">
                                 {{ $item->article->title }}
                             </a>
-                            
+
                             <!-- Description (Limitée à 2 ou 3 lignes pour ne pas casser le design) -->
                             <p class="text-sm text-[#84796F] mt-2 line-clamp-3">
                                 {{ $item->article->description }}
                             </p>
-                            
+
                             <!-- Prix unitaire -->
                             <div class="mt-3 text-lg font-black text-[#5D0824]">
-                                {{ number_format($item->article->final_price, 2, ',', ' ') }} € 
+                                {{ number_format($item->article->final_price, 2, ',', ' ') }} €
                                 <span class="text-xs font-medium text-[#84796F] ml-1">/ unité</span>
                             </div>
                         </div>
@@ -61,35 +61,35 @@
 
                     <!-- BLOC DROIT : Contrôles Quantité & Suppression -->
                     <div class="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto mt-2 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-t-0 border-[#84796F]/10">
-                        
+
                         <!-- Sélecteur de quantité stylisé -->
                         <div class="flex items-center bg-[#FAF1E3] rounded-lg border border-[#84796F]/30 overflow-hidden shadow-sm">
-                            <button wire:click='addOrRemoveItem({{ $item }}, -1)' 
+                            <button wire:click="addOrRemoveItem('{{ $item->id }}', -1)"
                                     class="px-3 py-2 text-[#41342D] hover:bg-[#84796F]/20 hover:text-[#5D0824] transition-colors focus:outline-none">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"></path></svg>
                             </button>
-                            
+
                             <span class="px-4 py-2 text-sm font-bold text-[#0B0A0B] bg-white border-x border-[#84796F]/30 w-12 text-center">
                                 {{ $item->quantity }}
                             </span>
-                            
-                            <button wire:click='addOrRemoveItem({{ $item }})' 
+
+                            <button wire:click="addOrRemoveItem('{{ $item->id }}')"
                                     class="px-3 py-2 text-[#41342D] hover:bg-[#84796F]/20 hover:text-[#5D0824] transition-colors focus:outline-none">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
                             </button>
                         </div>
 
                         <!-- Bouton Supprimer -->
-                        <button wire:click='deleteItem({{ $item->id }})' 
+                        <button wire:click="deleteItem('{{ $item->id }}')"
                                 class="p-2.5 text-[#84796F] hover:text-[#5D0824] hover:bg-red-50 rounded-full transition-colors focus:outline-none shadow-sm border border-transparent hover:border-red-100"
                                 title="Retirer l'article">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                         </button>
-                        
+
                     </div>
                 </div>
             @endforeach
-            
+
         </div>
     @else
         <!-- État Panier Vide -->

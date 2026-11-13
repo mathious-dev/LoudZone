@@ -1,10 +1,10 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    
+
     <!-- En-tête : Titre et Bouton Ajouter -->
     <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
         <h1 class="text-2xl font-extrabold text-[#0B0A0B]">Gestion des Catégories</h1>
-        
-        <a href="{{ route('admin.categoryForm.create') }}" 
+
+        <a href="{{ route('admin.categoryForm.create') }}"
            class="inline-flex items-center px-4 py-2 bg-[#5D0824] text-[#FAF1E3] font-bold rounded-lg shadow-sm hover:bg-[#48041B] transition-colors">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -46,10 +46,10 @@
                                 {{ $category->type->name ?? $category->type }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-right"> 
+                        <td class="px-6 py-4 text-right">
                             <div class="flex items-center justify-end space-x-3">
                                 <!-- Bouton Modifier (Icône Crayon) -->
-                                <a href="{{ route('admin.categoryForm.edit', $category) }}" 
+                                <a href="{{ route('admin.categoryForm.edit', $category) }}"
                                 title="Modifier"
                                 class="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/50">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,7 +58,7 @@
                                 </a>
 
                                 <!-- Bouton Supprimer (Icône Poubelle) -->
-                                <button wire:click="delete({{ $category->id }})" 
+                                <button wire:click="delete('{{ $category->id }}')" 
                                         title="Supprimer"
                                         class="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/50"
                                         onclick="confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?') || event.stopImmediatePropagation()">

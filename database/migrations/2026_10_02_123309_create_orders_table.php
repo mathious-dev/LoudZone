@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('state');
-            $table->decimal('total_price', 5, 2);
+            $table->decimal('total_price', 8, 2);
             $table->string('reference')->unique();
             $table->timestamps();
         });

@@ -25,7 +25,7 @@ class CartService
             $cart=Cart::where('session_id', session()->getId())->where('is_payed', false)->first();
             if(!$cart)
                 $cart=Cart::create(['session_id'=>session()->getId(),'user_id'=>null]);//sécurité de user_id en null pour être sûr que le cart n'est lié à personne
-        }     
+        }
         $cartItem=CartItem::where('article_id',$articleId)->where('cart_id',$cart->id)->first();
         if($cartItem)
             $this->changeQuantity($cartItem,$quantity);

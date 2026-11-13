@@ -1,13 +1,13 @@
 <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    
+
     <!-- En-tête de la page -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
             <h1 class="text-2xl font-black text-[#0B0A0B]">Gestion des Permissions</h1>
             <p class="text-sm text-[#84796F] mt-1">Liste des droits d'accès disponibles sur l'application.</p>
         </div>
-        
-        <a href="{{ route('admin.permissionForm.create') }}" 
+
+        <a href="{{ route('admin.permissionForm.create') }}"
            class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#5D0824] text-[#FAF1E3] text-sm font-bold rounded-lg hover:bg-[#0B0A0B] transition-colors shadow-md">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             Ajouter une permission
@@ -29,7 +29,7 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-[#84796F]/10 bg-white">
-                    
+
                     @forelse ($listPermissions as $permission)
                         <tr class="hover:bg-[#FAF1E3]/20 transition-colors">
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -39,17 +39,17 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex items-center justify-end gap-3">
-    
+
                                     <!-- Bouton Modifier (Stylo) -->
-                                    <a href="{{ route('admin.permissionForm.edit', $permission->id) }}" 
+                                    <a href="{{ route('admin.permissionForm.edit', $permission->id) }}"
                                     class="text-[#84796F] hover:text-[#0B0A0B] transition-colors" title="Modifier">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                                         </svg>
                                     </a>
-                                    
+
                                     <!-- Bouton Supprimer (Corbeille) -->
-                                    <button wire:click='delete({{ $permission->id }})' 
+                                    <button wire:click="delete('{{ $permission->id }}')"
                                             wire:confirm="Êtes-vous sûr de vouloir supprimer la permission '{{ $permission->name }}' ?"
                                             class="text-[#84796F] hover:text-red-600 transition-colors" title="Supprimer">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +66,7 @@
                             </td>
                         </tr>
                     @endforelse
-                    
+
                 </tbody>
             </table>
         </div>

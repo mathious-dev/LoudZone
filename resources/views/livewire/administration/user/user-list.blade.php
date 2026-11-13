@@ -1,5 +1,5 @@
 <div class="p-6 bg-white rounded-lg shadow-md max-w-7xl mx-auto mt-8">
-    
+
     <!-- En-tête avec le titre et le bouton d'ajout -->
     <div class="flex justify-between items-center mb-8">
         <h2 class="text-2xl font-bold text-gray-800">Gestion des utilisateurs</h2>
@@ -12,7 +12,7 @@
     <!-- BARRE D'OUTILS (Recherche + Tri)           -->
     <!-- ========================================== -->
     <div class="flex flex-col lg:flex-row justify-between items-center gap-4 mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
-        
+
         <!-- Le composant de recherche (prend toute la place dispo à gauche) -->
         <div class="w-full lg:w-2/3">
             <x-search :options="$tabSearchPossibility" :listSearch="$listSearch" :search="$search" :searchWichColumn="$searchWichColumn" :showList="$showList" />
@@ -32,16 +32,16 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                 </svg>
             </div>
-            
-            <select wire:model.live='searchRole' 
+
+            <select wire:model.live='searchRole'
                     class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#5D0824] focus:border-[#5D0824] block w-full pl-10 p-2.5 shadow-sm transition-colors cursor-pointer appearance-none">
                 <option value="">Tous les rôles</option>
-                
+
                 <!-- On utilise bien l'objet $role ici -->
                 @foreach ($listRoles as $role)
                     <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
                 @endforeach
-                
+
             </select>
 
             <!-- Flèche personnalisée à droite -->
@@ -66,7 +66,7 @@
                     <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
-            
+
             <tbody class="bg-white divide-y divide-gray-200">
                 @foreach ($listUsers as $user)
                 <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
@@ -86,7 +86,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         @if(auth()->id() !== $user->id)
                             <div class="flex justify-end items-center space-x-4">
-                                
+
                                 <!-- Bouton Voir (Bordeaux au survol) -->
                                 <a href="{{ route('admin.userDetail', $user->id) }}" class="text-gray-400 hover:text-[#5D0824] transition-colors" title="Voir les détails">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 640 640">
@@ -102,12 +102,12 @@
                                 </a>
 
                                 <!-- Bouton Supprimer (Rouge au survol) -->
-                                <button wire:click="delete({{ $user->id }})" wire:confirm="Êtes-vous sûr de supprimer l'utilisateur ?" class="text-gray-400 hover:text-red-600 transition-colors" title="Supprimer">
+                                <button wire:click="delete('{{ $user->id }}')" wire:confirm="Êtes-vous sûr de supprimer l'utilisateur ?" class="text-gray-400 hover:text-red-600 transition-colors" title="Supprimer">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 640 640">
                                         <path d="M232.7 69.9C237.1 56.8 249.3 48 263.1 48L377 48C390.8 48 403 56.8 407.4 69.9L416 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L128 160C110.3 160 96 145.7 96 128C96 110.3 110.3 96 128 96L224 96L232.7 69.9zM128 208L512 208L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 208zM216 272C202.7 272 192 282.7 192 296L192 488C192 501.3 202.7 512 216 512C229.3 512 240 501.3 240 488L240 296C240 282.7 229.3 272 216 272zM320 272C306.7 272 296 282.7 296 296L296 488C296 501.3 306.7 512 320 512C333.3 512 344 501.3 344 488L344 296C344 282.7 333.3 272 320 272zM424 272C410.7 272 400 282.7 400 296L400 488C400 501.3 410.7 512 424 512C437.3 512 448 501.3 448 488L448 296C448 282.7 437.3 272 424 272z"/>
                                     </svg>
                                 </button>
-                                
+
                             </div>
                         @else
                             <span class="text-gray-400 italic text-xs">Vous-même</span>
@@ -123,5 +123,5 @@
     <div class="mt-6">
         {{ $listUsers->links() }}
     </div>
-    
+
 </div>

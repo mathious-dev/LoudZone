@@ -1,43 +1,43 @@
 <div class="bg-gray-50 py-12 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <!-- La carte principale de l'article -->
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 p-8">
-                
+
                 <!-- ========================================== -->
                 <!-- SECTION GAUCHE : IMAGES + DÉCLINAISONS     -->
                 <!-- ========================================== -->
                 <div class="flex flex-col">
                     {{-- S'il y a une image principale OU des images polymorphiques --}}
                     @if($article->primary_image || ($article->images && $article->images->count() > 0))
-                        
+
                         <!-- Image mise en avant -->
                         <div class="w-full h-96 mb-4 bg-gray-100 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
                             @if($article->primary_image)
-                                <img src="{{ asset('storage/' . $article->primary_image) }}" 
-                                    alt="Image principale" 
+                                <img src="{{ asset('storage/' . $article->primary_image) }}"
+                                    alt="Image principale"
                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                             @else
-                                <img src="{{ asset('storage/' . $article->images->first()->url) }}" 
-                                    alt="Image principale" 
+                                <img src="{{ asset('storage/' . $article->images->first()->url) }}"
+                                    alt="Image principale"
                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                             @endif
                         </div>
-                        
+
                         <!-- La grille des miniatures -->
                         @if($article->images && $article->images->count() > 0)
                             <div class="grid grid-cols-4 gap-4">
                                 @foreach($article->images as $image)
                                     <div class="aspect-w-1 aspect-h-1 rounded-md overflow-hidden bg-gray-100 border border-gray-200">
-                                        <img src="{{ asset('storage/'. $image->url) }}" 
-                                            alt="Miniature" 
+                                        <img src="{{ asset('storage/'. $image->url) }}"
+                                            alt="Miniature"
                                             class="w-full h-full object-cover hover:opacity-75 transition-opacity cursor-pointer">
                                     </div>
                                 @endforeach
                             </div>
                         @endif
-                        
+
                     @else
                         <!-- Si l'article n'a AUCUNE image -->
                         <div class="w-full h-96 bg-gray-100 rounded-lg flex flex-col items-center justify-center border-2 border-dashed border-gray-300">
@@ -60,7 +60,7 @@
                                     <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold bg-white text-indigo-800 border border-indigo-200 shadow-sm hover:border-indigo-400 transition-colors">
                                         {{ $clothe->size ?? 'Unique' }}
                                         @if($clothe->color)
-                                            <span class="mx-2 text-indigo-200">|</span> 
+                                            <span class="mx-2 text-indigo-200">|</span>
                                             {{ $clothe->color }}
                                         @endif
                                     </span>
@@ -74,7 +74,7 @@
                 <!-- SECTION DROITE : LES DÉTAILS DU PRODUIT    -->
                 <!-- ========================================== -->
                 <div class="flex flex-col">
-                    
+
                     <!-- Le badge de Catégorie -->
                     <div class="mb-4">
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-100 text-indigo-800">
@@ -110,24 +110,24 @@
                     @if($article->stock > 0)
                         <div class="mb-8 p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
                             <div class="flex flex-col sm:flex-row items-center gap-4">
-                                
+
                                 <!-- Sélecteur de quantité avec flèches -->
                                 <div class="flex items-center border border-gray-300 rounded-lg bg-gray-50 overflow-hidden h-12 w-full sm:w-32">
                                     <button type="button" wire:click='addRemoveNumberArticle(-1)' class="px-4 text-gray-500 hover:text-gray-900 hover:bg-gray-200 transition-colors h-full focus:outline-none" aria-label="Diminuer">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
                                     </button>
-                                    
+
                                     <div class="flex-1 text-center font-bold text-gray-900 bg-white border-x border-gray-300 h-full flex items-center justify-center">
                                         {{ $quantity }}
                                     </div>
-                                    
+
                                     <button type="button" wire:click='addRemoveNumberArticle(1)' class="px-4 text-gray-500 hover:text-gray-900 hover:bg-gray-200 transition-colors h-full focus:outline-none" aria-label="Augmenter">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                                     </button>
                                 </div>
 
                                 <!-- Bouton Ajouter au Panier -->
-                                <button type="button" wire:click='addArticleToCart({{ $article->id }}, {{ $quantity }})' class="w-full h-12 flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-md transition duration-150 ease-in-out flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <button type="button" wire:click="addArticleToCart('{{ $article->id }}', {{ $quantity }})" class="w-full h-12 flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-md transition duration-150 ease-in-out flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                                     Ajouter au panier
                                 </button>
@@ -165,6 +165,6 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>

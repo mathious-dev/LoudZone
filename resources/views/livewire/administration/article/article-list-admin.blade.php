@@ -106,7 +106,7 @@
                             </span>
                             <div class="text-[9px] text-gray-500 mt-0.5">{{ $article->promotion->label ?? 'Promo active' }}</div>
                         @else
-                            <form wire:submit.prevent='saveFormPromotion({{ $article->id }})' class="flex flex-col items-center">
+                            <form wire:submit.prevent="saveFormPromotion('{{ $article->id }}')" class="flex flex-col items-center">
                                 <div class="flex items-center gap-1">
                                     <select wire:model='promotionNullInfoId.{{ $article->id }}' class="block w-28 text-[11px] py-1 pl-2 pr-6 rounded border-gray-300 shadow-sm focus:border-[#48041B] focus:ring-[#48041B]">
                                         <option value="">Aucune</option>
@@ -147,7 +147,7 @@
                         @if($article->category)
                             {{ $article->category->label }}
                         @else
-                            <form wire:submit.prevent="saveFormCategory({{ $article->id }})" class="flex items-center gap-1">
+                            <form wire:submit.prevent="saveFormCategory('{{ $article->id }}')" class="flex items-center gap-1">
                                 <select wire:model='categoryNullInfoId.{{ $article->id }}' class="block w-28 rounded border-gray-300 py-1 pl-2 pr-6 text-[11px] text-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                     <option value="">Choisir...</option>
                                     @foreach ($listCategories as $category)
@@ -166,9 +166,9 @@
                         <!-- Toggle Statut -->
                         <div>
                             @if($article->is_published)
-                                <button wire:click="changeStatePublishArticle({{ $article->id }})" class="text-[11px] text-amber-700 hover:text-amber-900 font-semibold transition-colors border border-amber-300 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded shadow-sm">Dépublier</button>
+                                <button wire:click="changeStatePublishArticle('{{ $article->id }}')" class="text-[11px] text-amber-700 hover:text-amber-900 font-semibold transition-colors border border-amber-300 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded shadow-sm">Dépublier</button>
                             @else
-                                <button wire:click="changeStatePublishArticle({{ $article->id }})" class="text-[11px] text-emerald-700 hover:text-emerald-900 font-semibold transition-colors border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded shadow-sm">Publier</button>
+                                <button wire:click="changeStatePublishArticle('{{ $article->id }}')" class="text-[11px] text-emerald-700 hover:text-emerald-900 font-semibold transition-colors border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded shadow-sm">Publier</button>
                             @endif
                         </div>
 
@@ -177,7 +177,7 @@
                             <a href="{{ route('admin.articleForm.edit', $article) }}" class="text-indigo-500 hover:text-indigo-900 transition-colors p-1 hover:bg-indigo-50 rounded" title="Modifier">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                             </a>
-                            <button wire:confirm="Êtes-vous sûr de vouloir supprimer cet article ?" wire:click="delete({{ $article->id }})" class="text-red-500 hover:text-red-900 transition-colors p-1 hover:bg-red-50 rounded" title="Supprimer">
+                            <button wire:confirm="Êtes-vous sûr de vouloir supprimer cet article ?" wire:click="delete('{{ $article->id }}')" class="text-red-500 hover:text-red-900 transition-colors p-1 hover:bg-red-50 rounded" title="Supprimer">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
                         </div>
