@@ -34,6 +34,7 @@ class EventForm extends AdminComponent
             $this->event=$event;
             $this->fill($event->toArray());
             $this->address=$event->address;
+            $this->primary_image = null;
             $this->fill($event->address->toArray());
             $this->isEditing=true;
         }
@@ -64,8 +65,9 @@ class EventForm extends AdminComponent
             'postal_code'=>$data['postal_code'],
         ];
         $textImage = $this->event->primary_image;
-        if($this->primary_image) 
+        if($this->primary_image && !is_string($this->primary_image))
             $textImage = $this->primary_image->store('events', 'public');
+        
         $dataEvent=[
             'label'=>$data['label'],
             'description'=>$data['description'],
