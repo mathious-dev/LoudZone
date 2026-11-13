@@ -8,10 +8,7 @@ trait CrudTrait
 {
     public function crudLog($object,$action)
     {
-        //pour l'affichage dans l'historique si c'est la classe rôle ou permission
-        $nameValueColumn = method_exists($object, 'getValueNameColumn') ? $object->getValueNameColumn() : class_basename($object);
-        $nameValue = method_exists($object, 'getNameColumn') ? $object->getNameColumn() : $object->name;
-        saveHistory("$action de $nameValueColumn $nameValue ");
+        saveHistory("$action de {$object->getValueNameColumn()} {$object->getNameColumn()} ");
     }
 
     public function delete($id)
@@ -53,7 +50,7 @@ trait CrudTrait
         return $this->redirectRoute($route);
     }
 
-    //Méthode de save pour les relations OneToMany mais côté belongsTo si jamais on crée 2 objets de 2 tables différents en même temps. 
+    //Méthode de save pour les relations OneToMany mais côté belongsTo si jamais on crée 2 objets de 2 tables différents en même temps.
     // Exemple : avec événement et adresse
     public function saveBelongsTo($objectMain,$dataTabMain,$objectRelation,$dataTabForRelation=[],$foreignKey,$route)
     {
