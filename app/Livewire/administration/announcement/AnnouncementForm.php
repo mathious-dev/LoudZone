@@ -48,5 +48,7 @@ class AnnouncementForm extends AdminComponent
         $data=$this->validate();
         if($this->announcement->IsDateCorrect($data['start_date'],$data['end_date']))
             $this->save($this->validate(),$this->announcement,'admin.announcementList');
+        else
+            $this->flashError("Erreur de date, la date de début doit être inférieur à celle de fin");
     }
 }

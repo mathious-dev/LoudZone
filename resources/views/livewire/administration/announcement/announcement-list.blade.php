@@ -149,7 +149,7 @@
                                     <!-- Fin Menu Publier -->
 
                                     @if($announcement->is_showing)
-                                    <button wire:click='removePublish({{ $announcement }})' class="text-xs font-bold text-red-600 hover:text-red-800 uppercase">Dépublier</button>
+                                    <button wire:click="removePublish('{{ $announcement->id }}')" class="text-xs font-bold text-red-600 hover:text-red-800 uppercase">Dépublier</button>
                                     @endif
 
                                     <!-- Bouton Modifier (SVG) -->

@@ -30,10 +30,12 @@ class AnnouncementList extends AdminComponent
             $this->start_date = null;
             $this->end_date = null;
         }
+        else
+            $this->flashError("Erreur de date, la date de début doit être inférieur à celle de fin");
     }
     public function rules()
     {
-        return 
+        return
         ['start_date'=>'required',
         'end_date'=>'nullable'];
     }
